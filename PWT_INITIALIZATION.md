@@ -15,7 +15,7 @@ PWT does **not** require a fixed number of SRS sections. The project structure m
 - [x] Establish canonical AI instructions and Claude/Gemini entry points.
 - [x] Identify initial architecture direction.
 - [x] Identify privacy, offline, failure/recovery, and data-control gaps requiring review.
-- [ ] Independent AI gap review.
+- [x] Independent AI gap review. (Claude, 2026-09-17 — see `06_AI_HANDOFF.md`)
 - [ ] Project-owner reconciliation of review findings.
 - [ ] Establish first approved project-specific baseline commit.
 - [ ] Begin UX/design after requirements approval.
