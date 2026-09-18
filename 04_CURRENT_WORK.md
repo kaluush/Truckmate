@@ -1,26 +1,27 @@
 # TruckMate — Current Work
 
 ## Lifecycle phase
-Discovery / requirements consolidation.
+Requirements reconciliation / final baseline hardening.
 
 ## Current milestone
-Create a trustworthy PWT project baseline from the owner's real trucking workflow, then have Claude independently review it for gaps before design/coding.
+Resolve the remaining pre-design requirements questions, then establish the first owner-approved implementation baseline.
 
 ## Current focus
-1. Preserve existing TruckMate requirements in repository truth.
-2. Do not expand scope merely to make the SRS larger.
-3. ~~Independent gap review by Claude.~~ Done 2026-09-17 — see `06_AI_HANDOFF.md`.
-4. Owner reviews proposed gaps/changes (TM-Q014–TM-Q020 in `05_OPEN_QUESTIONS.md`).
-5. Reconcile and approve V1 requirements.
+1. Preserve the reconciled Claude review decisions in repository truth.
+2. Resolve remaining TM-Q001–TM-Q013 questions that materially affect V1.
+3. Validate the public product name separately; TruckMate remains the working/project name.
+4. Finalize offline, privacy/data lifecycle, and other remaining implementation-blocking requirements.
+5. Establish the first approved baseline.
 6. Move to UX/design only after requirements are stable enough.
 
 ## Success criteria for this milestone
-- Next AI can understand TruckMate without the setup chat.
-- Current Load Card workflow is clearly captured.
-- Driver vs Pro needs are distinguishable.
-- Known deferred/out-of-scope items are explicit.
-- Open questions are visible rather than silently assumed.
-- Claude produces a critique, not a competing redesign. ✔ done — classified REPAIR THEN APPROVE, 7 findings recorded, no redesign proposed.
+- Current Load Card supports real multi-stop workflow.
+- Current and Upcoming Loads cannot overwrite or corrupt each other.
+- Document attribution and timestamp provenance are explicit.
+- Load History/search is base V1 functionality.
+- In-motion interaction constraints are explicit.
+- Deferred/future architecture does not inflate V1.
+- Remaining open questions are visible rather than silently assumed.
 
 ## Blocker
-Owner reconciliation of TM-Q014–TM-Q020 has not yet occurred. Do not start UX/design on Current Load Card, check-in/out, document categories, or Load History until those are resolved (they reshape core screens/data model).
+Claude's TM-Q014–TM-Q020 findings are reconciled. Remaining blocker is owner reconciliation of the material questions still open in TM-Q001–TM-Q013 before the baseline is marked fully approved.
