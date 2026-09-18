@@ -4,19 +4,19 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 
 | ID | Feature | Status | Notes |
 |---|---|---|---|
-| TM-F001 | Dynamic Current Load Card | V1 Core | Central experience; stage-aware. |
+| TM-F001 | Dynamic Current Load Card | V1 Core | Central experience; stage-aware and multi-stop aware. |
 | TM-F002 | Rate/load document import | V1 Core | PDF/image/share/scan. |
 | TM-F003 | Gemini document extraction | V1 Core | Extract operational fields with confidence/fallback. |
-| TM-F004 | Pickup number prominence | V1 Core | Large/visible at pickup stage. |
-| TM-F005 | Delivery/BOL number prominence | V1 Core | Large/visible after pickup. |
-| TM-F006 | Shipper/receiver addresses + appointments | V1 Core | Load-card essentials. |
+| TM-F004 | Pickup number prominence | V1 Core | Large/visible for the active pickup stop. |
+| TM-F005 | Delivery/BOL number prominence | V1 Core | Large/visible for the active delivery stop. |
+| TM-F006 | Shipper/receiver addresses + appointments | V1 Core | Load-card essentials across stops. |
 | TM-F007 | Truck/trailer/plate/company/DOT reference details | V1 Core | One-scroll access at check-in desk. |
-| TM-F008 | Check In timestamp/location | V1 Core | User-triggered detention evidence. |
-| TM-F009 | Check Out + dwell calculation | V1 Core | Manual or safely inferred. |
+| TM-F008 | Check In timestamp/location + provenance | V1 Core | Preserve system-captured vs manual/edited origin. |
+| TM-F009 | Check Out + dwell calculation + provenance | V1 Core | Manual or safely inferred; preserve provenance. |
 | TM-F010 | Detention timeline/evidence | V1 Core | Proof-oriented record, not guarantee of payment. |
 | TM-F011 | Copy/share arrival/check-in/check-out status | V1 Core | SMS, WhatsApp, email, carrier app via native share. |
 | TM-F012 | In-app multi-page document scanning | V1 Core | Existing/native scanner. |
-| TM-F013 | Load document package | V1 Core | Confirmation/rate con + BOL + POD. |
+| TM-F013 | Load document package | V1 Core | Confirmation/rate con + BOL + POD + flexible Other Load Documents. |
 | TM-F014 | Original document retention | V1 Core | Structured extraction never replaces source. |
 | TM-F015 | Document Wallet / Essentials | V1 Core | Expected slots + custom Other. |
 | TM-F016 | Document type mismatch detection | V1 Candidate | Warn when wrong doc placed in known slot. |
@@ -26,8 +26,8 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F020 | Quick PTI | V1 Core | Fast everyday walk-around record. |
 | TM-F021 | Detailed PTI | V1 Candidate | More thorough periodic inspection. |
 | TM-F022 | Defect notes/photos/reminders | V1 Candidate | Open-defect follow-up. |
-| TM-F023 | Deadhead calculation | V1 Core | Current location to pickup. |
-| TM-F024 | Loaded-mile calculation | V1 Core | Pickup to receiver. |
+| TM-F023 | Deadhead calculation | V1 Core | Current location to first pickup. |
+| TM-F024 | Loaded-mile calculation | V1 Core | Across load stops. |
 | TM-F025 | Total trip miles | V1 Core | Deadhead + loaded. |
 | TM-F026 | Configurable deadhead/pay behavior | V1 Core | Optional and carrier-dependent. |
 | TM-F027 | Mileage-driver estimated weekly pay | V1 Candidate | CPM + paid miles rules. |
@@ -44,3 +44,11 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F038 | Data export/account deletion/retention controls | Must review for V1 | Privacy lifecycle requirement. |
 | TM-F039 | Large roadside service marketplace | Rejected/Out of Scope | Feature bloat for V1. |
 | TM-F040 | ELD replacement | Rejected/Out of Scope | Explicit boundary. |
+| TM-F041 | Multi-stop loads | V1 Core | Multiple pickups and/or deliveries; Current Load Card follows active stop. |
+| TM-F042 | Current + Upcoming/Pre-planned Loads | V1 Core | Prevent upcoming assignment from replacing current work. |
+| TM-F043 | Explicit document-to-load attribution | V1 Core | Scan/import must attach to intended load; ambiguous cases require confirmation. |
+| TM-F044 | Other Load Documents | V1 Core | Flexible slot for lumper/scale/washout/accessorial/damage and similar paperwork. |
+| TM-F045 | Load History + search | V1 Core | Base-tier retrieval across past loads/documents. |
+| TM-F046 | In-motion interaction guardrails | V1 Core UX requirement | Minimize interaction; no core workflow requiring multi-field typing while moving. |
+| TM-F047 | Team-driver/shared-load access | Architecture Later | Schema should permit later sharing without building it now. |
+| TM-F048 | AI usage/cost-abuse controls | Architecture Later / production requirement | Server-side quotas/rate controls for extraction calls. |
