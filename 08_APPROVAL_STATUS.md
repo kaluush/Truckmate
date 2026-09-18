@@ -1,22 +1,16 @@
 # TruckMate — Approval Status
 
 ## Project-specific baseline
-**Status:** CLAUDE REVIEW COMPLETE — PENDING OWNER RECONCILIATION
+**Status:** CLAUDE REVIEW RECONCILED — FINAL OWNER BASELINE APPROVAL PENDING
 
-The initial TruckMate requirements baseline was assembled by ChatGPT from the project owner's prior TruckMate/roadside-assistant discussions on 2026-09-16.
+Claude's independent gap review was completed on 2026-09-17. On 2026-09-18, the owner/ChatGPT reconciliation accepted and incorporated TM-Q014–TM-Q019 into the Master Decisions, Master SRS, and Feature Bank. TM-Q020 was resolved operationally by keeping TruckMate only as the working/project name while public-name conflict review remains open under TM-Q012.
 
-Claude completed the independent gap review on 2026-09-17 and classified the baseline **REPAIR THEN APPROVE**: sound and correctly scoped overall, with seven concrete gaps (TM-Q014–TM-Q020 in `05_OPEN_QUESTIONS.md`) that should be resolved before the baseline is trusted implementation truth. See `06_AI_HANDOFF.md` for the full classification (Must Have Now / Architecture Must Allow Later / Optional Future).
+The baseline is substantially stronger, but it is not yet marked fully approved because remaining TM-Q001–TM-Q013 questions include implementation-affecting offline, data lifecycle, inspection, correction/provenance, and compliance decisions.
 
-It is still NOT marked approved. The project owner (with ChatGPT) should reconcile TM-Q014–TM-Q020 next.
+## Review classification
+- Claude review: REPAIR THEN APPROVE.
+- Claude findings TM-Q014–TM-Q020: RECONCILED.
+- Final owner baseline approval: PENDING remaining material open-question reconciliation.
 
-## Last approved work commit
-None yet — project-specific baseline has not been owner-approved. Repo git history begins at commit `1bc2e44` ("Initialize TruckMate PWT baseline"); the review findings were recorded in a following commit.
-
-## Review target
-Review the current repository state through the latest initialization commit and classify the result according to `AGENTS.md`:
-- APPROVE
-- **REPAIR THEN APPROVE ← this review's classification**
-- NEEDS ATTENTION
-
-## Owner approval needed after review
-Claude recommendations are proposals. The project owner should decide which material additions/removals/changes become TruckMate truth before design/coding.
+## Design/coding gate
+UX exploration may use the reconciled decisions, but implementation must not silently invent answers to remaining material open questions. Establish the first fully approved baseline after those questions are resolved or explicitly deferred.
