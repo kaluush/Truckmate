@@ -1,5 +1,17 @@
 # TruckMate — Changelog
 
+## 2026-09-18 — Owner reconciliation of Claude review
+- Reconciled TM-Q014–TM-Q020.
+- Made multi-stop loads V1 core.
+- Added Current + Upcoming/Pre-planned Loads and explicit document-to-load attribution.
+- Added system-captured vs manual/edited check-in/out timestamp provenance.
+- Expanded each load package with flexible Other Load Documents.
+- Made Load History + search base V1 functionality.
+- Added in-motion interaction guardrails.
+- Added architecture-later protection for team-driver/shared-load access and AI usage/cost controls.
+- Kept TruckMate as the working/project name only; public branding remains unresolved under TM-Q012.
+- Updated handoff/current-work/approval state. Final baseline approval still waits on remaining material TM-Q001–TM-Q013 decisions.
+
 ## 2026-09-17 — Claude independent gap review
 - Repaired repository git history (the checked-in `.git` directory was incomplete; no prior commits existed).
 - Completed the independent gap review requested in `06_AI_HANDOFF.md`. Classification: REPAIR THEN APPROVE.
