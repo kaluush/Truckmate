@@ -1,16 +1,16 @@
 # TruckMate — Approval Status
 
 ## Project-specific baseline
-**Status:** CLAUDE REVIEW RECONCILED — FINAL OWNER BASELINE APPROVAL PENDING
+**Status:** OWNER-APPROVED FOR UX/DESIGN — PUBLIC NAME PENDING
 
-Claude's independent gap review was completed on 2026-09-17. On 2026-09-18, the owner/ChatGPT reconciliation accepted and incorporated TM-Q014–TM-Q019 into the Master Decisions, Master SRS, and Feature Bank. TM-Q020 was resolved operationally by keeping TruckMate only as the working/project name while public-name conflict review remains open under TM-Q012.
-
-The baseline is substantially stronger, but it is not yet marked fully approved because remaining TM-Q001–TM-Q013 questions include implementation-affecting offline, data lifecycle, inspection, correction/provenance, and compliance decisions.
+The owner reconciled all material pre-design questions on 2026-09-21 except TM-Q012, which is intentionally deferred because TruckMate cannot be the public product name. That naming decision does not block UX/design under the working repository name.
 
 ## Review classification
 - Claude review: REPAIR THEN APPROVE.
 - Claude findings TM-Q014–TM-Q020: RECONCILED.
-- Final owner baseline approval: PENDING remaining material open-question reconciliation.
+- Owner questions TM-Q001–TM-Q011 and TM-Q013: RESOLVED.
+- TM-Q012 public replacement name: OPEN BY CHOICE.
+- V1 requirements baseline: APPROVED FOR UX/DESIGN.
 
 ## Design/coding gate
-UX exploration may use the reconciled decisions, but implementation must not silently invent answers to remaining material open questions. Establish the first fully approved baseline after those questions are resolved or explicitly deferred.
+Proceed to UX/design using Master Decisions and Master SRS as product truth. Coding should follow the designed/approved flows rather than inventing behavior. Public launch/store branding remains blocked until TM-Q012 is resolved.
