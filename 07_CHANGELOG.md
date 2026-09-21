@@ -1,5 +1,20 @@
 # TruckMate — Changelog
 
+## 2026-09-21 — Owner closes pre-design requirements
+- Resolved TM-Q001–TM-Q011 and TM-Q013; only public naming TM-Q012 remains intentionally open.
+- Adopted offline-first V1 and offline check-in/out with provenance/safe sync.
+- Set standard + custom wallet documents and Quick + Detailed PTI.
+- Defined load-based settlement reconciliation across settlement weeks.
+- Separated carrier-paid, route-estimated, and driver-adjusted mileage with audit preservation.
+- Defined 30-day Trash/permanent deletion and flexible Excel + original-document export.
+- Defined document-driven load stage changes with manual override.
+- Added partial/full rejection, disposition-stop, and additional-compensation rules on the same load.
+- Replaced live nearby-driver help with opt-in, timestamped facility intelligence from TruckMate drivers.
+- Set 60-day full-feature trial and $59.98/month target.
+- Confirmed TruckMate cannot be the public product name; replacement remains open.
+- Defined legal/compliance claim boundary.
+- Defined unified truck/business expense capture without mandatory load linkage, including recurring overhead and reporting split.
+
 ## 2026-09-18 — Owner reconciliation of Claude review
 - Reconciled TM-Q014–TM-Q020.
 - Made multi-stop loads V1 core.
