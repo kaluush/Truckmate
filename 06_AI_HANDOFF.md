@@ -1,35 +1,25 @@
 # TruckMate — AI Handoff
 
 ## Current state
-Claude's independent gap review is complete and the owner/ChatGPT reconciliation of TM-Q014–TM-Q020 was completed on 2026-09-18.
+Owner reconciliation is complete for the material V1 requirements. On 2026-09-21, TM-Q001–TM-Q011 and TM-Q013 were resolved. TM-Q012 (public replacement name) is intentionally open.
 
-Accepted V1 decisions:
-- Multi-stop loads are V1 core.
-- A driver can have one Current Load plus Upcoming/Pre-planned Loads.
-- Every scan/import/action must attach to the intended load; ambiguous attribution requires confirmation.
-- Check-in/out timestamps preserve system-captured versus manual/edited provenance.
-- Load packages include a flexible Other Load Documents area.
-- Load History + search is base V1 functionality for all users.
-- In-motion interaction is minimized; core workflows do not depend on multi-field typing while driving.
-
-Accepted architecture-later protections:
-- Allow future team-driver/shared-load access without building it now.
-- Add server-side AI usage/cost-abuse controls before production.
-
-Branding:
-- TruckMate remains the working/project/repository name.
-- Public branding is NOT cleared. TM-Q012 remains open because an existing trucking-industry product uses TruckMate; resolve naming/trademark/customer-confusion risk before public launch/store branding.
-
-Still open:
-TM-Q001–TM-Q013 remain open except that TM-Q012 now explicitly covers the public-name decision. These should be reconciled based on whether they materially affect V1 implementation/design.
+Key accepted additions:
+- Offline-first V1 wherever technically possible; offline check-in/out queues safely with provenance.
+- Standard + custom expiring wallet documents.
+- Quick and Detailed PTI in V1.
+- Line-by-line load-based settlement reconciliation across settlement weeks.
+- Carrier-paid vs route-estimated vs driver-adjusted miles with audit history.
+- 30-day Trash then permanent deletion; flexible Excel + documents export.
+- Pickup paperwork may set In Transit; signed POD/BOL may set Delivered; manual override remains available.
+- Partial/full rejection stays on the same load, with exception/disposition stops and additional compensation.
+- Facility intelligence comes from proactive opt-in driver reports, not live nearby-driver maps/requests.
+- 60-day full-feature trial then $59.98/month target.
+- TruckMate is working name only; public replacement name remains open.
+- No claims of guaranteed legal/DOT/tax compliance, admissibility, or detention payment.
+- Unified expense system does not require load linkage; recurring overhead and truck expenses are included in reports/export.
 
 ## Next AI assignment
-1. Read AGENTS.md and the authoritative files.
-2. Treat TM-D017–TM-D023 and TM-F041–TM-F048 as accepted project truth.
-3. Do not reopen Claude's TM-Q014–TM-Q020 findings unless new evidence reveals a contradiction.
-4. Help the owner resolve the remaining material TM-Q001–TM-Q013 questions.
-5. Prefer simple trucking workflows over feature expansion.
-6. Do not begin coding from assumptions that are still recorded as open questions.
+Read AGENTS.md and authoritative files. Treat TM-D001–TM-D039 as project truth. Proceed to UX/design. Do not reopen settled questions without contradictory evidence. Keep TM-Q012 open until the owner selects a public name.
 
 ## Owner principle
 **Clean. Easy. Simple. Collect once, use everywhere.**
