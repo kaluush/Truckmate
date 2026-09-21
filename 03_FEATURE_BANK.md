@@ -24,7 +24,7 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F018 | Expiration notifications | V1 Core | 60/45/30/15/7/3/2/1/expired default cadence. |
 | TM-F019 | Replacement-document recognition | V1 Candidate | Update date and cancel old reminders. |
 | TM-F020 | Quick PTI | V1 Core | Fast everyday walk-around record. |
-| TM-F021 | Detailed PTI | V1 Candidate | More thorough periodic inspection. |
+| TM-F021 | Detailed PTI | V1 Core | Driver-selectable detailed inspection; timestamped and saved to history. |
 | TM-F022 | Defect notes/photos/reminders | V1 Candidate | Open-defect follow-up. |
 | TM-F023 | Deadhead calculation | V1 Core | Current location to first pickup. |
 | TM-F024 | Loaded-mile calculation | V1 Core | Across load stops. |
@@ -34,14 +34,14 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F028 | Pro load revenue extraction | V1 Core (Pro) | Rate/pay where available. |
 | TM-F029 | Pro expenses/fuel | V1 Core (Pro) | Load/business expense records. |
 | TM-F030 | Pro weekly/monthly/yearly analytics | V1 Core (Pro) | Loads, gross, miles, RPM, fuel, expenses, net estimate. |
-| TM-F031 | Settlement reconciliation support | V1 Candidate (Pro) | Surface possible duplicates/missing/mismatched charges. |
-| TM-F032 | Tax-record organization/export | Architecture Later | Organization only; not tax advice. |
-| TM-F033 | Nearby truck service/dealer/tires/truck stops | V1 Candidate | Keep lightweight. |
+| TM-F031 | Settlement reconciliation support | V1 Core (Pro) | Line-by-line load matching across settlement weeks; awaiting-settlement status and mismatch/accessorial review. |
+| TM-F032 | Excel + document export | V1 Core (Pro) | All data/date range/selected loads; Excel financial index plus original document bundle. |
+| TM-F033 | Driver-sourced facility intelligence | V1 Core | Opt-in post-stop structured reports; timestamp/source; supplement conflicting public info without exposing driver history. |
 | TM-F034 | Gmail automatic rate-con detection/import | Future | Requires permissions/verification design. |
 | TM-F035 | Subscription billing | Future before public monetization | Add after field validation. |
-| TM-F036 | Full-feature trial | Future before monetization | Avoid crippled trial. |
-| TM-F037 | Offline/poor-network load-card access | Must review for V1 | High-value trucking environment gap. |
-| TM-F038 | Data export/account deletion/retention controls | Must review for V1 | Privacy lifecycle requirement. |
+| TM-F036 | Full-feature trial | Monetization target | 60 days full-feature, then $59.98/month. |
+| TM-F037 | Offline/poor-network operation | V1 Core | Everything technically feasible stays usable offline; safe queued sync. |
+| TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. |
 | TM-F039 | Large roadside service marketplace | Rejected/Out of Scope | Feature bloat for V1. |
 | TM-F040 | ELD replacement | Rejected/Out of Scope | Explicit boundary. |
 | TM-F041 | Multi-stop loads | V1 Core | Multiple pickups and/or deliveries; Current Load Card follows active stop. |
@@ -52,3 +52,11 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F046 | In-motion interaction guardrails | V1 Core UX requirement | Minimize interaction; no core workflow requiring multi-field typing while moving. |
 | TM-F047 | Team-driver/shared-load access | Architecture Later | Schema should permit later sharing without building it now. |
 | TM-F048 | AI usage/cost-abuse controls | Architecture Later / production requirement | Server-side quotas/rate controls for extraction calls. |
+
+| TM-F049 | Offline check-in/out | V1 Core | Local timestamp + location when available; provenance/pending-sync state; idempotent sync. |
+| TM-F050 | Custom wallet documents | V1 Core | User-defined document types with expiration/reminders when applicable. |
+| TM-F051 | Mileage source + manual adjustment audit | V1 Core | Carrier-paid vs route-estimated vs driver-adjusted miles; preserve original. |
+| TM-F052 | Document/state automation override | V1 Core | Pickup papers → In Transit; signed POD/BOL → Delivered when reliable; user can override. |
+| TM-F053 | Partial/full rejection + disposition | V1 Core | Same load; Delivered with Exception or Awaiting Instructions; add disposition stop and compensation. |
+| TM-F054 | Unified truck/business expenses | V1 Core (Pro) | No mandatory load link; categories, location, description, optional receipt/line items, recurring overhead. |
+| TM-F055 | Correction audit history | V1 Core | Preserve original AI/system value and manual correction provenance. |
