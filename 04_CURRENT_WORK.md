@@ -1,27 +1,17 @@
 # TruckMate — Current Work
 
 ## Lifecycle phase
-Requirements reconciliation / final baseline hardening.
+Requirements baseline approved for product design; public naming remains intentionally open.
 
 ## Current milestone
-Resolve the remaining pre-design requirements questions, then establish the first owner-approved implementation baseline.
+Translate the approved V1 rules into UX/design flows without reopening settled product decisions unless new evidence exposes a contradiction.
 
 ## Current focus
-1. Preserve the reconciled Claude review decisions in repository truth.
-2. Resolve remaining TM-Q001–TM-Q013 questions that materially affect V1.
-3. Validate the public product name separately; TruckMate remains the working/project name.
-4. Finalize offline, privacy/data lifecycle, and other remaining implementation-blocking requirements.
-5. Establish the first approved baseline.
-6. Move to UX/design only after requirements are stable enough.
+1. Design the Current Load Card and multi-stop flow.
+2. Design offline-first behavior and sync visibility.
+3. Design load documents, rejection/disposition, settlement reconciliation, expenses, export, PTI, wallet, and facility-intelligence flows.
+4. Keep TruckMate as the repository/working name only while TM-Q012 remains open.
+5. Preserve clean/easy/simple and collect-once/use-everywhere.
 
-## Success criteria for this milestone
-- Current Load Card supports real multi-stop workflow.
-- Current and Upcoming Loads cannot overwrite or corrupt each other.
-- Document attribution and timestamp provenance are explicit.
-- Load History/search is base V1 functionality.
-- In-motion interaction constraints are explicit.
-- Deferred/future architecture does not inflate V1.
-- Remaining open questions are visible rather than silently assumed.
-
-## Blocker
-Claude's TM-Q014–TM-Q020 findings are reconciled. Remaining blocker is owner reconciliation of the material questions still open in TM-Q001–TM-Q013 before the baseline is marked fully approved.
+## Baseline state
+Owner reconciled TM-Q001–TM-Q011 and TM-Q013 on 2026-09-21. TM-Q012 is intentionally deferred because the public name must change. No other material pre-design question is currently open.
