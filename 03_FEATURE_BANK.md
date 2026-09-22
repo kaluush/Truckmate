@@ -10,10 +10,10 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F004 | Pickup number prominence | V1 Core | Large/visible for the active pickup stop. |
 | TM-F005 | Delivery/BOL number prominence | V1 Core | Large/visible for the active delivery stop. |
 | TM-F006 | Shipper/receiver addresses + appointments | V1 Core | Load-card essentials across stops. |
-| TM-F007 | Truck/trailer/plate/company/DOT reference details | V1 Core | One-scroll access at check-in desk. |
+| TM-F007 | Truck/trailer/plate/company/DOT reference details | V1 Core | Prominent Current Load Card access for gate/check-in use; no separate Gate Pass screen in V1. |
 | TM-F008 | Check In timestamp/location + provenance | V1 Core | Preserve system-captured vs manual/edited origin. |
 | TM-F009 | Check Out + dwell calculation + provenance | V1 Core | Manual or safely inferred; preserve provenance. |
-| TM-F010 | Detention timeline/evidence | V1 Core | Proof-oriented record, not guarantee of payment. |
+| TM-F010 | Detention timeline/evidence | V1 Core | Configurable threshold; 2-hour user default when unknown; local reminder 15 minutes before threshold; never guarantee payment. |
 | TM-F011 | Copy/share arrival/check-in/check-out status | V1 Core | SMS, WhatsApp, email, carrier app via native share. |
 | TM-F012 | In-app multi-page document scanning | V1 Core | Existing/native scanner. |
 | TM-F013 | Load document package | V1 Core | Confirmation/rate con + BOL + POD + flexible Other Load Documents. |
@@ -40,11 +40,11 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F034 | Gmail automatic rate-con detection/import | Future | Requires permissions/verification design. |
 | TM-F035 | Subscription billing | Future before public monetization | Add after field validation. |
 | TM-F036 | Full-feature trial | Monetization target | 60 days full-feature, then $59.98/month. |
-| TM-F037 | Offline/poor-network operation | V1 Core | Everything technically feasible stays usable offline; safe queued sync. |
+| TM-F037 | Offline/poor-network operation | V1 Core | Everything technically feasible stays usable offline; safe queued sync; manual user corrections outrank AI/inference; material manual conflicts preserve recovery/provenance. |
 | TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. |
 | TM-F039 | Large roadside service marketplace | Rejected/Out of Scope | Feature bloat for V1. |
 | TM-F040 | ELD replacement | Rejected/Out of Scope | Explicit boundary. |
-| TM-F041 | Multi-stop loads | V1 Core | Multiple pickups and/or deliveries; Current Load Card follows active stop. |
+| TM-F041 | Multi-stop loads | V1 Core | Multiple pickups/deliveries; driver may select an out-of-order Active Stop without fake completion; drag-and-drop is not a required primary flow. |
 | TM-F042 | Current + Upcoming/Pre-planned Loads | V1 Core | Prevent upcoming assignment from replacing current work. |
 | TM-F043 | Explicit document-to-load attribution | V1 Core | Scan/import must attach to intended load; ambiguous cases require confirmation. |
 | TM-F044 | Other Load Documents | V1 Core | Flexible slot for lumper/scale/washout/accessorial/damage and similar paperwork. |
@@ -60,3 +60,9 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F053 | Partial/full rejection + disposition | V1 Core | Same load; Delivered with Exception or Awaiting Instructions; add disposition stop and compensation. |
 | TM-F054 | Unified truck/business expenses | V1 Core (Pro) | No mandatory load link; categories, location, description, optional receipt/line items, recurring overhead. |
 | TM-F055 | Correction audit history | V1 Core | Preserve original AI/system value and manual correction provenance. |
+
+| TM-F056 | Trailer-type adaptive fields | V1 Core | Dry Van + Reefer in V1; trailer type controls relevant fields/checks; other types later. |
+| TM-F057 | Mid-load equipment swaps + assignment history | V1 Core | Truck/trailer changes apply from swap forward by default and preserve prior equipment history. |
+| TM-F058 | Quick trailer hook/swap inspection | V1 Core | Fast condition check before confirming assignment; notes/photos supported; skip allowed with reason. |
+| TM-F059 | Reefer operational fields | V1 Core | Set point, operating mode, reefer fuel level, unit/alarm status, optional actual temperature. |
+| TM-F060 | Critical Load Instructions | V1 Core | Flexible high-value instructions such as seal, driver assist, pallet exchange, special handling; surface when relevant. |

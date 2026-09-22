@@ -14,20 +14,20 @@ TruckMate SHALL support at minimum:
 Functional capability SHALL be based on need/tier rather than job-title assumptions. A user SHALL control their own operational/business records. Sharing SHALL require an intentional user action unless a future integration is explicitly authorized.
 
 ## 3. Current Load Card
-The Current Load Card SHALL be the primary active-trip interface. V1 SHALL support multiple pickups and/or deliveries, with the card following the active stop. A driver MAY also have Upcoming/Pre-planned Loads without replacing the Current Load. It SHALL display stage-relevant information first and secondary reference information with minimal scrolling.
+The Current Load Card SHALL be the primary active-trip interface. V1 SHALL support multiple pickups and/or deliveries, with the card following the active stop. The driver SHALL be able to select another active stop without falsely completing earlier stops. A driver MAY also have Upcoming/Pre-planned Loads without replacing the Current Load. It SHALL display stage-relevant information first and secondary reference information with minimal scrolling.
 
 At pickup stage, high-priority fields include pickup number, shipper, address, appointment, navigation, and Check In.
 
 After pickup, delivery reference/BOL number, receiver, address, appointment, navigation, and delivery-stage actions become primary.
 
-Secondary reference fields SHOULD include truck number, trailer number, truck/trailer plate, company/carrier information, DOT number, contacts, and other extracted load references where available.
+Secondary reference fields SHOULD include truck number, trailer number, truck/trailer plate, company/carrier information, DOT number, contacts, and other extracted load references where available. Gate/check-in references SHALL be quickly readable from the Current Load Card; V1 SHALL NOT require a separate Gate Pass screen.
 
 The user SHALL be able to correct extracted information.
 
 ## 4. Load Creation and Document Intake
 V1 SHALL allow load creation from practical intake methods such as PDF/image upload, in-app scan, and OS share/import. The system SHOULD minimize manual transcription.
 
-AI extraction SHOULD identify, when present: shipper, receiver, addresses, pickup/delivery references, load number, BOL/reference number, appointments, contacts, rate/pay for authorized Pro use, and other necessary operational fields.
+AI extraction SHOULD identify, when present: shipper, receiver, addresses, pickup/delivery references, load number, BOL/reference number, appointments, contacts, rate/pay for authorized Pro use, Critical Load Instructions, and other necessary operational fields. For reefer loads, extraction SHOULD also identify set-point temperature, operating mode, reefer fuel information, unit/alarm status, and actual temperature when present.
 
 Extraction confidence/failure SHALL NOT silently create trusted incorrect data. Important ambiguous fields SHOULD be surfaced for quick confirmation/correction. When more than one load could receive a scan/import, the system SHALL require reliable attribution to the intended load and SHALL request confirmation when attribution is ambiguous.
 
@@ -58,7 +58,7 @@ A Check In action SHALL record timestamp, load/facility context, and location wh
 
 The system SHOULD support both shipper and receiver dwell records. A normal workflow action MAY provide a checkout signal when reliable, but manual correction SHALL remain possible.
 
-TruckMate MAY flag possible detention based on configurable/free-time rules. It SHALL describe this as supporting evidence/recordkeeping, not a guarantee of eligibility or payment.
+TruckMate MAY flag possible detention based on configurable/free-time rules. When no load-specific threshold is known, the user MAY use a default threshold of 2 hours. V1 MAY schedule a local reminder 15 minutes before the configured threshold. It SHALL describe this as supporting evidence/recordkeeping and a configured threshold, not as guaranteed billable detention, eligibility, or payment.
 
 ## 9. Copy and Share Status
 After arrival/check-in/check-out, TruckMate SHALL generate a concise reusable status summary. Fields MAY include facility, city/location, pickup/delivery number, truck/trailer, arrival/check-in/departure timestamps, and dwell time.
@@ -115,7 +115,7 @@ Export SHALL support all data, a selected date range, one load, or selected load
 ## 20. Offline and Poor-Network Behavior
 V1 SHALL be offline-first wherever technically possible. Previously available Current/Upcoming Load information, locally available documents, edits, PTI, expenses, and other technically feasible actions SHALL remain usable without connectivity.
 
-Check-in/out SHALL work offline, saving local timestamp and device location when permission/location is available, preserving provenance and pending-sync state. Sync SHALL be idempotent and avoid duplicate events when connectivity returns. Internet-dependent operations such as new cloud imports, Gemini processing, live traffic/routing refresh, and fresh public/facility data MAY wait for connectivity.
+Check-in/out SHALL work offline, saving local timestamp and device location when permission/location is available, preserving provenance and pending-sync state. Sync SHALL be idempotent and avoid duplicate events when connectivity returns. Deliberate manual user corrections SHALL take precedence over AI/inferred background values. Material manual-vs-manual conflicts SHALL NOT be silently resolved solely by client/device timestamp; the system SHOULD preserve competing versions/provenance and provide a recovery path. Internet-dependent operations such as new cloud imports, Gemini processing, live traffic/routing refresh, and fresh public/facility data MAY wait for connectivity.
 
 ## 21. Architecture and Integrations
 Current direction:
@@ -143,7 +143,7 @@ Common driver actions SHALL be optimized for fast comprehension and large, clear
 The launch monetization target is a **60-day full-feature trial**, followed by **$59.98/month**. The trial SHALL expose the real product rather than an artificially crippled version. Billing/store implementation details remain a later implementation decision.
 
 ## 25. Data Model — Initial Conceptual Entities
-At minimum the architecture should anticipate: User, DriverProfile, Vehicle, Trailer, CarrierProfile, Load, LoadStop, LoadReference, LoadDocument, ExtractedField/Provenance, CheckEvent, DwellRecord, SharedStatusTemplate, EssentialDocument, ExpirationReminder, Inspection, Defect, MileageRecord, Expense, RecurringExpense, FuelRecord, Settlement/SettlementLine, and Subscription/Entitlement when monetization is added.
+At minimum the architecture should anticipate: User, DriverProfile, Vehicle, Trailer, EquipmentAssignment, TrailerInspection, CarrierProfile, Load, LoadStop, LoadReference, LoadDocument, ExtractedField/Provenance, CheckEvent, DwellRecord, SharedStatusTemplate, EssentialDocument, ExpirationReminder, Inspection, Defect, MileageRecord, Expense, RecurringExpense, FuelRecord, Settlement/SettlementLine, and Subscription/Entitlement when monetization is added.
 
 This is conceptual, not a final database schema.
 
@@ -184,3 +184,32 @@ AI-extracted/system-estimated values that are manually corrected SHALL retain th
 
 ## 31. Public Naming
 **TruckMate is a working/project/repository name only.** The public product/domain/store name SHALL be replaced before launch. TM-Q012 remains intentionally open for naming work and does not block UX/design.
+
+
+## 32. Trailer Type and Equipment Assignment
+V1 SHALL support **Dry Van** and **Reefer** as explicit trailer types. Trailer type SHALL control which trailer-specific fields and checks are shown so irrelevant reefer fields do not appear for dry-van work. The architecture SHOULD permit additional trailer types later without requiring V1 workflows for them.
+
+V1 SHALL support truck and/or trailer changes during an active load. Each change SHALL create or update an equipment-assignment history rather than rewriting prior-stop history. By default, the newly selected equipment applies from the swap forward unless the user explicitly corrects the effective history.
+
+## 33. Trailer Hook/Swap Inspection and Reefer Fields
+When a trailer is hooked or swapped, TruckMate SHALL prompt for a **Quick Trailer Check** before confirming the assignment. The quick check SHOULD be optimized for speed and SHOULD allow notes/photos for pre-existing damage. The driver MAY skip the check with a reason. A more detailed trailer inspection MAY be available when needed.
+
+For Reefer trailers, V1 SHALL support:
+- Set-point temperature.
+- Operating mode (for example Continuous or Start/Stop where applicable).
+- Reefer fuel level.
+- Reefer unit status and alarm indication/code/note when available.
+- Optional actual temperature.
+
+V1 SHALL NOT expand into broader reefer-management/telemetry features unless separately approved after field evidence.
+
+## 34. Critical Load Instructions
+V1 SHALL provide a flexible **Critical Load Instructions** area for high-value special directions such as seal number, do-not-break-seal, driver assist, pallet exchange, special handling, and similar requirements. These instructions MAY be extracted from source documents when confidence is sufficient and SHALL be easy to surface on the Current Load Card when operationally relevant.
+
+## 35. Parallel Workflow Statuses
+TruckMate SHALL model at least three independent status dimensions where applicable:
+1. **Operational status** — e.g. Upcoming, At Pickup, In Transit, At Delivery, Delivered, Delivered with Exception.
+2. **Paperwork status** — e.g. incomplete/complete with missing-document indicators.
+3. **Settlement status** — e.g. not yet expected, Awaiting Settlement, matched/settled, or review needed.
+
+A change in one dimension SHALL NOT automatically force an inaccurate value in another. This prevents a delivered load with missing paperwork or a pay mismatch from being misrepresented by one linear status.

@@ -1,5 +1,18 @@
 # TruckMate — Changelog
 
+## 2026-09-21 — Gemini gap review reconciled; V1 scope frozen
+- Reconciled TM-Q021–TM-Q028 and recorded TM-D040–TM-D049.
+- Limited V1 trailer types to Dry Van + Reefer, with trailer-type-specific fields/checks.
+- Added mid-load truck/trailer swap history and Quick Trailer Check with skip reason.
+- Added limited reefer fields: set point, operating mode, reefer fuel level, unit/alarm status, optional actual temperature.
+- Added flexible Critical Load Instructions to avoid niche-field bloat.
+- Added out-of-order Active Stop selection without fake completion; drag-and-drop is not required as the primary flow.
+- Added configurable detention threshold with a 2-hour default when unknown and a local 15-minute warning.
+- Defined sync-conflict rule: manual user corrections outrank AI/inference; material manual conflicts retain provenance/recovery rather than trusting device time alone.
+- Separated operational, paperwork, and settlement status dimensions.
+- Rejected a separate Gate Pass screen for V1; gate/check-in references stay prominent on the Current Load Card.
+- Declared the V1 requirements frozen for UX/design; only TM-Q012 public naming remains intentionally open.
+
 ## 2026-09-21 — Owner closes pre-design requirements
 - Resolved TM-Q001–TM-Q011 and TM-Q013; only public naming TM-Q012 remains intentionally open.
 - Adopted offline-first V1 and offline check-in/out with provenance/safe sync.

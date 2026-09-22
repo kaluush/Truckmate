@@ -28,3 +28,14 @@ These are unresolved and are NOT approved decisions.
 - TM-Q018 → TM-D020/TM-F045: Load History + search is V1 base functionality.
 - TM-Q019 → TM-D021/TM-F046: minimize in-motion interaction; no typing-heavy core workflow while moving.
 - TM-Q020 → TM-D001/TM-Q012: TruckMate remains the working/project name only pending separate public-brand replacement.
+
+
+## Resolved from Gemini gap-review reconciliation — 2026-09-21
+- TM-Q021 → TM-D041: support mid-load equipment swaps with assignment history; default effective from swap forward.
+- TM-Q022 → TM-D045: allow out-of-order Active Stop selection without fake completion; drag-and-drop is not required as the primary V1 flow.
+- TM-Q023 → TM-D040/TM-D043/TM-D044: V1 trailer types are Dry Van + Reefer; reefer-specific fields are deliberately limited; use flexible Critical Load Instructions for special requirements.
+- TM-Q024 → TM-D047: manual user corrections outrank AI/inference; material manual conflicts are not silently resolved solely by client timestamp.
+- TM-Q025 → TM-D049: no separate Gate Pass screen in V1; make gate/check-in references prominent on the Current Load Card.
+- TM-Q026 → TM-D046: configurable detention threshold; 2-hour user default when unknown; local reminder 15 minutes before threshold with non-guarantee wording.
+- TM-Q027 → TM-D048: operational, paperwork, and settlement statuses remain separate parallel dimensions.
+- TM-Q028 → TM-D042: trailer hook/swap prompts a Quick Trailer Check; skip allowed with reason.
