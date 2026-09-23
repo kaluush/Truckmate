@@ -68,3 +68,11 @@ Do not mark your own new work approved merely because you created it. The next A
 
 ## Final V1 freeze rule
 The owner-approved V1 baseline is frozen through TM-D055. The unified Upcoming due/reminder module and lean admin/operations panel are the final V1 feature additions. Do not add another V1 feature during design or coding. Put new ideas in V2/future scope unless they are necessary to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
+
+
+## Multi-AI design protocol
+For TruckMate UX/design, follow the canonical workflow in `design/README.md`:
+
+Requirements → 3 independent designs → 3 improved designs by learning from each other → select the strongest design using real-world data → selected final design → all AIs improve that selected design together → coding.
+
+Isolation is mandatory during the first design round. GPT, Claude, and Gemini must not read the other independent designs until all three first versions are complete. Coding begins only after the jointly improved final design is explicitly approved by the owner.
