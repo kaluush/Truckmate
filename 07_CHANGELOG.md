@@ -1,5 +1,14 @@
 # TruckMate — Changelog
 
+## 2026-09-23 — CabPilot public brand selected
+- Resolved TM-Q012.
+- Added TM-D056.
+- Approved public product/store name: **CabPilot**.
+- Approved domain: **cabpilotapp.com**.
+- Preserved TruckMate as the repository/internal working name for continuity/history.
+- Marked prior open-brand decisions TM-D001 and TM-D036 superseded where they conflicted with the resolved public name.
+
+
 ## 2026-09-23 — Final V1 additions synchronized
 - Added TM-D050–TM-D055 and TM-F061–TM-F065.
 - Added one unified Upcoming due/reminder area for one-time dates and recurring obligations; distinguished it from Upcoming/Pre-planned Loads.
