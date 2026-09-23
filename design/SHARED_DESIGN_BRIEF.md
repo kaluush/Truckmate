@@ -1,6 +1,11 @@
-# TruckMate — Shared Design Brief
+# TruckMate / CabPilot — Shared Design Brief
 
 This brief is the identical starting point for GPT, Claude, and Gemini.
+
+## Public brand
+- Customer-facing product name: **CabPilot**
+- Primary domain: **cabpilotapp.com**
+- Repository/internal working name may remain TruckMate.
 
 ## Authoritative inputs
 Before creating an independent design, read:
