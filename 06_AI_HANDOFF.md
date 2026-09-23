@@ -1,7 +1,7 @@
 # TruckMate — AI Handoff
 
 ## Current state
-TruckMate's final V1 requirements baseline is owner-approved through **TM-D055**. The previous 2026-09-21 baseline was extended only by the owner's final additions: the unified Upcoming due/reminder module and the lean admin/operations layer. TM-Q012 (public replacement name) remains intentionally open.
+TruckMate's final V1 requirements baseline is owner-approved through **TM-D056**. The previous baseline was extended by the owner's final additions and the public-brand decision. TM-Q012 is resolved: the public product name is **CabPilot** and the approved domain is **cabpilotapp.com**.
 
 ## Final additions now in project truth
 - **Upcoming due/reminders:** one unified flow for one-time expiration/due dates or recurring schedules; supports bills, expiring documents, maintenance and similar obligations; distinct from Upcoming/Pre-planned Loads.
@@ -16,7 +16,7 @@ TruckMate's final V1 requirements baseline is owner-approved through **TM-D055**
 TM-D001–TM-D049 remain active, including Current Load Card, multi-stop loads, load-document package, offline-first behavior, check-in/out and detention evidence, PTI, wallet/expirations, mileage provenance, settlement reconciliation, unified expenses, export, Dry Van/Reefer behavior, equipment swaps, Quick Trailer Check, Critical Load Instructions, parallel statuses, and facility intelligence.
 
 ## Next AI assignment
-Read `AGENTS.md`, `08_APPROVAL_STATUS.md`, `04_CURRENT_WORK.md`, then relevant authoritative requirements. Proceed to UX/design. Do not reopen settled decisions or add V1 features. Keep TM-Q012 open until the owner selects the public name.
+Read `AGENTS.md`, `08_APPROVAL_STATUS.md`, `04_CURRENT_WORK.md`, then relevant authoritative requirements. Proceed to UX/design. Do not reopen settled decisions or add V1 features. Use **CabPilot** for customer-facing branding; the repository may remain named TruckMate.
 
 ## Owner principle
 **Clean. Easy. Simple. Collect once, use everywhere.**
