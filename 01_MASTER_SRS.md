@@ -1,6 +1,6 @@
 # TruckMate — Master Software Requirements Specification
 
-**Status:** Owner-approved V1 requirements baseline for UX/design as of 2026-09-21. Public replacement name remains intentionally open.
+**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public replacement name remains intentionally open.
 
 The structure is intentionally sized to TruckMate. PWT does not impose a fixed section count.
 
@@ -213,3 +213,46 @@ TruckMate SHALL model at least three independent status dimensions where applica
 3. **Settlement status** — e.g. not yet expected, Awaiting Settlement, matched/settled, or review needed.
 
 A change in one dimension SHALL NOT automatically force an inaccurate value in another. This prevents a delivered load with missing paperwork or a pay mismatch from being misrepresented by one linear status.
+
+
+## 36. Upcoming Due Items and Recurring Reminders
+V1 SHALL include a unified **Upcoming** due-items area near the top of the working experience. This is distinct from **Upcoming/Pre-planned Loads**.
+
+A single **Add Upcoming** flow SHALL support either a one-time due/expiration date or a recurring schedule such as weekly, biweekly, monthly, or another supported interval. Examples include insurance/document expirations, recurring bills/subscriptions, oil changes or other maintenance reminders, and similar driver/truck obligations.
+
+The user SHALL set the applicable due date or recurring draft/due date. The UI SHOULD show a clear countdown and surface approaching items. Recurring items SHOULD remind within the final week and on the due day unless the user changes the reminder behavior. Existing document-expiration rules may continue using their more detailed cadence.
+
+The design SHALL avoid separate features for expirations, bills, and maintenance when the same Upcoming item model can represent them cleanly.
+
+## 37. Authentication and Account Recovery
+V1 authentication SHALL use phone OTP as the primary login method, with optional email attached to the account. V1 SHALL NOT require a password.
+
+If a user loses access to both the phone number and optional email, TruckMate SHALL NOT promise automatic self-service recovery in V1. Support tooling MAY expose limited account/activity metadata needed to investigate a recovery request, but SHALL NOT expose private document contents. Support-visible metadata MAY include account status, activity timestamps, and upload time/city metadata when available.
+
+Any later manual credential-recovery procedure SHALL require a separate approved security design rather than ad hoc support action.
+
+## 38. Lean Admin / Operations Panel
+V1 SHALL include a deliberately small admin/operations panel with five primary areas:
+1. **Dashboard** — basic user/subscription counts, recent signups, and important system/job failures.
+2. **Users** — search by name, phone, email, or user ID; view account/tier/subscription/support metadata.
+3. **Subscriptions** — trial/active/past-due/canceled state and billing references; authorized staff may correct or extend trial/subscription state where policy permits.
+4. **Support / Recovery** — simple cases with status/internal notes and limited account activity metadata; export requests may be tracked here.
+5. **Controls** — feature/entitlement toggles by tier, maintenance messaging, and minimum supported app version when needed.
+
+The admin panel SHALL NOT become a driver-location map, load-management console, CRM, marketing suite, document browser, or duplicate billing engine. Stripe or the selected billing provider SHOULD remain the billing source of truth when monetization is implemented.
+
+Admin roles SHALL remain simple: **Owner**, **Admin**, and **Support**. Owner has full administrative control; Admin handles users, subscriptions, support and allowed operational controls; Support is limited to user lookup/support/recovery context.
+
+Admin/support users SHALL NOT be able to open a driver's RC, BOL, medical card, insurance, or other private document contents merely because they are administrators.
+
+## 39. V1 Tiers and Entitlements
+The working V1 tier model SHALL support:
+- **Company Driver** tier for mileage/driver operational needs.
+- **O/O** tier for owner-operators and percentage-paid drivers who need the financial/business layer.
+
+The entitlement model SHALL allow features to be enabled/disabled by tier without hard-coding job titles into core data. Additional tiers MAY be added later without redesigning the user model.
+
+## 40. Final V1 Scope Lock
+The additions in Sections 36–39 are the final owner-approved V1 feature additions before UX/design. After this baseline, new feature ideas SHALL be placed in V2/future scope.
+
+A V1 change is permitted only to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated requirement gap in already-approved behavior. UX simplification and clarification are allowed when they do not expand product capability.
