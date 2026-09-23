@@ -73,6 +73,6 @@ The owner-approved V1 baseline is frozen through TM-D055. The unified Upcoming d
 ## Multi-AI design protocol
 For TruckMate UX/design, follow the canonical workflow in `design/README.md`:
 
-Requirements → 3 independent designs → 3 improved designs by learning from each other → select the strongest design using real-world data → selected final design → all AIs improve that selected design together → coding.
+Frozen requirements → shared design brief → 3 independent designs → requirement check → 3 improved designs by learning from each other → same real-world tests → blind evidence-based selection → selected final design → all AIs improve that selected design together → owner approval/freeze → coding.
 
-Isolation is mandatory during the first design round. GPT, Claude, and Gemini must not read the other independent designs until all three first versions are complete. Coding begins only after the jointly improved final design is explicitly approved by the owner.
+Isolation is mandatory during the first design round. GPT, Claude, and Gemini must not read the other independent designs until all three first versions are complete. All three improved designs must be tested against the same real-world scenario set before selection. Selection should use anonymized Design A/B/C labels and concrete evidence. Simulated walkthroughs must be labeled as simulated rather than real-world data. Preserve losing designs for future reference. Coding begins only after the jointly improved final design is explicitly approved and frozen by the owner.
