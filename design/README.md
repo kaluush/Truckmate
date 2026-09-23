@@ -4,9 +4,15 @@ This directory preserves the approved multi-AI design process.
 
 ## Canonical design workflow
 
-**Requirements → 3 independent designs → 3 improved designs by learning from each other → select the strongest design using real-world data → selected final design → all AIs improve that selected design together → coding**
+**Frozen requirements → shared design brief → 3 independent designs → requirement check → 3 improved designs by learning from each other → same real-world tests → blind evidence-based selection → selected final design → all AIs improve that selected design together → owner approval/freeze → coding**
 
-## Stage 1 — Independent designs
+## Stage 0 — Shared brief
+All three AIs receive the same instructions and source material from:
+- `SHARED_DESIGN_BRIEF.md`
+
+No AI gets a different private design brief.
+
+## Stage 1 — Three independent designs
 GPT, Claude, and Gemini each create a complete first design from the same approved TruckMate requirements.
 
 They MUST NOT read the other two independent designs before completing their own.
@@ -18,49 +24,57 @@ Files:
 
 The originals are preserved permanently.
 
-## Stage 2 — Improved designs
-Only after all three independent designs are complete, each AI reads the other two designs, learns from them, and improves its own design.
+## Stage 2 — Requirement completeness check
+Before peer learning, each independent design is checked against:
+- `validation/REQUIREMENT_CHECK_TEMPLATE.md`
 
-Files:
+This stage repairs omissions or contradictions only. It is not a design competition and does not add features.
+
+## Stage 3 — Three improved designs
+Only after all three independent designs pass the requirement check may each AI read the other two designs.
+
+Each AI learns from the other designs and improves its own:
 - `improved/gpt/DESIGN_V2.md`
 - `improved/claude/DESIGN_V2.md`
 - `improved/gemini/DESIGN_V2.md`
 
-Each AI may adopt better ideas from the others, but must still produce its own improved design.
+The original independent files remain unchanged.
 
-## Stage 3 — Selection using real-world data
-Compare the three improved designs against the same approved TruckMate requirements and real-world driver evidence.
+## Stage 4 — Same real-world tests
+Test all three improved designs using the identical scenarios in:
+- `testing/REAL_WORLD_SCENARIOS.md`
 
-The selection is based on evidence such as:
-- real driver workflow fit
-- minimal taps and typing
-- one-handed mobile use
-- fast comprehension at pickup/delivery
-- safe in-motion behavior
-- offline reality
-- privacy
-- error recovery
-- implementation practicality
-- consistency with the frozen V1 scope
+Record whether evidence is observed/measured or only simulated. Do not call simulated walkthroughs real-world data.
 
-Do not select based on which AI created the design.
+## Stage 5 — Blind evidence-based selection
+Temporarily label the improved designs Design A, B and C and evaluate them without AI identity using:
+- `selection/EVALUATION_PROTOCOL.md`
 
-Selection notes belong in `selection/`.
+Selection must be supported by concrete evidence rather than preference or AI reputation.
 
-## Stage 4 — Selected final design
-The strongest design becomes the selected final design and is copied/preserved in:
+Preserve all three designs and the evidence, including the designs that are not selected.
+
+## Stage 6 — Selected final design
+The selected design is preserved in:
 - `final/SELECTED_DESIGN.md`
 
-This is the chosen foundation, not yet the coding baseline.
+It is the chosen foundation, not yet the coding baseline.
 
-## Stage 5 — Improve the selected final design together
-GPT, Claude, and Gemini then review the selected design together and improve that one design using the best evidence and ideas from all prior work.
+## Stage 7 — Improve the selected design together
+GPT, Claude, and Gemini jointly challenge and improve the selected design using the requirements, test evidence, and useful ideas preserved from all three designs.
 
-The resulting owner-approved coding baseline belongs in:
+Output:
 - `final-improvement/FINAL_DESIGN.md`
 
-## Stage 6 — Coding
-Coding begins only after the owner approves the final improved design.
+At this stage the goal is no longer to defend the original AI designs. The goal is to make the selected design stronger.
+
+## Stage 8 — Owner approval and design freeze
+The final improved design becomes the coding baseline only after explicit owner approval.
+
+After approval, design changes during coding require a real implementation problem, contradiction, security/privacy problem, or field-validated issue—not casual redesign.
+
+## Stage 9 — Coding
+Coding starts from the approved frozen design.
 
 ## Scope rule
 No stage of the design process may add new V1 features. New feature ideas go to V2 unless they repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
