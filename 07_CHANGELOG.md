@@ -1,5 +1,16 @@
 # TruckMate — Changelog
 
+## 2026-09-23 — Final V1 additions synchronized
+- Added TM-D050–TM-D055 and TM-F061–TM-F065.
+- Added one unified Upcoming due/reminder area for one-time dates and recurring obligations; distinguished it from Upcoming/Pre-planned Loads.
+- Added phone OTP + optional email/no-password V1 authentication and the no-automatic-recovery boundary when both access channels are lost.
+- Added the lean admin/operations panel: Dashboard, Users, Subscriptions, Support/Recovery, Controls.
+- Added simple Owner/Admin/Support roles and the rule that administrators cannot open private driver document contents.
+- Added Company Driver and O/O working tiers with tier entitlement controls.
+- Reaffirmed that Stripe/selected billing provider remains the billing source of truth when monetization is implemented.
+- Declared the final V1 scope lock: all new feature ideas now go to V2 unless required to repair an approved requirement.
+
+
 ## 2026-09-21 — Gemini gap review reconciled; V1 scope frozen
 - Reconciled TM-Q021–TM-Q028 and recorded TM-D040–TM-D049.
 - Limited V1 trailer types to Dry Van + Reefer, with trailer-type-specific fields/checks.
