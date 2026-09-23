@@ -1,6 +1,6 @@
 # TruckMate — Master Software Requirements Specification
 
-**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public replacement name remains intentionally open.
+**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**.
 
 The structure is intentionally sized to TruckMate. PWT does not impose a fixed section count.
 
@@ -157,7 +157,7 @@ Before monetization, TruckMate SHOULD be tested in real trucking workflows. Vali
 - Automatic Gmail import as launch dependency.
 - Full tax preparation/accounting replacement.
 - Claims that TruckMate guarantees DOT/legal/tax compliance, court admissibility, detention payment, or legal proof.
-- Public use of the TruckMate name; replacement branding remains open.
+- Public use of the TruckMate name as the customer-facing brand. The approved public brand is **CabPilot**.
 - Features added only because competitors have them.
 
 ## 28. Gap-Review Gate
@@ -183,7 +183,7 @@ Reports SHALL be able to show trip/load-related costs and truck/business overhea
 AI-extracted/system-estimated values that are manually corrected SHALL retain the original value and correction provenance in history while using the corrected value operationally. This rule applies to extracted document fields and mileage adjustments and SHOULD be reused for other material corrections where practical.
 
 ## 31. Public Naming
-**TruckMate is a working/project/repository name only.** The public product/domain/store name SHALL be replaced before launch. TM-Q012 remains intentionally open for naming work and does not block UX/design.
+The approved public product/store brand is **CabPilot**. The approved primary domain is **cabpilotapp.com**. **TruckMate** may remain the internal repository/project working name for continuity and history, but customer-facing branding SHALL use CabPilot. TM-Q012 is resolved by TM-D056.
 
 
 ## 32. Trailer Type and Equipment Assignment
