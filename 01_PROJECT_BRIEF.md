@@ -28,8 +28,11 @@ TruckMate is not an ELD and should not attempt to replace one. It is not a carri
 - Privacy by default; sharing is user initiated.
 - Full-product field testing before monetization gates are emphasized.
 
+## Lean V1 operations layer
+TruckMate includes a deliberately small admin/operations panel for subscriber support, tier controls, support/recovery cases, and basic system visibility. Admin tooling SHALL not become a second product and SHALL not expose private driver document contents.
+
 ## Current technical direction
 Mobile app; Firebase Authentication; TruckMate-owned backend/business layer; Firestore or equivalent; Cloud Storage; Gemini API; push notifications; location/maps; in-app scanner using existing/native technology; subscriptions later; Gmail import later.
 
 ## Current phase
-Discovery / requirements consolidation and independent gap review before design and coding.
+V1 requirements are owner-approved and frozen for UX/design. The final V1 additions are the unified Upcoming due/reminder module and the lean admin/operations panel. Public replacement naming remains open; any new feature idea now goes to V2 unless field evidence exposes a contradiction in an approved requirement.
