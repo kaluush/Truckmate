@@ -64,3 +64,7 @@ Do not mark your own new work approved merely because you created it. The next A
 
 ## Core principle
 **Think critically. Read efficiently. Find gaps without scope creep. Design for real drivers. Validate before building further. Build for extension, not speculation.**
+
+
+## Final V1 freeze rule
+The owner-approved V1 baseline is frozen through TM-D055. The unified Upcoming due/reminder module and lean admin/operations panel are the final V1 feature additions. Do not add another V1 feature during design or coding. Put new ideas in V2/future scope unless they are necessary to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
