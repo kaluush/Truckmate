@@ -1,5 +1,11 @@
-# TruckMate — Design Review Round
+# TruckMate — Legacy Design Review Folder
 
-Use this directory only after all three independent designs are complete.
+This folder is superseded by the approved workflow in `design/README.md`.
 
-Each AI may then review the other two designs and create an improved version here. Do not overwrite the original files under `design/independent/`.
+Use:
+- `design/improved/` for the three post-learning improved designs.
+- `design/selection/` for evidence-based selection.
+- `design/final/` for the selected design.
+- `design/final-improvement/` for the jointly improved coding baseline.
+
+Do not place new design work in this folder.
