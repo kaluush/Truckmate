@@ -1,4 +1,9 @@
-# TruckMate — Project Brief
+# TruckMate / CabPilot — Project Brief
+
+## Public brand
+- **Product name:** CabPilot
+- **Domain:** cabpilotapp.com
+- **Repository/internal working history:** TruckMate may remain as the repo/project working name.
 
 ## Mission
 TruckMate is a clean, simple mobile work companion for CDL drivers and owner-operators. It keeps the active load, essential documents, trip records, inspection records, mileage, detention evidence, and—when needed—business financial information organized in one place.
@@ -35,4 +40,4 @@ TruckMate includes a deliberately small admin/operations panel for subscriber su
 Mobile app; Firebase Authentication; TruckMate-owned backend/business layer; Firestore or equivalent; Cloud Storage; Gemini API; push notifications; location/maps; in-app scanner using existing/native technology; subscriptions later; Gmail import later.
 
 ## Current phase
-V1 requirements are owner-approved and frozen for UX/design. The final V1 additions are the unified Upcoming due/reminder module and the lean admin/operations panel. Public replacement naming remains open; any new feature idea now goes to V2 unless field evidence exposes a contradiction in an approved requirement.
+V1 requirements are owner-approved and frozen for UX/design. The final V1 additions are the unified Upcoming due/reminder module and the lean admin/operations panel. Public naming is resolved as **CabPilot** with **cabpilotapp.com**; any new feature idea now goes to V2 unless field evidence exposes a contradiction in an approved requirement.
