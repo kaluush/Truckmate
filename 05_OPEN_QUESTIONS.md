@@ -39,3 +39,14 @@ These are unresolved and are NOT approved decisions.
 - TM-Q026 → TM-D046: configurable detention threshold; 2-hour user default when unknown; local reminder 15 minutes before threshold with non-guarantee wording.
 - TM-Q027 → TM-D048: operational, paperwork, and settlement statuses remain separate parallel dimensions.
 - TM-Q028 → TM-D042: trailer hook/swap prompts a Quick Trailer Check; skip allowed with reason.
+
+
+## Final V1 additions — 2026-09-22/23
+- Upcoming due/reminder module → TM-D050.
+- Phone OTP + optional email/no-password authentication and recovery boundary → TM-D051.
+- Lean five-area admin/operations panel → TM-D052.
+- Owner/Admin/Support roles and admin privacy boundary → TM-D053.
+- Company Driver + O/O working tiers and entitlement controls → TM-D054.
+- Final V1 scope lock; all new feature ideas move to V2 → TM-D055.
+
+No new open V1 product question was created. TM-Q012 remains intentionally open for public naming only.
