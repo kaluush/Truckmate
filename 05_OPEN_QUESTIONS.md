@@ -2,9 +2,7 @@
 
 These are unresolved and are NOT approved decisions.
 
-| ID | Question | Why it matters |
-|---|---|---|
-| TM-Q012 | What public product name/domain/store name should replace the working name TruckMate? | TruckMate is already used in the trucking industry; owner intentionally left the replacement name open for later naming work. |
+**No material V1 product questions are currently open.**
 
 ## Resolved by owner — 2026-09-21
 - TM-Q001 → TM-D024: offline-first wherever technically possible.
@@ -49,4 +47,8 @@ These are unresolved and are NOT approved decisions.
 - Company Driver + O/O working tiers and entitlement controls → TM-D054.
 - Final V1 scope lock; all new feature ideas move to V2 → TM-D055.
 
-No new open V1 product question was created. TM-Q012 remains intentionally open for public naming only.
+No new open V1 product question was created.
+
+
+## Resolved public naming — 2026-09-23
+- TM-Q012 → TM-D056: approved public product name **CabPilot**; approved domain **cabpilotapp.com**. The repository/internal working name may remain TruckMate for continuity/history.
