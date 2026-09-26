@@ -1,0 +1,1425 @@
+<title>CabPilot V1 Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@500;600;700&family=Barlow+Semi+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F1F2EE; --panel:#FFFFFF; --fg:#151A1E; --muted:#5A635E; --line:#D6DAD3;
+  --accent:#0B6B45; --accent-soft:#E1F0E7; --warn:#8A5A00; --warn-soft:#FFF1C9; --crit:#A8281F; --crit-soft:#FBE4E1;
+  --code:#EAECE7;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1315; --panel:#171D20; --fg:#E7ECE8; --muted:#9BA69F; --line:#2B3439;
+    --accent:#3CC486; --accent-soft:#12291E; --warn:#F2C14E; --warn-soft:#2F260E; --crit:#FF8A7E; --crit-soft:#35171A;
+    --code:#1F272B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1315; --panel:#171D20; --fg:#E7ECE8; --muted:#9BA69F; --line:#2B3439;
+  --accent:#3CC486; --accent-soft:#12291E; --warn:#F2C14E; --warn-soft:#2F260E; --crit:#FF8A7E; --crit-soft:#35171A;
+  --code:#1F272B; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.5;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 80px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,6vw,64px);letter-spacing:.005em}
+h2{font-size:34px;margin-top:64px;padding-top:18px;border-top:3px solid var(--fg)}
+h3{font-size:22px;margin-top:28px;font-weight:600}
+p{max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:19px;max-width:62ch;color:var(--fg)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--f-mono);font-size:12.5px;color:var(--muted);margin-top:14px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.toc a{font-family:var(--f-display);font-weight:600;font-size:17px;text-decoration:none;color:var(--fg);border:1.5px solid var(--line);border-radius:6px;padding:4px 12px;background:var(--panel)}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);outline:none}
+.tag{font-family:var(--f-mono);font-size:11.5px;background:var(--code);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.note{font-size:14.5px;color:var(--muted)}
+.callout{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-top:16px;max-width:900px}
+
+/* ---------- screen gallery ---------- */
+.shots{display:flex;flex-wrap:wrap;gap:34px 30px;margin-top:22px;align-items:flex-start}
+.shot{margin:0;width:330px;max-width:100%;scroll-margin-top:24px}
+.shot figcaption{margin-top:12px;font-size:14px;line-height:1.45;color:var(--muted)}
+.shot figcaption b{display:block;color:var(--fg);font-family:var(--f-display);font-size:19px;font-weight:600;margin-bottom:2px}
+.shot figcaption ul{margin:6px 0 0;padding-left:18px}
+.shot figcaption li{margin:2px 0}
+.shot:target .phone,.shot:target .desk{outline:4px solid var(--accent);outline-offset:6px}
+.hint{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:6px}
+
+/* ---------- app mockup: fixed palette (the app's own design) ---------- */
+.phone{
+  --a-bg:#ECEEE9; --a-card:#FFFFFF; --a-ink:#12181D; --a-mut:#56615B; --a-line:#D2D7D0;
+  --a-go:#0B7A4B; --a-go2:#E0F1E8; --a-amb:#F2B200; --a-amb2:#FFF2C6; --a-amb-ink:#5C3E00;
+  --a-red:#B3261E; --a-red2:#FCE3E0; --a-blue:#1B58B8; --a-blue2:#E3ECFA; --a-dark:#12181D;
+  width:330px;max-width:100%;height:710px;border-radius:38px;border:10px solid #0C1013;background:var(--a-bg);
+  color:var(--a-ink);font-family:"Atkinson Hyperlegible",Verdana,sans-serif;font-size:15px;line-height:1.3;
+  overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 18px 40px -22px rgba(0,0,0,.45)
+}
+.phone.night{--a-bg:#0A0E10; --a-card:#151B1F; --a-ink:#EEF2EE; --a-mut:#9CA7A0; --a-line:#29323A;
+  --a-go:#29B36E; --a-go2:#11301F; --a-amb:#E8A800; --a-amb2:#33290A; --a-amb-ink:#FFD66B; --a-red:#FF6D5E; --a-red2:#3A1512; --a-blue:#6FA3FF; --a-blue2:#15233B; --a-dark:#000}
+.phone a{color:inherit;text-decoration:none}
+.sb{height:28px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font-size:12px;font-weight:700}
+.ab{flex:none;display:flex;justify-content:space-between;align-items:center;padding:6px 14px 8px;gap:8px}
+.ab .t{font-family:"Barlow Semi Condensed",Arial,sans-serif;font-size:24px;font-weight:700;line-height:1}
+.ab .sub{font-size:12px;color:var(--a-mut)}
+.ab .back{font-size:22px;font-weight:700;margin-right:6px}
+.bd{flex:1;overflow:hidden;padding:2px 12px 10px;display:flex;flex-direction:column;gap:9px;position:relative}
+.card{background:var(--a-card);border:1px solid var(--a-line);border-radius:14px;padding:11px 12px;display:flex;flex-direction:column;gap:6px}
+.lbl{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--a-mut)}
+.ref{font-size:34px;font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+.ref.md{font-size:26px}
+.fac{font-size:17px;font-weight:700;line-height:1.15}
+.mut{color:var(--a-mut);font-size:13px}
+.sm{font-size:12.5px}
+.xs{font-size:11px}
+.b{font-weight:700}
+.r{display:flex;align-items:center;gap:7px}
+.sp{justify-content:space-between}
+.wr{flex-wrap:wrap}
+.col{display:flex;flex-direction:column;gap:6px}
+.ch{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;border-radius:99px;padding:2px 8px;border:1px solid var(--a-line);background:var(--a-card);white-space:nowrap}
+.ch.go{background:var(--a-go2);border-color:transparent;color:var(--a-go)}
+.ch.amb{background:var(--a-amb2);border-color:transparent;color:var(--a-amb-ink)}
+.ch.red{background:var(--a-red2);border-color:transparent;color:var(--a-red)}
+.ch.blue{background:var(--a-blue2);border-color:transparent;color:var(--a-blue)}
+.ch.dk{background:var(--a-dark);color:#fff;border-color:transparent}
+.ch.sel{background:var(--a-ink);color:var(--a-card);border-color:transparent}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:54px;border-radius:12px;background:var(--a-go);color:#fff !important;font-weight:700;font-size:17px;flex:1;border:0}
+.btn.gh{background:var(--a-card);color:var(--a-ink) !important;border:1.5px solid var(--a-line)}
+.btn.dk{background:var(--a-ink);color:var(--a-card) !important}
+.btn.amb{background:var(--a-amb);color:#2A1C00 !important}
+.btn.s{height:42px;font-size:15px;border-radius:10px}
+.btn.sq{flex:0 0 54px}
+.act{flex:none;display:flex;gap:8px;padding:9px 12px;background:var(--a-card);border-top:1px solid var(--a-line)}
+.tb{flex:none;height:64px;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--a-card);border-top:1px solid var(--a-line);padding-bottom:6px}
+.tb a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--a-mut)}
+.tb a.on{color:var(--a-ink)}
+.tb a.on svg{stroke:var(--a-go)}
+.tb .sc span{width:54px;height:54px;border-radius:16px;background:var(--a-ink);display:flex;align-items:center;justify-content:center;margin-top:-18px;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
+.tb .sc svg{stroke:#fff;width:28px;height:28px}
+.phone.night .tb .sc span{background:#2B3339}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.i.s{width:16px;height:16px}
+svg.i.l{width:26px;height:26px}
+.due{display:flex;align-items:center;gap:8px;background:var(--a-amb2);color:var(--a-amb-ink) !important;border-radius:10px;padding:8px 10px;font-size:13.5px;font-weight:700}
+.due .grow{flex:1}
+.crit{display:flex;gap:9px;background:var(--a-amb);color:#221700 !important;border-radius:10px;padding:8px 10px;font-size:13.5px;line-height:1.25}
+.crit svg{margin-top:1px}
+.stops{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700}
+.stops .st{flex:1;border-radius:7px;padding:5px 6px;background:var(--a-bg);color:var(--a-mut);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stops .st.on{background:var(--a-ink);color:var(--a-card)}
+.stops .st.dn{background:var(--a-go2);color:var(--a-go)}
+.stops .nx{font-size:12px;color:var(--a-blue);padding-left:4px;white-space:nowrap}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.kv .k{font-size:10.5px;color:var(--a-mut);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.kv .v{font-size:14.5px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.docs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.docs a{display:flex;flex-direction:column;align-items:center;gap:1px;border:1.5px dashed var(--a-line);border-radius:9px;padding:5px 2px;font-size:11px;font-weight:700;color:var(--a-mut)}
+.docs a.ok{border-style:solid;border-color:transparent;background:var(--a-go2);color:var(--a-go)}
+.docs a.miss{border-color:var(--a-amb);color:var(--a-amb-ink)}
+.hr{height:1px;background:var(--a-line);margin:2px 0}
+.li{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--a-line)}
+.li:last-child{border-bottom:0}
+.li .grow{flex:1;min-width:0}
+.li .tt{font-weight:700;font-size:14.5px}
+.sec{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--a-mut);margin-top:4px;display:flex;justify-content:space-between}
+.sec a{color:var(--a-blue);letter-spacing:0;text-transform:none;font-size:12.5px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;background:var(--a-line)}
+.dot.go{background:var(--a-go)} .dot.amb{background:var(--a-amb)} .dot.red{background:var(--a-red)} .dot.blue{background:var(--a-blue)}
+.seg{display:flex;background:var(--a-bg);border-radius:10px;padding:3px;gap:3px}
+.seg span{flex:1;text-align:center;padding:7px 4px;border-radius:8px;font-size:13px;font-weight:700;color:var(--a-mut)}
+.seg span.on{background:var(--a-card);color:var(--a-ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.search{display:flex;align-items:center;gap:8px;background:var(--a-card);border:1.5px solid var(--a-line);border-radius:11px;padding:10px 11px;font-size:14px;color:var(--a-mut)}
+.search b{color:var(--a-ink)}
+.toast{position:absolute;left:12px;right:12px;top:6px;z-index:6;background:#12181D;color:#fff;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:9px;font-size:13.5px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.toast .grow{flex:1}
+.toast a{color:#8FE3B5 !important;font-weight:700}
+.dim{position:absolute;inset:0;background:rgba(10,14,16,.5);z-index:5}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--a-card);border-radius:20px 20px 0 0;padding:8px 14px 16px;display:flex;flex-direction:column;gap:9px;max-height:92%}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:var(--a-line);margin:0 auto 4px}
+.sheet h4{margin:0;font-family:"Barlow Semi Condensed",Arial,sans-serif;font-size:22px;line-height:1.1}
+.msg{background:var(--a-bg);border-radius:10px;padding:9px 10px;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.45}
+.opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--a-line);border-radius:12px;padding:10px 11px}
+.opt.on{border-color:var(--a-go);background:var(--a-go2)}
+.rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--a-mut);flex:none}
+.opt.on .rad{border:6px solid var(--a-go)}
+.opt .grow{flex:1;min-width:0}
+.bar{height:10px;border-radius:5px;background:var(--a-bg);position:relative;overflow:visible}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--a-amb)}
+.bar em{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--a-ink);border-radius:2px}
+.big{font-size:52px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:10.5px;border-radius:4px;padding:1px 5px;background:var(--a-bg);color:var(--a-mut);white-space:nowrap}
+.prov.ed{background:var(--a-blue2);color:var(--a-blue)}
+.qs{display:flex;gap:5px}
+.qs span{flex:1;text-align:center;border:1.5px solid var(--a-line);border-radius:9px;padding:8px 2px;font-size:13px;font-weight:700}
+.qs span.on{background:var(--a-ink);color:var(--a-card);border-color:var(--a-ink)}
+.qs span.bad{background:var(--a-red2);color:var(--a-red);border-color:var(--a-red)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:var(--a-card);border:1px solid var(--a-line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:5px;min-height:84px}
+.tile .tt{font-weight:700;font-size:14px;line-height:1.15}
+.tile.add{border-style:dashed;align-items:center;justify-content:center;color:var(--a-mut);font-weight:700}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.keypad span{background:var(--a-card);border:1px solid var(--a-line);border-radius:10px;text-align:center;padding:9px 0;font-size:19px;font-weight:700}
+.cat{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cat span{border:1.5px solid var(--a-line);border-radius:10px;text-align:center;padding:7px 2px;font-size:12px;font-weight:700;background:var(--a-card)}
+.cat span.on{border-color:var(--a-go);background:var(--a-go2);color:var(--a-go)}
+.stat .n{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .k{font-size:11px;color:var(--a-mut);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.num{font-variant-numeric:tabular-nums}
+.lock{position:absolute;inset:0;background:linear-gradient(160deg,#23313A,#0E1418);color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 12px 0;gap:8px}
+.lock .clock{font-family:"Barlow Semi Condensed",Arial,sans-serif;font-size:72px;font-weight:600;line-height:1}
+.nt{width:100%;background:rgba(255,255,255,.88);color:#12181D;border-radius:16px;padding:10px 12px;font-size:13px;line-height:1.3}
+.nt .h{display:flex;justify-content:space-between;font-size:11px;color:#56615B;font-weight:700;margin-bottom:2px}
+.brand{font-family:"Barlow Semi Condensed",Arial,sans-serif;font-weight:700;font-size:34px;letter-spacing:.01em}
+.brand i{font-style:normal;color:var(--a-go)}
+.field{border:1.5px solid var(--a-line);border-radius:12px;padding:12px;font-size:20px;font-weight:700;background:var(--a-card);font-variant-numeric:tabular-nums}
+.field.f{border-color:var(--a-go);box-shadow:0 0 0 3px var(--a-go2)}
+.otp{display:flex;gap:6px}
+.otp span{flex:1;height:52px;border:1.5px solid var(--a-line);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;background:var(--a-card)}
+.lowc{background:var(--a-amb2);border-radius:8px;padding:6px 8px}
+.drive{background:var(--a-dark);color:#fff}
+.thumb{width:48px;height:60px;border-radius:6px;background:repeating-linear-gradient(0deg,#fff 0 6px,#e7e9e4 6px 8px);border:1px solid var(--a-line);flex:none}
+
+/* ---------- admin desktop mockup ---------- */
+.deskwrap{overflow-x:auto;margin-top:22px;padding:4px 4px 10px}
+.desk{width:1000px;height:600px;border-radius:12px;border:1px solid #2B3439;background:#F4F5F2;color:#12181D;font-family:"Atkinson Hyperlegible",Verdana,sans-serif;font-size:13.5px;display:grid;grid-template-columns:200px 1fr;overflow:hidden;box-shadow:0 18px 40px -24px rgba(0,0,0,.5)}
+.desk .side{background:#12181D;color:#C9D1CC;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
+.desk .side .bn{font-family:"Barlow Semi Condensed",Arial,sans-serif;font-size:22px;color:#fff;font-weight:700;margin-bottom:10px}
+.desk .side .bn i{font-style:normal;color:#3CC486}
+.desk .side a{padding:8px 10px;border-radius:8px;color:#C9D1CC;text-decoration:none;font-weight:700}
+.desk .side a.on{background:#243038;color:#fff}
+.desk .side .role{margin-top:auto;font-size:12px;border-top:1px solid #2B3439;padding-top:10px}
+.desk .mn{padding:18px 22px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.desk h5{font-family:"Barlow Semi Condensed",Arial,sans-serif;font-size:24px;margin:0}
+.desk .pn{background:#fff;border:1px solid #D6DAD3;border-radius:10px;padding:12px 14px}
+.desk .kp{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.desk .kp .n{font-size:26px;font-weight:700}
+.desk .kp .k{font-size:11.5px;color:#56615B;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.desk table{width:100%;border-collapse:collapse;font-size:13px}
+.desk th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#56615B;padding:6px 8px;border-bottom:1px solid #D6DAD3}
+.desk td{padding:7px 8px;border-bottom:1px solid #ECEEE9}
+.desk .two{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
+.desk .btnd{display:inline-block;padding:7px 12px;border-radius:8px;background:#0B7A4B;color:#fff;font-weight:700;font-size:13px}
+.desk .btnd.off{background:#D6DAD3;color:#7A847E}
+.desk .tg{display:inline-block;width:34px;height:20px;border-radius:10px;background:#0B7A4B;position:relative;vertical-align:middle}
+.desk .tg::after{content:"";position:absolute;right:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff}
+.desk .tg.off{background:#C5CBC4}.desk .tg.off::after{right:auto;left:3px}
+
+/* ---------- diagrams & tables ---------- */
+.navmap{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:12px;margin-top:20px}
+.navwrap{overflow-x:auto;padding-bottom:6px}
+.nm{background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:12px 12px 10px}
+.nm.center{border-color:var(--fg);border-width:2.5px}
+.nm h4{margin:0 0 6px;font-family:var(--f-display);font-size:21px}
+.nm .kicker{font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.nm ul{margin:6px 0 0;padding-left:16px;font-size:14px}
+.nm li{margin:2px 0}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:14px}
+.flow a{font-family:var(--f-display);font-weight:600;font-size:16.5px;text-decoration:none;color:var(--fg);background:var(--panel);border:1.5px solid var(--line);border-radius:6px;padding:4px 10px}
+.flow a:hover{border-color:var(--accent)}
+.flow span.arr{color:var(--muted);font-family:var(--f-mono)}
+.tblwrap{overflow-x:auto;margin-top:16px}
+table.t{border-collapse:collapse;width:100%;min-width:760px;font-size:14.5px;background:var(--panel);border:1px solid var(--line)}
+table.t th{font-family:var(--f-display);font-size:16px;text-align:left;padding:9px 10px;border-bottom:2px solid var(--fg);font-weight:600}
+table.t td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.sev{font-family:var(--f-mono);font-size:11.5px;font-weight:500;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.sev.h{background:var(--crit-soft);color:var(--crit)}
+.sev.m{background:var(--warn-soft);color:var(--warn)}
+.sev.l{background:var(--code);color:var(--muted)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:18px}
+.why div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.why h4{margin:0 0 6px;font-family:var(--f-display);font-size:20px}
+.why p{margin:0;font-size:15px}
+@media (prefers-reduced-motion:no-preference){ .shot:target .phone{transition:outline-color .3s} }
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4M4 12h16"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7h15a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l12-3v3M16 13h2"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-nav" viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v4M12 17.5v.5"/></symbol>
+  <symbol id="i-off" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19v.5M3 3l18 18"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-temp" viewBox="0 0 24 24"><path d="M10 4a2 2 0 0 1 4 0v10a4 4 0 1 1-4 0z"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14l-4-4M20 16H6l4 4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2M20 4v5h-5M4 20v-5h5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M4 4h6l2 3h8v13H4z"/></symbol>
+  <symbol id="i-money" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14 6a4 4 0 0 0 5 5l-9 9-3-3 9-9a4 4 0 0 1-2-2z"/></symbol>
+</svg>
+
+<main class="wrap">
+<header>
+  <div class="eyebrow">TruckMate repo · design/independent/claude · Stage 1 independent design</div>
+  <h1>CabPilot V1 — screens, states &amp; navigation</h1>
+  <p class="lede">Claude's independent UX design for every major V1 screen: one Current Load that shows the right number at the right moment, one big button in the same place for the next step, and everything else a tap away.</p>
+  <div class="meta"><span>Baseline: TM-D001…D056 · Master SRS §1–40</span><span>Isolation: GPT/Gemini designs not read</span><span>Date: 2026-09-26</span><span>Sample data is fictional</span></div>
+  <nav class="toc" aria-label="Sections">
+    <a href="#nav">Navigation</a><a href="#onboard">First run</a><a href="#today">Today &amp; the load</a><a href="#scan">Scan &amp; attribution</a><a href="#delivery">Delivery &amp; exceptions</a><a href="#equip">Equipment &amp; reefer</a><a href="#loads">Loads &amp; history</a><a href="#wallet">Wallet &amp; Upcoming</a><a href="#pti">PTI</a><a href="#money">Money</a><a href="#more">More, export, trash</a><a href="#offline">Offline &amp; alerts</a><a href="#admin">Admin panel</a><a href="#reasoning">Reasoning</a><a href="#issues">UX problems</a><a href="#coverage">Coverage</a>
+  </nav>
+  <div class="callout note">Buttons inside the phone mockups are live links: tap <b>Check In</b>, a stop, a document slot or a tab and the page jumps to the screen it opens, outlined in green. Phones use the app's own fixed palette; the page around them follows your light/dark setting.</div>
+</header>
+
+<!-- ================= NAVIGATION ================= -->
+<section id="nav">
+<h2>1 · Navigation structure</h2>
+<p>Four destinations and one capture button. <b>Today</b> is where the app opens and where a driver spends the working day. The centre <b>Scan</b> button is the single way to get paper into CabPilot; it always asks, or proves, which load the paper belongs to.</p>
+<div class="navwrap"><div class="navmap">
+  <div class="nm center"><div class="kicker">Tab 1 · opens here</div><h4>Today</h4><ul>
+    <li><a href="#s-today">Current Load Card</a> (stage-aware)</li><li><a href="#s-stops">Active stop picker</a></li><li><a href="#s-dwell">Checked-in / dwell</a></li><li><a href="#s-share">Check-out + share status</a></li><li><a href="#s-driving">Driving view</a> (in motion)</li><li>Upcoming — next 3 due items</li><li>Pre-planned loads — next 1–2</li></ul></div>
+  <div class="nm"><div class="kicker">Tab 2</div><h4>Loads</h4><ul>
+    <li><a href="#s-loads">Current · Pre-planned · History</a></li><li><a href="#s-history">Search</a> (load #, PU #, BOL, facility, date)</li><li><a href="#s-loaddetail">Load detail</a>: docs, stops, times, equipment, miles, pay, audit</li><li><a href="#s-miles">Miles sources</a></li><li><a href="#s-facility-info">Facility page</a></li></ul></div>
+  <div class="nm"><div class="kicker">Centre button</div><h4>Scan</h4><ul>
+    <li><a href="#s-capture">Scan / import / add</a></li><li><a href="#s-attrib">Which load?</a> attribution</li><li><a href="#s-review">Check extracted fields</a></li><li>Shortcuts: expense, Upcoming item, PTI</li></ul></div>
+  <div class="nm"><div class="kicker">Tab 3</div><h4>Wallet</h4><ul>
+    <li><a href="#s-wallet">Standard + custom slots</a></li><li><a href="#s-walletdoc">Document, expiry, replace</a></li></ul></div>
+  <div class="nm"><div class="kicker">Tab 4</div><h4>More</h4><ul>
+    <li><a href="#s-money">Money</a> (O/O) · <a href="#s-pay">Pay estimate</a> (Company Driver)</li><li><a href="#s-upcoming">Upcoming</a> (full list)</li><li><a href="#s-ptiq">Inspections / PTI</a></li><li>Equipment</li><li><a href="#s-export">Export</a> · <a href="#s-trash">Trash</a></li><li><a href="#s-settings">Settings &amp; account</a></li></ul></div>
+</div></div>
+<h3>The load, stage by stage — one card, one button</h3>
+<p class="note">The Current Load Card changes what it puts first; the green button at the bottom always shows the next step.</p>
+<div class="flow">
+  <a href="#s-today">Pickup · <b>Check In</b></a><span class="arr">→</span>
+  <a href="#s-dwell">On site · <b>Check Out</b></a><span class="arr">→</span>
+  <a href="#s-share">Share status</a><span class="arr">→</span>
+  <a href="#s-attrib">Scan BOL</a><span class="arr">→</span>
+  <a href="#s-transit">In Transit · <b>Check In</b></a><span class="arr">→</span>
+  <a href="#s-atdelivery">At delivery · <b>Scan POD</b></a><span class="arr">→</span>
+  <a href="#s-delivered">Delivered · next load</a>
+</div>
+<div class="flow">
+  <span class="eyebrow" style="margin-right:4px">Branches</span>
+  <a href="#s-stops">Switch active stop</a><a href="#s-exception">Rejection</a><a href="#s-disposition">Disposition stop</a><a href="#s-swap">Trailer swap</a><a href="#s-trailercheck">Quick Trailer Check</a><a href="#s-facility">Facility check</a><a href="#s-conflict">Sync conflict</a>
+</div>
+</section>
+
+<!-- ================= ONBOARDING ================= -->
+<section id="onboard">
+<h2>2 · First run</h2>
+<p>Three screens, no password (TM-D051). The only thing asked beyond the phone number is a backup email, with a plain warning about what happens without one, and how the driver is paid, which picks the tier.</p>
+<div class="shots">
+<figure class="shot" id="s-login"><div class="phone">
+  <div class="sb" data-t="6:02"></div>
+  <div class="bd" style="padding-top:40px;gap:14px">
+    <div class="brand">Cab<i>Pilot</i></div>
+    <div class="fac" style="font-size:22px">Your loads, papers and times in one place.</div>
+    <div class="lbl" style="margin-top:18px">Mobile number</div>
+    <div class="field f">+1 (312) 555-0148</div>
+    <div class="mut">We'll text a 6-digit code. No password.</div>
+  </div>
+  <div class="act" style="border:0;background:transparent"><a class="btn" href="#s-otp">Send code</a></div>
+</div><figcaption><b>Sign in</b>Phone number only. Numeric keypad opens automatically. <span class="tag">TM-D051</span></figcaption></figure>
+
+<figure class="shot" id="s-otp"><div class="phone">
+  <div class="sb" data-t="6:02"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-login">‹</a><div class="t">Enter code</div></div></div>
+  <div class="bd" style="gap:14px">
+    <div class="mut" style="font-size:14px">Sent to (312) 555-0148</div>
+    <div class="otp"><span>4</span><span>8</span><span>1</span><span>0</span><span>7</span><span></span></div>
+    <div class="mut">Code fills in by itself when the text arrives.</div>
+    <a class="sm" style="color:var(--a-blue);font-weight:700">Resend in 0:24</a>
+  </div>
+  <div class="act" style="border:0;background:transparent"><a class="btn" href="#s-setup">Continue</a></div>
+</div><figcaption><b>One-time code</b>SMS autofill on both platforms; manual entry still works.</figcaption></figure>
+
+<figure class="shot" id="s-setup"><div class="phone">
+  <div class="sb" data-t="6:03"></div>
+  <div class="ab"><div class="t">Set up</div><span class="mut">1 of 1</span></div>
+  <div class="bd" style="gap:10px">
+    <div class="lbl">Backup email (recommended)</div>
+    <div class="field" style="font-size:16px">ralvarez.driver@email.com</div>
+    <div class="crit" style="background:var(--a-amb2);color:var(--a-amb-ink) !important"><svg class="i s"><use href="#i-alert"/></svg><div>If you lose this phone number <b>and</b> have no email on file, we can't restore your account automatically.</div></div>
+    <div class="lbl" style="margin-top:6px">How are you paid?</div>
+    <div class="opt"><div class="rad"></div><div class="grow"><div class="b">By the mile</div><div class="mut">Company Driver — miles &amp; pay estimate</div></div></div>
+    <div class="opt on"><div class="rad"></div><div class="grow"><div class="b">Percentage or my own authority</div><div class="mut">O/O — revenue, expenses, settlements</div></div></div>
+    <div class="ch go" style="align-self:flex-start;margin-top:4px">60 days full access · then $59.98/mo</div>
+    <div class="mut sm">You can change this later in Settings.</div>
+  </div>
+  <div class="act" style="border:0;background:transparent"><a class="btn" href="#s-empty">Start</a></div>
+</div><figcaption><b>Backup email + tier</b><ul><li>Email is optional but the recovery limit is stated up front <span class="tag">SRS §37</span></li><li>"How are you paid" maps to Company Driver / O/O without asking job title <span class="tag">TM-D005 D054</span></li><li>Trial shows the full product <span class="tag">TM-D035</span> — see issue #11</li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= TODAY ================= -->
+<section id="today">
+<h2>3 · Today &amp; the Current Load Card</h2>
+<p>The card is built top-down in the order a driver needs things at the gate: <b>which stop → the number → where &amp; when → what must not go wrong → gate details → paperwork</b>. The next step is always the big green button in the thumb zone, never inside the scrolling card.</p>
+<div class="shots">
+
+<figure class="shot" id="s-today"><div class="phone">
+  <div class="sb" data-t="9:14"></div>
+  <div class="ab"><div><div class="t">Today</div><div class="sub">Fri, Sep 26</div></div><span class="ch go">● Synced</span></div>
+  <div class="bd">
+    <a class="due" href="#s-upcoming"><svg class="i s"><use href="#i-cal"/></svg><span class="grow">Truck insurance expires in 6 days</span><svg class="i s"><use href="#i-chev"/></svg></a>
+    <div class="card">
+      <div class="r sp"><span class="lbl">Load 58213 · Blue Mesa Freight</span><span class="ch blue">Reefer</span></div>
+      <a class="stops" href="#s-stops"><span class="st on">P1 Joliet</span><span class="st">D1 Columbus</span><span class="st">D2 Dayton</span><span class="nx">1/3 ›</span></a>
+      <div class="lbl" style="margin-top:2px">Pickup #</div>
+      <div class="r sp"><div class="ref">4471-0923</div><svg class="i l" style="color:var(--a-mut)"><use href="#i-copy"/></svg></div>
+      <a href="#s-facility-info"><div class="fac">Prairie Fresh Distribution ›</div><div class="mut">1840 Industry Rd, Joliet IL · Door 14</div></a>
+      <div class="r"><svg class="i s"><use href="#i-clock"/></svg><span class="b">Appt 10:30–11:30</span><span class="ch amb">in 1 h 16 m</span></div>
+      <a class="crit" href="#s-loaddetail"><svg class="i s"><use href="#i-alert"/></svg><div><b>Seal required · Driver assist</b><br>Pallet exchange · +1 more</div></a>
+      <div class="lbl">Gate info · tap any to copy</div>
+      <div class="g2">
+        <div class="kv"><div class="k">Carrier</div><div class="v">Blue Mesa Freight</div></div>
+        <div class="kv"><div class="k">USDOT / MC</div><div class="v">3184427 / 912044</div></div>
+        <div class="kv"><div class="k">Truck · plate</div><div class="v">412 · IL P88231</div></div>
+        <div class="kv"><div class="k">Trailer · plate</div><div class="v">5310 · IN 4471TR</div></div>
+        <div class="kv"><div class="k">Driver</div><div class="v">R. Alvarez</div></div>
+        <div class="kv"><div class="k">Load #</div><div class="v">58213</div></div>
+      </div>
+      <div class="docs" style="margin-top:4px"><a class="ok" href="#s-loaddetail"><svg class="i s"><use href="#i-check"/></svg>Rate con</a><a href="#s-attrib">+ BOL</a><a href="#s-attrib">+ POD</a><a href="#s-attrib">+ Other</a></div>
+    </div>
+  </div>
+  <div class="act"><a class="btn gh sq" href="#s-driving" aria-label="Navigate"><svg class="i"><use href="#i-nav"/></svg></a><a class="btn" href="#s-dwell">Check In</a></div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>Today — heading to pickup / at the gate</b><ul>
+<li>Pickup # is the largest text on screen; tap copies it <span class="tag">SRS §3</span> <span class="tag">TM-F004</span></li>
+<li>Gate info sits on the card itself; no Gate Pass screen, 0 taps at the gate <span class="tag">TM-D049</span></li>
+<li>Critical Load Instructions in solid amber, the only amber block on the card <span class="tag">TM-D044</span></li>
+<li>Stop strip shows multi-stop progress; tapping it opens the stop picker <span class="tag">TM-D017 D045</span></li>
+<li>Due banner appears only when something is inside its warning window <span class="tag">TM-D050</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-dwell"><div class="phone">
+  <div class="sb" data-t="11:49" data-net="off"></div>
+  <div class="ab"><div><div class="t">Today</div><div class="sub">Fri, Sep 26</div></div><span class="ch amb"><svg class="i s"><use href="#i-off"/></svg>Offline · 1 saved</span></div>
+  <div class="bd">
+    <div class="card">
+      <div class="r sp"><span class="lbl">P1 · Prairie Fresh Distribution</span><span class="ch go">Checked in</span></div>
+      <div class="r sp"><div><div class="lbl">Pickup #</div><div class="ref md">4471-0923</div></div><svg class="i" style="color:var(--a-mut)"><use href="#i-copy"/></svg></div>
+      <div class="hr"></div>
+      <div class="lbl">Time on site</div>
+      <div class="r" style="align-items:flex-end;gap:10px"><div class="big">1:47</div><div class="mut" style="padding-bottom:6px">of 2:00 free time</div></div>
+      <div class="bar"><i style="width:89%"></i><em style="left:100%"></em></div>
+      <div class="r sp sm"><span class="mut">Checked in 10:02</span><span class="b">Threshold 12:02</span></div>
+      <div class="r sm"><svg class="i s" style="color:var(--a-go)"><use href="#i-check"/></svg><span>Reminder sent at 1:45</span><a class="mut" style="margin-left:auto;text-decoration:underline">Change 2 h</a></div>
+      <div class="mut xs">A record for your own follow-up. Whether detention is paid depends on your carrier and load.</div>
+      <div class="hr"></div>
+      <div class="li" style="padding:4px 0"><svg class="i s"><use href="#i-clock"/></svg><div class="grow sm"><b>Check in 10:02 AM</b> · Joliet IL</div><span class="prov">GPS · on phone</span></div>
+      <a class="sm" style="color:var(--a-blue);font-weight:700">Edit time</a>
+    </div>
+    <div class="card" style="gap:4px">
+      <div class="lbl">While you wait</div>
+      <div class="r sm"><svg class="i s"><use href="#i-alert"/></svg>Seal required · Driver assist · Pallet exchange</div>
+    </div>
+  </div>
+  <div class="act"><a class="btn gh s" style="flex:0 0 96px;height:54px" href="#s-share"><svg class="i s"><use href="#i-share"/></svg>Share</a><a class="btn" href="#s-share">Check Out</a></div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>Checked in — dwell timer (offline)</b><ul>
+<li>Check In is one tap, no confirm dialog; a 5-second Undo toast covers mis-taps</li>
+<li>Works with no signal: time + location saved on the phone, labelled "on phone" until synced <span class="tag">TM-D025</span> RW-02</li>
+<li>Progress bar toward the configured threshold; reminder 15 min before <span class="tag">TM-D046</span></li>
+<li>Provenance tag on every time: GPS / Edited <span class="tag">TM-D019</span></li>
+<li>Non-guarantee sentence sits under the timer, not in a popup <span class="tag">TM-D037</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-share"><div class="phone">
+  <div class="sb" data-t="12:21"></div>
+  <div class="ab"><div class="t">Today</div></div>
+  <div class="bd"><div class="card"><div class="lbl">P1 · Prairie Fresh</div><div class="ref md">4471-0923</div></div></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <div class="r sp"><h4>Checked out 12:21 PM</h4><span class="prov">GPS</span></div>
+    <div class="r"><span class="ch amb">2 h 19 m on site</span><span class="mut sm">19 m past your 2 h</span></div>
+    <div class="lbl">Status message</div>
+    <div class="msg">Load 58213 — Prairie Fresh Distribution, Joliet IL<br>PU# 4471-0923 · Truck 412 / Trl 5310<br>In 10:02 AM · Out 12:21 PM · 2h 19m on site</div>
+    <div class="lbl">Include</div>
+    <div class="r wr" style="gap:5px"><span class="ch sel">✓ Facility</span><span class="ch sel">✓ City</span><span class="ch sel">✓ PU #</span><span class="ch sel">✓ Truck/Trailer</span><span class="ch sel">✓ Times</span><span class="ch sel">✓ Dwell</span><span class="ch">Exact location</span></div>
+    <div class="r"><a class="btn gh s" style="flex:0 0 90px"><svg class="i s"><use href="#i-copy"/></svg>Copy</a><a class="btn s" href="#s-facility"><svg class="i s"><use href="#i-share"/></svg>Share…</a></div>
+    <a class="opt" href="#s-attrib" style="margin-top:2px"><svg class="i"><use href="#i-cam"/></svg><div class="grow"><div class="b">Next: scan the pickup BOL</div><div class="mut">Moves the load to In Transit</div></div><svg class="i s"><use href="#i-chev"/></svg></a>
+  </div>
+</div><figcaption><b>Check Out → share status</b><ul>
+<li>Checking out opens this sheet directly: the message is already written <span class="tag">TM-D015</span> <span class="tag">SRS §9</span></li>
+<li>Field chips let the driver drop anything they don't want to disclose; the choice is remembered</li>
+<li>Share uses the phone's own share sheet (SMS, WhatsApp, email, carrier app)</li>
+<li>Suggests the next step instead of leaving the driver to find it</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-facility"><div class="phone">
+  <div class="sb" data-t="12:22"></div>
+  <div class="ab"><div class="t">Today</div></div>
+  <div class="bd"></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <h4>Quick facility check</h4>
+    <div class="mut">Optional. Helps other CabPilot drivers. Your name, loads and location history are never shown.</div>
+    <div class="b sm" style="margin-top:4px">Overnight parking?</div><div class="qs"><span>Yes</span><span class="on">No</span><span>Not sure</span></div>
+    <div class="b sm">Driver restroom?</div><div class="qs"><span class="on">Yes</span><span>No</span><span>Not sure</span></div>
+    <div class="b sm">Loaded/unloaded early?</div><div class="qs"><span class="on">Yes</span><span>No</span><span>Not sure</span></div>
+    <div class="b sm">Food or vending?</div><div class="qs"><span>Yes</span><span>No</span><span class="on">Not sure</span></div>
+    <div class="search" style="padding:8px 10px"><span>Add a note (optional)</span></div>
+    <div class="r"><a class="btn gh s" href="#s-transit">Not now</a><a class="btn s" href="#s-transit">Send</a></div>
+  </div>
+</div><figcaption><b>Facility check (opt-in)</b><ul>
+<li>Four tap-only questions; the note is optional, so no typing is required <span class="tag">TM-D034</span></li>
+<li>Asked right after Check Out while still parked, never once the truck is moving (issue #7)</li>
+<li>"Not now" is as big as "Send"</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-facility-info"><div class="phone">
+  <div class="sb" data-t="9:15"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-today">‹</a><div class="t">Facility</div></div></div>
+  <div class="bd">
+    <div class="card"><div class="fac">Prairie Fresh Distribution</div><div class="mut">1840 Industry Rd, Joliet IL 60431</div>
+      <div class="r" style="margin-top:4px"><a class="btn s gh"><svg class="i s"><use href="#i-nav"/></svg>Navigate</a><a class="btn s gh">Call shipping</a></div></div>
+    <div class="sec">From CabPilot drivers</div>
+    <div class="card" style="gap:0">
+      <div class="li"><span class="dot red"></span><div class="grow"><div class="tt">No overnight parking</div><div class="mut">3 drivers · latest 2 days ago</div></div></div>
+      <div class="li"><span class="dot go"></span><div class="grow"><div class="tt">Driver restroom</div><div class="mut">4 drivers · latest 2 days ago</div></div></div>
+      <div class="li"><span class="dot go"></span><div class="grow"><div class="tt">Loads early</div><div class="mut">2 of 3 said yes · 6 days ago</div></div></div>
+    </div>
+    <div class="sec">Public listing</div>
+    <div class="card" style="gap:4px"><div class="r"><span class="ch amb">Differs</span><span class="b sm">Lists "Truck parking available"</span></div><div class="mut xs">Source: public map listing · updated Mar 2026</div></div>
+    <div class="sec">Notes</div>
+    <div class="card"><div class="sm">"Check in at the guard shack, not the office. Lumper cash only."</div><div class="mut xs">CabPilot driver · 9 days ago</div></div>
+  </div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>Facility page</b><ul>
+<li>Opened by tapping the facility name on the card</li>
+<li>Driver reports and public info shown side by side with source and age; conflicts are labelled, not hidden <span class="tag">SRS §16</span></li>
+<li>No reporter identity, no load data</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-stops"><div class="phone">
+  <div class="sb" data-t="13:05"></div>
+  <div class="ab"><div class="t">Today</div></div>
+  <div class="bd"></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <h4>Stops · Load 58213</h4>
+    <div class="opt" style="opacity:.75"><span class="ch go">Done</span><div class="grow"><div class="b">P1 Prairie Fresh · Joliet</div><div class="mut">Out 12:21 PM · BOL scanned</div></div></div>
+    <div class="opt"><div class="rad"></div><div class="grow"><div class="b">D1 Lakeshore Grocers · Columbus</div><div class="mut">Appt Sat 06:00 · Open</div></div></div>
+    <div class="opt on"><div class="rad"></div><div class="grow"><div class="b">D2 Harvest Table Markets · Dayton</div><div class="mut">Appt Sat 04:00 · Open</div></div></div>
+    <div class="r sm" style="background:var(--a-blue2);color:var(--a-blue);border-radius:10px;padding:8px 10px;font-weight:700"><svg class="i s"><use href="#i-check"/></svg>D1 stays open. Nothing is marked done.</div>
+    <a class="btn" href="#s-transit">Go to D2 first</a>
+    <a class="mut sm" style="text-align:center">Change stop order in Edit load</a>
+  </div>
+</div><figcaption><b>Switch active stop</b><ul>
+<li>Out-of-order service: pick any open stop; earlier stops are not falsely completed <span class="tag">TM-D045</span> RW-03</li>
+<li>2 taps from Today (stop strip → choose + confirm)</li>
+<li>No drag-and-drop; sequence edits live in Edit load</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-transit"><div class="phone">
+  <div class="sb" data-t="13:07"></div>
+  <div class="ab"><div><div class="t">Today</div><div class="sub">Fri, Sep 26</div></div><span class="ch go">● Synced</span></div>
+  <div class="bd">
+    <div class="toast"><svg class="i s"><use href="#i-check"/></svg><span class="grow">Pickup BOL saved · load is <b>In Transit</b></span><a href="#s-loaddetail">Undo</a></div>
+    <div class="card" style="margin-top:52px">
+      <div class="r sp"><span class="lbl">Load 58213 · In Transit</span><span class="ch amb">POD missing</span></div>
+      <a class="stops" href="#s-stops"><span class="st dn">P1 ✓</span><span class="st">D1 Columbus</span><span class="st on">D2 Dayton</span><span class="nx">3/3 ›</span></a>
+      <div class="lbl">Delivery ref / BOL #</div>
+      <div class="r sp"><div class="ref">BOL 7730215</div><svg class="i l" style="color:var(--a-mut)"><use href="#i-copy"/></svg></div>
+      <div><div class="fac">Harvest Table Markets DC</div><div class="mut">55 Commerce Pkwy, Dayton OH</div></div>
+      <div class="r"><svg class="i s"><use href="#i-clock"/></svg><span class="b">Appt Sat 04:00</span><span class="ch">in 14 h 53 m</span></div>
+      <a class="crit" href="#s-loaddetail"><svg class="i s"><use href="#i-alert"/></svg><div><b>Seal 4471823 — do not break</b><br>Receiver cuts seal</div></a>
+      <a class="card" href="#s-reefer" style="background:var(--a-blue2);border:0;padding:8px 10px;gap:3px">
+        <div class="r sp"><span class="lbl" style="color:var(--a-blue)">Reefer</span><span class="xs b" style="color:var(--a-blue)">Update ›</span></div>
+        <div class="r sp num"><span class="b"><svg class="i s" style="vertical-align:-3px"><use href="#i-temp"/></svg>Set 34°F</span><span class="b">Continuous</span><span class="b">Fuel ¾</span><span class="ch go">Unit OK</span></div>
+      </a>
+      <div class="docs"><a class="ok">✓ Rate con</a><a class="ok">✓ BOL</a><a class="miss" href="#s-attrib">+ POD</a><a href="#s-attrib">+ Other</a></div>
+    </div>
+  </div>
+  <div class="act"><a class="btn gh sq" href="#s-driving"><svg class="i"><use href="#i-nav"/></svg></a><a class="btn" href="#s-atdelivery">Check In</a></div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>In Transit — delivery stage (reefer)</b><ul>
+<li>Scanning the BOL advanced the stage automatically, announced with an Undo <span class="tag">TM-D032</span> RW-05</li>
+<li>The hero number switches to the delivery ref / BOL # <span class="tag">TM-F005</span></li>
+<li>Reefer strip appears only on reefer loads: set point, mode, fuel, unit status <span class="tag">TM-D043</span> RW-08</li>
+<li>Paperwork status shown separately from operational status <span class="tag">TM-D048</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-driving"><div class="phone night">
+  <div class="sb" data-t="14:40" style="color:#fff"></div>
+  <div class="bd" style="gap:12px;padding-top:12px">
+    <div class="r" style="background:#1F2A30;border-radius:10px;padding:8px 10px;color:#CFE9DA;font-size:13px;font-weight:700"><svg class="i s"><use href="#i-lock"/></svg>Driving — editing paused</div>
+    <div class="lbl">Next stop · D2 of 3</div>
+    <div style="font-size:30px;font-weight:700;line-height:1.1">Harvest Table Markets</div>
+    <div style="font-size:18px;color:var(--a-mut)">Dayton OH</div>
+    <div class="card" style="gap:2px"><div class="lbl">Appointment</div><div style="font-size:30px;font-weight:700" class="num">Sat 04:00</div><div class="mut" style="font-size:15px">in 13 h 20 m</div></div>
+    <div class="card" style="gap:2px"><div class="lbl">BOL #</div><div class="ref">7730215</div></div>
+    <div class="card" style="gap:2px;background:var(--a-amb2);border:0"><div class="b" style="color:var(--a-amb-ink);font-size:16px">Seal 4471823 — do not break</div></div>
+  </div>
+  <div class="act" style="background:transparent;border:0"><a class="btn" style="height:64px;font-size:19px"><svg class="i"><use href="#i-nav"/></svg>Open navigation</a></div>
+</div><figcaption><b>Driving view (in motion)</b><ul>
+<li>When the phone reports sustained vehicle speed, Today collapses to large read-only facts and one button <span class="tag">TM-D021</span></li>
+<li>Scan, forms and edits wait until stopped; nothing is lost</li>
+<li>Also shows night styling: high contrast, low glare</li>
+<li>Detection method + passenger override need an owner decision (issue #5)</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-empty"><div class="phone">
+  <div class="sb" data-t="6:05"></div>
+  <div class="ab"><div><div class="t">Today</div><div class="sub">Trial · 60 days left</div></div><span class="ch go">● Synced</span></div>
+  <div class="bd">
+    <div class="card" style="align-items:center;text-align:center;padding:20px 14px;gap:10px">
+      <svg class="i l" style="width:40px;height:40px;color:var(--a-mut)"><use href="#i-doc"/></svg>
+      <div class="fac">No current load</div>
+      <div class="mut">Scan or share your rate confirmation and CabPilot fills in the load.</div>
+      <a class="btn" style="width:100%" href="#s-capture"><svg class="i"><use href="#i-scan"/></svg>Scan rate con</a>
+      <a class="btn gh s" style="width:100%" href="#s-capture">Import PDF or photo</a>
+      <div class="mut xs">Or use Share → CabPilot from email or a carrier app</div>
+    </div>
+    <div class="sec">Pre-planned loads</div>
+    <div class="card" style="gap:0"><div class="li"><span class="dot blue"></span><div class="grow"><div class="tt">58240 · Gary IN → Louisville KY</div><div class="mut">Pickup Tue 06:00</div></div><a class="ch dk">Start</a></div></div>
+    <div class="sec">Upcoming <a href="#s-upcoming">All ›</a></div>
+    <div class="card" style="gap:0">
+      <div class="li"><span class="dot amb"></span><div class="grow"><div class="tt">Truck insurance</div><div class="mut">Expires Oct 2</div></div><span class="ch amb">6 d</span></div>
+      <div class="li"><span class="dot"></span><div class="grow"><div class="tt">Truck payment</div><div class="mut">Monthly · 1st</div></div><span class="ch">5 d</span></div>
+    </div>
+  </div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>Today — no current load</b><ul>
+<li>Empty state is the intake point: scan is the primary action <span class="tag">SRS §4</span></li>
+<li>A pre-planned load can be started as Current in one tap <span class="tag">TM-D018</span></li>
+<li>Upcoming due items keep their own section and wording, visually unlike loads (dots + day counts vs. load routes) <span class="tag">TM-D050</span></li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= SCAN ================= -->
+<section id="scan">
+<h2>4 · Scan, import &amp; attribution</h2>
+<p>All paper comes through the centre button. Every scan answers two questions before it's saved: <b>what is it</b> and <b>which load is it for</b>. When CabPilot is sure, the answer is pre-selected with the reason shown. When it isn't, nothing is pre-selected and the driver must pick.</p>
+<div class="shots">
+<figure class="shot" id="s-capture"><div class="phone">
+  <div class="sb" data-t="12:24"></div>
+  <div class="ab"><div class="t">Today</div></div>
+  <div class="bd"></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <a class="btn" style="height:72px;font-size:19px" href="#s-attrib"><svg class="i l"><use href="#i-cam"/></svg>Scan paperwork</a>
+    <a class="btn gh" href="#s-review"><svg class="i"><use href="#i-file"/></svg>Import PDF or photo</a>
+    <div class="lbl" style="margin-top:4px">Add</div>
+    <div class="r">
+      <a class="btn gh s" href="#s-expense"><svg class="i s"><use href="#i-money"/></svg>Expense</a>
+      <a class="btn gh s" href="#s-addup"><svg class="i s"><use href="#i-cal"/></svg>Upcoming</a>
+      <a class="btn gh s" href="#s-ptiq"><svg class="i s"><use href="#i-check"/></svg>PTI</a>
+    </div>
+    <div class="mut xs" style="text-align:center">Rate cons, BOLs, PODs, receipts, wallet documents: scan them all here.</div>
+  </div>
+  <nav class="tb" data-on="scan" style="position:relative;z-index:7"></nav>
+</div><figcaption><b>Capture sheet (centre button)</b><ul>
+<li>One entry for every document type; CabPilot classifies after capture <span class="tag">SRS §4 §6</span></li>
+<li>Uses the platform's native scanner (crop, multi-page) <span class="tag">TM-D010</span></li>
+<li>Quick-adds for the non-paper items most often recorded on the road</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-attrib"><div class="phone">
+  <div class="sb" data-t="12:26"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-capture">‹</a><div class="t">Where does this go?</div></div></div>
+  <div class="bd">
+    <div class="card" style="flex-direction:row;gap:10px;align-items:center"><div class="thumb"></div><div class="thumb" style="margin-left:-38px;transform:rotate(4deg)"></div><div class="grow"><div class="b">2 pages</div><div class="r"><span class="ch go">Pickup BOL</span><span class="mut xs">high confidence</span></div><a class="xs" style="color:var(--a-blue);font-weight:700">Not a BOL? Change</a></div></div>
+    <div class="lbl">Attach to</div>
+    <div class="opt on"><div class="rad"></div><div class="grow"><div class="b">Load 58213 · Current</div><div class="mut">Matches PU# 4471-0923 on the page</div></div></div>
+    <div class="opt"><div class="rad"></div><div class="grow"><div class="b">Load 58240 · Pre-planned</div><div class="mut">Gary IN → Louisville KY</div></div></div>
+    <div class="opt"><div class="rad"></div><div class="grow"><div class="b">New load</div></div></div>
+    <div class="opt"><div class="rad"></div><div class="grow"><div class="b">Not load paperwork</div><div class="mut">Wallet document or receipt</div></div></div>
+  </div>
+  <div class="act"><a class="btn" href="#s-transit">Save to 58213</a></div>
+</div><figcaption><b>Attribution</b><ul>
+<li>Pre-selected only when the page itself matches a load (reference number shown as the reason) <span class="tag">TM-D018</span> <span class="tag">TM-F043</span></li>
+<li>Ambiguous state: no pre-selection, banner "This could belong to two loads — pick one", Save disabled until chosen</li>
+<li>Offline: saved to the chosen load immediately; classification and stage change wait for signal (issue #3)</li>
+<li>2 taps from Today for the common case: Scan → Save</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-review"><div class="phone">
+  <div class="sb" data-t="19:40"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-capture">‹</a><div class="t">New load</div></div><span class="ch amb">Check 2</span></div>
+  <div class="bd">
+    <div class="card" style="gap:4px"><div class="r sp"><span class="lbl">From rate confirmation</span><span class="ch blue">Reefer</span></div><div class="b">Load 58240 · Blue Mesa Freight</div></div>
+    <div class="card" style="gap:6px">
+      <div class="lbl">P1 · Pickup</div>
+      <div class="b">Midwest Cold Storage · Gary IN</div>
+      <div class="r sp"><span class="sm">Tue Sep 30 · 06:00</span><span class="prov">read from page</span></div>
+      <div class="lowc"><div class="r sp"><span class="lbl" style="color:var(--a-amb-ink)">Pickup # · unclear</span><a class="xs b" style="color:var(--a-amb-ink)">Fix</a></div><div class="b num" style="font-size:18px">88124-?7</div></div>
+      <div class="hr"></div>
+      <div class="lbl">D1 · Delivery</div>
+      <div class="b">Riverbend Foods · Louisville KY</div>
+      <div class="lowc"><div class="r sp"><span class="lbl" style="color:var(--a-amb-ink)">Appointment · check</span><a class="xs b" style="color:var(--a-amb-ink)">Fix</a></div><div class="b sm">Wed Oct 1 · 14:00 or FCFS?</div></div>
+    </div>
+    <div class="card" style="gap:5px">
+      <div class="r sp"><span class="lbl">Critical instructions</span><a class="xs b" style="color:var(--a-blue)">Edit</a></div>
+      <div class="sm">Set 34°F Continuous · Seal required · Driver assist</div>
+      <div class="r sp"><span class="lbl">Rate</span><span class="b num">$2,450.00</span></div>
+      <div class="r sp"><span class="lbl">Miles</span><span class="sm num">Carrier 318 · Est. 322</span></div>
+    </div>
+  </div>
+  <div class="act"><a class="btn gh s" style="height:54px" href="#s-loads">Make current</a><a class="btn" href="#s-loads">Save pre-planned</a></div>
+</div><figcaption><b>Check extracted fields</b><ul>
+<li>Only uncertain fields are highlighted, and the count sits in the title; confident fields are not re-asked <span class="tag">SRS §4</span></li>
+<li>Every field is editable; the original stays in history <span class="tag">TM-D030</span></li>
+<li>Rate shown only for O/O entitlement <span class="tag">TM-D054</span></li>
+<li>Default save is Pre-planned when a Current load exists, so the new load never replaces active work <span class="tag">TM-D018</span></li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= DELIVERY ================= -->
+<section id="delivery">
+<h2>5 · Delivery, POD &amp; exceptions</h2>
+<div class="shots">
+<figure class="shot" id="s-atdelivery"><div class="phone">
+  <div class="sb" data-t="04:12"></div>
+  <div class="ab"><div><div class="t">Today</div><div class="sub">Sat, Sep 27</div></div><span class="ch go">● Synced</span></div>
+  <div class="bd">
+    <div class="card">
+      <div class="r sp"><span class="lbl">D2 · Harvest Table Markets</span><span class="ch go">Checked in 03:51</span></div>
+      <div class="lbl">BOL #</div><div class="ref md">7730215</div>
+      <div class="r"><span class="b">On site 0:21</span><span class="mut sm">· free time 2:00</span></div>
+      <div class="bar"><i style="width:18%;background:var(--a-go)"></i><em style="left:100%"></em></div>
+      <div class="crit" style="margin-top:4px"><svg class="i s"><use href="#i-alert"/></svg><div><b>Seal 4471823 — do not break</b></div></div>
+      <div class="docs"><a class="ok">✓ Rate con</a><a class="ok">✓ BOL</a><a class="miss" href="#s-attrib">+ POD</a><a href="#s-attrib">+ Other</a></div>
+    </div>
+    <a class="opt" href="#s-exception"><svg class="i" style="color:var(--a-red)"><use href="#i-alert"/></svg><div class="grow"><div class="b">Delivery problem</div><div class="mut">Partial or full rejection</div></div><svg class="i s"><use href="#i-chev"/></svg></a>
+    <a class="opt" href="#s-attrib"><svg class="i"><use href="#i-doc"/></svg><div class="grow"><div class="b">Add lumper receipt / other</div></div><svg class="i s"><use href="#i-chev"/></svg></a>
+  </div>
+  <div class="act"><a class="btn gh s" style="flex:0 0 108px;height:54px" href="#s-delivered">Check Out</a><a class="btn" href="#s-delivered"><svg class="i"><use href="#i-cam"/></svg>Scan signed POD</a></div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>At delivery</b><ul>
+<li>Primary action becomes "Scan signed POD", the step that completes the stop and the paperwork <span class="tag">TM-D032</span></li>
+<li>Check Out stays one tap away; scanning the POD does not silently check out (issue #6)</li>
+<li>Delivery problem is visible but secondary</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-exception"><div class="phone">
+  <div class="sb" data-t="05:02"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-atdelivery">‹</a><div class="t">Delivery problem</div></div></div>
+  <div class="bd">
+    <div class="seg"><span class="on">Some freight refused</span><span>All refused</span></div>
+    <div class="card">
+      <div class="lbl">Refused quantity</div>
+      <div class="r sp"><span class="btn gh s" style="flex:0 0 48px">−</span><span style="font-size:30px;font-weight:700" class="num">4</span><span class="btn gh s" style="flex:0 0 48px">+</span><span class="seg" style="flex:0 0 120px"><span class="on">pallets</span><span>cases</span></span></div>
+      <div class="lbl">Reason</div>
+      <div class="r wr" style="gap:5px"><span class="ch sel">Temp out of range</span><span class="ch">Damaged</span><span class="ch">Short / over</span><span class="ch">Wrong product</span><span class="ch">Late</span><span class="ch">Other</span></div>
+      <div class="lbl">Evidence</div>
+      <div class="r"><div class="thumb" style="width:52px;height:52px"></div><div class="thumb" style="width:52px;height:52px"></div><span class="btn gh s" style="flex:0 0 52px;height:52px"><svg class="i"><use href="#i-cam"/></svg></span><span class="btn gh s" style="flex:0 0 52px;height:52px"><svg class="i"><use href="#i-doc"/></svg></span></div>
+      <div class="search" style="padding:8px 10px">Note (optional)</div>
+    </div>
+    <div class="mut sm">The 4 pallets stay on your truck as part of this load.</div>
+  </div>
+  <div class="act"><a class="btn" href="#s-disposition">Save · Delivered with exception</a></div>
+</div><figcaption><b>Partial / full rejection</b><ul>
+<li>Stepper and chips, so no typing is required; the note is optional <span class="tag">TM-D033</span> RW-06</li>
+<li>Partial → Delivered with Exception; All refused → load stays open, Awaiting Instructions</li>
+<li>The button text says the resulting status</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-disposition"><div class="phone">
+  <div class="sb" data-t="07:40"></div>
+  <div class="ab"><div><div class="t">Today</div></div></div>
+  <div class="bd">
+    <div class="card">
+      <div class="r sp"><span class="lbl">Load 58213</span><span class="ch amb">Delivered w/ exception</span></div>
+      <div class="fac">4 pallets on truck</div>
+      <div class="mut">Refused at D2 · Temp out of range · waiting for instructions</div>
+    </div>
+  </div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <h4>Where is the freight going?</h4>
+    <div class="opt on"><div class="rad"></div><div class="b grow">Back to shipper</div></div>
+    <div class="opt"><div class="rad"></div><div class="b grow">Different receiver</div></div>
+    <div class="opt"><div class="rad"></div><div class="b grow">Donation / food bank</div></div>
+    <div class="opt"><div class="rad"></div><div class="b grow">Other</div></div>
+    <div class="lbl">Extra pay for this stop</div>
+    <div class="qs"><span class="on">Unknown</span><span>None</span><span>Amount</span></div>
+    <a class="btn" href="#s-delivered">Add stop D3</a>
+  </div>
+</div><figcaption><b>Disposition as a new stop</b><ul>
+<li>The same load gains stop D3; no new load is created <span class="tag">TM-D033</span></li>
+<li>Extra pay: Unknown / None / Amount, reconciled later in Money</li>
+<li>Address comes from the shipper record or is filled in when stopped</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-delivered"><div class="phone">
+  <div class="sb" data-t="05:10"></div>
+  <div class="ab"><div><div class="t">Today</div><div class="sub">Sat, Sep 27</div></div><span class="ch go">● Synced</span></div>
+  <div class="bd">
+    <div class="toast"><svg class="i s"><use href="#i-check"/></svg><span class="grow">Signed POD saved · <b>Delivered</b></span><a>Undo</a></div>
+    <div class="card" style="margin-top:52px">
+      <div class="r sp"><span class="lbl">Load 58213</span><span class="ch go">Delivered</span></div>
+      <div class="lbl">Still open</div>
+      <div class="opt"><span class="ch amb">D1</span><div class="grow"><div class="b">Lakeshore Grocers · Columbus</div><div class="mut">Appt Sat 06:00 · not delivered yet</div></div></div>
+      <div class="r wr" style="gap:5px"><span class="ch go">Paperwork complete</span><span class="ch">Settlement: not expected yet</span></div>
+    </div>
+    <a class="btn dk" style="flex:none" href="#s-transit">Go to D1 now</a>
+    <div class="sec">Next</div>
+    <div class="card" style="gap:0"><div class="li"><span class="dot blue"></span><div class="grow"><div class="tt">58240 · Gary IN → Louisville KY</div><div class="mut">Pre-planned · Pickup Tue 06:00</div></div><span class="ch dk">Start</span></div></div>
+  </div>
+  <nav class="tb" data-on="today"></nav>
+</div><figcaption><b>POD saved — load not finished</b><ul>
+<li>After out-of-order service, the app shows what is still open (D1) rather than declaring the whole load done</li>
+<li>Three status dimensions shown as separate chips <span class="tag">TM-D048</span></li>
+<li>Starting the next pre-planned load is offered, never automatic (issue #9)</li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= EQUIPMENT ================= -->
+<section id="equip">
+<h2>6 · Equipment, swaps &amp; reefer</h2>
+<div class="shots">
+<figure class="shot" id="s-swap"><div class="phone">
+  <div class="sb" data-t="15:30"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-loaddetail">‹</a><div class="t">Change equipment</div></div></div>
+  <div class="bd">
+    <div class="card"><div class="lbl">Truck</div><div class="r sp"><span class="b">412 · IL P88231</span><span class="ch">Keep</span></div></div>
+    <div class="card">
+      <div class="lbl">New trailer</div>
+      <div class="opt on"><div class="rad"></div><div class="grow"><div class="b">6120</div><div class="mut">Reefer · used Sep 10</div></div></div>
+      <div class="opt"><div class="rad"></div><div class="grow"><div class="b">5877</div><div class="mut">Dry Van · used Aug 28</div></div></div>
+      <div class="opt"><svg class="i"><use href="#i-plus"/></svg><div class="b grow">Other trailer #</div></div>
+    </div>
+    <div class="card" style="gap:4px"><div class="lbl">Applies</div><div class="b">From now on (after P1)</div><div class="mut sm">Earlier stops keep trailer 5310.</div><a class="xs b" style="color:var(--a-blue)">Correct earlier history instead</a></div>
+  </div>
+  <div class="act"><a class="btn" href="#s-trailercheck">Next: quick check</a></div>
+</div><figcaption><b>Trailer swap</b><ul>
+<li>Recent trailers first, so a swap usually needs no typing <span class="tag">TM-D041</span> RW-07</li>
+<li>Default: effective from now; earlier history is untouched unless explicitly corrected</li>
+<li>Reached from the equipment row on the load or the gate-info block</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-trailercheck"><div class="phone">
+  <div class="sb" data-t="15:31"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-swap">‹</a><div class="t">Quick trailer check</div></div><span class="ch blue">6120</span></div>
+  <div class="bd">
+    <div class="card" style="gap:0">
+      <div class="li"><div class="grow tt">Doors, hinges, seal</div><div class="qs" style="flex:0 0 120px"><span class="on">OK</span><span>Issue</span></div></div>
+      <div class="li"><div class="grow tt">Lights &amp; reflectors</div><div class="qs" style="flex:0 0 120px"><span class="on">OK</span><span>Issue</span></div></div>
+      <div class="li"><div class="grow tt">Tires &amp; wheels</div><div class="qs" style="flex:0 0 120px"><span class="on">OK</span><span>Issue</span></div></div>
+      <div class="li" style="flex-wrap:wrap"><div class="grow tt">Body, roof, floor</div><div class="qs" style="flex:0 0 120px"><span>OK</span><span class="bad">Issue</span></div>
+        <div class="r" style="width:100%;margin-top:6px"><div class="thumb" style="width:44px;height:44px"></div><span class="mut sm grow">Dent right rear corner</span><span class="ch">+ Photo</span></div></div>
+      <div class="li"><div class="grow tt">Landing gear, mud flaps</div><div class="qs" style="flex:0 0 120px"><span class="on">OK</span><span>Issue</span></div></div>
+      <div class="li"><div class="grow tt">Reefer unit</div><div class="qs" style="flex:0 0 120px"><span class="on">OK</span><span>Issue</span></div></div>
+    </div>
+    <a class="sm b" style="color:var(--a-blue)">Detailed trailer inspection</a>
+  </div>
+  <div class="act"><a class="btn gh s" style="flex:0 0 90px;height:54px">Skip…</a><a class="btn" href="#s-loaddetail">Confirm trailer 6120</a></div>
+</div><figcaption><b>Quick Trailer Check</b><ul>
+<li>Everything starts OK; the driver only taps what's wrong. Typical: 1 tap to confirm <span class="tag">TM-D042</span></li>
+<li>Reefer row appears only for reefer trailers <span class="tag">TM-D040</span></li>
+<li>Skip opens reason chips (tight appointment · yard won't allow · done on paper · other)</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-reefer"><div class="phone">
+  <div class="sb" data-t="17:02"></div>
+  <div class="ab"><div class="t">Today</div></div>
+  <div class="bd"></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <h4>Reefer · trailer 6120</h4>
+    <div class="g2">
+      <div class="card" style="gap:2px"><div class="lbl">Set point</div><div class="r sp"><span class="btn gh s" style="flex:0 0 36px;height:36px">−</span><span class="b num" style="font-size:22px">34°F</span><span class="btn gh s" style="flex:0 0 36px;height:36px">+</span></div></div>
+      <div class="card" style="gap:2px"><div class="lbl">Actual (optional)</div><div class="r sp"><span class="btn gh s" style="flex:0 0 36px;height:36px">−</span><span class="b num" style="font-size:22px">35°F</span><span class="btn gh s" style="flex:0 0 36px;height:36px">+</span></div></div>
+    </div>
+    <div class="lbl">Mode</div><div class="qs"><span class="on">Continuous</span><span>Start/Stop</span></div>
+    <div class="lbl">Reefer fuel</div><div class="qs"><span>¼</span><span>½</span><span class="on">¾</span><span>Full</span></div>
+    <div class="lbl">Unit</div><div class="qs"><span class="on">OK</span><span>Alarm</span></div>
+    <div class="mut xs">Alarm → optional code / note field.</div>
+    <a class="btn" href="#s-transit">Save</a>
+  </div>
+</div><figcaption><b>Reefer fields</b><ul>
+<li>Exactly the approved five fields, all tap-set <span class="tag">TM-D043</span></li>
+<li>Pre-filled from the rate con when extracted <span class="tag">SRS §4</span></li>
+<li>Dry-van loads never see this <span class="tag">TM-D040</span></li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= LOADS ================= -->
+<section id="loads">
+<h2>7 · Loads, history &amp; load detail</h2>
+<div class="shots">
+<figure class="shot" id="s-loads"><div class="phone">
+  <div class="sb" data-t="19:44"></div>
+  <div class="ab"><div class="t">Loads</div><a class="ch dk" href="#s-capture">+ Add</a></div>
+  <div class="bd">
+    <a class="search" href="#s-history"><svg class="i s"><use href="#i-search"/></svg>Load #, PU #, BOL, facility, date</a>
+    <div class="sec">Current</div>
+    <a class="card" href="#s-today" style="gap:4px"><div class="r sp"><span class="b">58213 · Joliet → Dayton</span><span class="ch go">In Transit</span></div><div class="mut">3 stops · D2 active · POD missing</div></a>
+    <div class="sec">Pre-planned</div>
+    <div class="card" style="gap:0"><div class="li"><span class="dot blue"></span><div class="grow"><div class="tt">58240 · Gary IN → Louisville KY</div><div class="mut">Tue 06:00 · Reefer</div></div><span class="ch dk">Start</span></div></div>
+    <div class="sec">History</div>
+    <div class="card" style="gap:0">
+      <a class="li" href="#s-loaddetail"><div class="grow"><div class="tt">57980 · Joliet → Columbus</div><div class="mut">Sep 12 · BOL 7730215</div></div><span class="ch amb">Pay review</span></a>
+      <div class="li"><div class="grow"><div class="tt">57944 · Aurora → Memphis</div><div class="mut">Sep 9</div></div><span class="ch">Awaiting pay</span></div>
+      <div class="li"><div class="grow"><div class="tt">57902 · Elgin → Des Moines</div><div class="mut">Sep 5</div></div><span class="ch go">Settled</span></div>
+      <div class="li"><div class="grow"><div class="tt">57871 · Joliet → St. Louis</div><div class="mut">Sep 2</div></div><span class="ch amb">POD missing</span></div>
+    </div>
+  </div>
+  <nav class="tb" data-on="loads"></nav>
+</div><figcaption><b>Loads tab</b><ul>
+<li>Current, Pre-planned and History in one list; search is always on top <span class="tag">TM-D020</span></li>
+<li>History rows show only the status that needs attention (paperwork or settlement); clean loads show "Settled"</li>
+<li>Available on every tier; no Pro gate <span class="tag">TM-F045</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-history"><div class="phone">
+  <div class="sb" data-t="19:45"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-loads">‹</a><div class="t">Search</div></div></div>
+  <div class="bd">
+    <div class="search" style="border-color:var(--a-go)"><svg class="i s"><use href="#i-search"/></svg><b>7730</b></div>
+    <div class="r" style="gap:5px"><span class="ch sel">All</span><span class="ch">Loads</span><span class="ch">Documents</span><span class="ch">Last 90 days ▾</span></div>
+    <div class="card" style="gap:0">
+      <a class="li" href="#s-loaddetail"><svg class="i"><use href="#i-truck"/></svg><div class="grow"><div class="tt">Load 57980</div><div class="mut">BOL <b style="color:var(--a-ink)">7730</b>215 · Sep 12 · Lakeshore Grocers</div></div><svg class="i s"><use href="#i-chev"/></svg></a>
+      <a class="li" href="#s-loaddetail"><svg class="i"><use href="#i-doc"/></svg><div class="grow"><div class="tt">Signed POD · 57980</div><div class="mut">1 page · Sep 13</div></div><svg class="i s"><use href="#i-chev"/></svg></a>
+      <div class="li"><svg class="i"><use href="#i-doc"/></svg><div class="grow"><div class="tt">Pickup BOL · 57980</div><div class="mut">2 pages · Sep 12</div></div><svg class="i s"><use href="#i-chev"/></svg></div>
+      <div class="li"><svg class="i"><use href="#i-truck"/></svg><div class="grow"><div class="tt">Load 57312</div><div class="mut">PU# 7730-118 · Jul 18 · Midwest Cold</div></div><svg class="i s"><use href="#i-chev"/></svg></div>
+    </div>
+    <div class="mut xs">Searches on-phone data offline; older documents download when opened.</div>
+  </div>
+  <nav class="tb" data-on="loads"></nav>
+</div><figcaption><b>Search results</b><ul>
+<li>Partial reference numbers match loads and individual documents <span class="tag">SRS §18</span> RW-11</li>
+<li>Opening a document from results: 3 taps from anywhere (Loads → type → result)</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-loaddetail"><div class="phone">
+  <div class="sb" data-t="19:46"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-loads">‹</a><div class="t">Load 57980</div></div><span class="ch">⋯</span></div>
+  <div class="bd">
+    <div class="r wr" style="gap:5px"><span class="ch go">Delivered</span><span class="ch go">Paperwork ✓</span><span class="ch amb">Pay: review</span></div>
+    <div class="sec">Documents</div>
+    <div class="tiles" style="grid-template-columns:repeat(4,1fr);gap:6px">
+      <div class="tile" style="min-height:0;padding:7px;align-items:center"><div class="thumb" style="width:34px;height:42px"></div><div class="xs b">Rate con</div></div>
+      <div class="tile" style="min-height:0;padding:7px;align-items:center"><div class="thumb" style="width:34px;height:42px"></div><div class="xs b">BOL · 2p</div></div>
+      <div class="tile" style="min-height:0;padding:7px;align-items:center"><div class="thumb" style="width:34px;height:42px"></div><div class="xs b">POD</div></div>
+      <div class="tile" style="min-height:0;padding:7px;align-items:center"><div class="thumb" style="width:34px;height:42px"></div><div class="xs b">Other · 2</div></div>
+    </div>
+    <div class="sec">Stops &amp; times</div>
+    <div class="card" style="gap:0">
+      <div class="li"><span class="ch go">P1</span><div class="grow sm"><b>Prairie Fresh</b><br>In 10:02 <span class="prov">GPS</span> · Out 12:21 <span class="prov ed">Edited</span></div><span class="b sm">2:19</span></div>
+      <div class="li"><span class="ch go">D1</span><div class="grow sm"><b>Lakeshore Grocers</b><br>In 05:48 <span class="prov">GPS</span> · Out 06:40 <span class="prov">GPS</span></div><span class="b sm">0:52</span></div>
+    </div>
+    <div class="sec">Equipment</div>
+    <a class="card" href="#s-swap" style="gap:2px"><div class="sm"><b>Truck 412</b> · all stops</div><div class="sm"><b>Trailer 5310</b> → P1 · <b>6120</b> from D1 <span class="ch" style="margin-left:4px">Check ✓</span></div></a>
+    <div class="sec">Miles <a href="#s-miles">Details ›</a></div>
+    <div class="card r sp num" style="flex-direction:row"><div class="stat"><div class="k">Carrier</div><div class="n">612</div></div><div class="stat"><div class="k">Estimate</div><div class="n">598</div></div><div class="stat"><div class="k">Yours</div><div class="n">605</div></div></div>
+    <div class="sec">Pay · Instructions · History of edits · Share / Export</div>
+  </div>
+  <nav class="tb" data-on="loads"></nav>
+</div><figcaption><b>Load detail</b><ul>
+<li>One scroll: status chips → document package → stops with provenance-tagged times → equipment history → miles → pay → instructions → edit history <span class="tag">TM-D009 D019 D041</span></li>
+<li>Original files always open from here, even after extraction <span class="tag">SRS §5</span></li>
+<li>⋯ menu: Edit load, Change stage, Change equipment, Delete to Trash</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-miles"><div class="phone">
+  <div class="sb" data-t="19:47"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-loaddetail">‹</a><div class="t">Miles · 57980</div></div></div>
+  <div class="bd">
+    <div class="card" style="gap:0">
+      <div class="li"><div class="grow"><div class="tt">Carrier-paid</div><div class="mut">From rate confirmation</div></div><span class="b num" style="font-size:20px">612</span></div>
+      <div class="li"><div class="grow"><div class="tt">CabPilot estimate</div><div class="mut">Route estimate · not truck-route exact</div></div><span class="b num" style="font-size:20px">598</span></div>
+      <div class="li"><div class="grow"><div class="tt">Your miles</div><div class="r"><span class="prov ed">Manual · Sep 13</span></div></div><span class="b num" style="font-size:20px">605</span></div>
+    </div>
+    <div class="card" style="gap:4px"><div class="r sp"><span class="tt b">Deadhead</span><span class="b num">38 mi</span></div><div class="mut sm">Estimate · last stop → P1 · Paid deadhead: off</div></div>
+    <div class="sec">History</div>
+    <div class="card sm" style="gap:4px"><div>Sep 13 · You changed 598 → 605</div><div class="mut">Sep 12 · Estimate 598 created</div><div class="mut">Sep 11 · Carrier 612 read from rate con</div></div>
+  </div>
+  <div class="act"><a class="btn">Adjust my miles</a></div>
+</div><figcaption><b>Mileage sources</b><ul>
+<li>The three sources are never merged into one number <span class="tag">TM-D029</span></li>
+<li>Manual value labelled; the original estimate stays in history <span class="tag">TM-D030</span></li>
+<li>Estimate wording is explicit <span class="tag">SRS §10</span></li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= WALLET & UPCOMING ================= -->
+<section id="wallet">
+<h2>8 · Wallet &amp; Upcoming</h2>
+<p>The Wallet holds the documents; <b>Upcoming</b> holds the dates. A wallet document with an expiry automatically produces an Upcoming item, so the driver never sets the same date twice.</p>
+<div class="shots">
+<figure class="shot" id="s-wallet"><div class="phone">
+  <div class="sb" data-t="20:10"></div>
+  <div class="ab"><div class="t">Wallet</div><a class="ch dk" href="#s-capture">+ Add</a></div>
+  <div class="bd">
+    <div class="tiles">
+      <a class="tile" href="#s-walletdoc" style="border-color:var(--a-red)"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch red">6 days</span></div><div class="tt">Truck insurance</div><div class="mut xs">Exp Oct 2, 2026</div></a>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch amb">41 days</span></div><div class="tt">Medical card</div><div class="mut xs">Exp Nov 6, 2026</div></div>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch go">✓</span></div><div class="tt">CDL</div><div class="mut xs">Exp Jun 2029</div></div>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch go">✓</span></div><div class="tt">Truck registration</div><div class="mut xs">Exp Mar 2027</div></div>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch go">✓</span></div><div class="tt">Trailer registration</div><div class="mut xs">Exp Jan 2027</div></div>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch go">✓</span></div><div class="tt">Annual inspection</div><div class="mut xs">Exp Feb 2027</div></div>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch go">✓</span></div><div class="tt">IFTA</div><div class="mut xs">2026 decals</div></div>
+      <div class="tile"><div class="r sp"><svg class="i"><use href="#i-doc"/></svg><span class="ch">Custom</span></div><div class="tt">TWIC card</div><div class="mut xs">Exp 2030</div></div>
+      <div class="tile add"><svg class="i"><use href="#i-plus"/></svg>Permits</div>
+      <div class="tile add"><svg class="i"><use href="#i-plus"/></svg>Custom document</div>
+    </div>
+  </div>
+  <nav class="tb" data-on="wallet"></nav>
+</div><figcaption><b>Wallet</b><ul>
+<li>Standard slots plus custom documents, ordered by urgency <span class="tag">TM-D026</span></li>
+<li>Countdown chip on every tile: red ≤ 7 days, amber ≤ 60, green OK</li>
+<li>Always one tab away, even mid-load, and available offline <span class="tag">SRS §13</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-walletdoc"><div class="phone">
+  <div class="sb" data-t="20:11"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-wallet">‹</a><div class="t">Truck insurance</div></div><span class="ch">⋯</span></div>
+  <div class="bd">
+    <div class="card" style="align-items:center"><div class="thumb" style="width:100%;height:120px"></div></div>
+    <div class="card" style="gap:3px"><div class="r sp"><span class="lbl">Expires</span><span class="prov">read from card</span></div><div class="fac">Oct 2, 2026</div><span class="ch red" style="align-self:flex-start">6 days left</span></div>
+    <div class="card" style="gap:6px"><div class="lbl">Reminders</div><div class="r wr num" style="gap:4px"><span class="ch go">60</span><span class="ch go">45</span><span class="ch go">30</span><span class="ch go">15</span><span class="ch go">7</span><span class="ch">3</span><span class="ch">2</span><span class="ch">1</span><span class="ch">Expired</span></div><div class="mut xs">Days before. Dismissing one keeps the rest.</div></div>
+    <div class="card" style="gap:2px"><div class="lbl">Previous</div><div class="sm">Policy 2025–26 · replaced Oct 2025</div></div>
+  </div>
+  <div class="act"><a class="btn" href="#s-capture"><svg class="i"><use href="#i-cam"/></svg>Scan new card</a></div>
+</div><figcaption><b>Wallet document</b><ul>
+<li>Default cadence 60/45/30/15/7/3/2/1/expired, with sent reminders ticked <span class="tag">SRS §14</span></li>
+<li>"Scan new card" replaces the document: reminders move to the new date, the old card goes to history; if the match is unclear, CabPilot asks</li>
+<li>Wrong-slot warning: "This looks like a registration. File it there?" <span class="tag">TM-F016</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-upcoming"><div class="phone">
+  <div class="sb" data-t="20:12"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Upcoming</div></div><a class="ch dk" href="#s-addup">+ Add</a></div>
+  <div class="bd">
+    <div class="mut sm">Bills, expirations and maintenance. Loads are in the Loads tab.</div>
+    <div class="sec">This week</div>
+    <div class="card" style="gap:0">
+      <a class="li" href="#s-walletdoc"><span class="dot red"></span><div class="grow"><div class="tt">Truck insurance</div><div class="mut">Expires Oct 2 · from Wallet</div></div><span class="ch red">6 d</span></a>
+      <div class="li"><span class="dot amb"></span><div class="grow"><div class="tt">Truck payment</div><div class="mut">Monthly · 1st · <b>Oct 1</b></div></div><span class="ch amb">5 d</span></div>
+      <div class="li"><span class="dot amb"></span><div class="grow"><div class="tt">ELD subscription</div><div class="mut">Monthly · 30th</div></div><span class="ch amb">4 d</span></div>
+    </div>
+    <div class="sec">Later</div>
+    <div class="card" style="gap:0">
+      <div class="li"><span class="dot"></span><div class="grow"><div class="tt">Oil change</div><div class="mut">One time · Oct 8</div></div><span class="ch">12 d</span></div>
+      <div class="li"><span class="dot"></span><div class="grow"><div class="tt">Medical card</div><div class="mut">Expires Nov 6 · from Wallet</div></div><span class="ch">41 d</span></div>
+      <div class="li"><span class="dot"></span><div class="grow"><div class="tt">IRP renewal</div><div class="mut">Yearly · Dec 31</div></div><span class="ch">96 d</span></div>
+    </div>
+    <div class="mut xs">Swipe a recurring item → Done to move it to its next date.</div>
+  </div>
+  <nav class="tb" data-on="more"></nav>
+</div><figcaption><b>Upcoming (full list)</b><ul>
+<li>One list for one-time and recurring items, sorted by days left <span class="tag">TM-D050</span> RW-09</li>
+<li>Wallet expiries appear here automatically ("from Wallet")</li>
+<li>Top 3 also appear on Today; the list itself lives under More</li>
+<li>"Done" for recurring items is assumed (issue #8)</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-addup"><div class="phone">
+  <div class="sb" data-t="20:13"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-upcoming">‹</a><div class="t">Add Upcoming</div></div></div>
+  <div class="bd">
+    <div class="lbl">What is it?</div>
+    <div class="field" style="font-size:17px">Truck payment</div>
+    <div class="r wr" style="gap:5px"><span class="ch">Insurance</span><span class="ch sel">Truck payment</span><span class="ch">Oil change</span><span class="ch">Registration</span><span class="ch">Permit</span><span class="ch">Subscription</span></div>
+    <div class="lbl" style="margin-top:4px">When</div>
+    <div class="seg"><span>One time</span><span class="on">Repeats</span></div>
+    <div class="qs"><span>Weekly</span><span>Every 2 wks</span><span class="on">Monthly</span><span>Other</span></div>
+    <div class="card r sp" style="flex-direction:row"><span class="b">Next due</span><span class="b">Wed, Oct 1 ▾</span></div>
+    <div class="card" style="gap:2px"><div class="r sp"><span class="b">Reminders</span><a class="xs b" style="color:var(--a-blue)">Change</a></div><div class="mut sm">Daily in the final week, and on the due day</div></div>
+    <div class="card r sp" style="flex-direction:row"><span class="b">Attach document</span><span class="mut">Optional ›</span></div>
+  </div>
+  <div class="act"><a class="btn" href="#s-upcoming">Save</a></div>
+</div><figcaption><b>Add Upcoming — one flow</b><ul>
+<li>One-time or recurring in the same form, with no separate bill / expiry / maintenance features <span class="tag">SRS §36</span></li>
+<li>Quick-pick names mean usually zero typing</li>
+<li>Default reminders: final week + due day</li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= PTI ================= -->
+<section id="pti">
+<h2>9 · Inspections (PTI)</h2>
+<div class="shots">
+<figure class="shot" id="s-ptiq"><div class="phone">
+  <div class="sb" data-t="05:40"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Quick PTI</div></div><span class="ch">Truck 412 + 6120</span></div>
+  <div class="bd">
+    <div class="seg"><span class="on">Quick</span><span>Detailed</span></div>
+    <div class="mut sm">Tap anything that isn't OK.</div>
+    <div class="cat" style="grid-template-columns:1fr 1fr;gap:7px">
+      <span class="on" style="padding:12px 4px">✓ Brakes &amp; air</span><span class="on" style="padding:12px 4px">✓ Lights</span>
+      <span class="on" style="padding:12px 4px">✓ Tires &amp; wheels</span><span class="on" style="padding:12px 4px">✓ Coupling</span>
+      <span class="on" style="padding:12px 4px">✓ Leaks &amp; fluids</span><span style="padding:12px 4px;border-color:var(--a-red);background:var(--a-red2);color:var(--a-red)">! Mirrors &amp; glass</span>
+      <span class="on" style="padding:12px 4px">✓ Emergency kit</span><span class="on" style="padding:12px 4px">✓ Reefer unit</span>
+    </div>
+    <div class="card" style="gap:5px;border-color:var(--a-red)"><div class="b sm">Mirrors &amp; glass</div><div class="r"><div class="thumb" style="width:44px;height:44px"></div><span class="mut sm grow">Chip passenger side windshield</span></div><div class="r sm"><span class="ch go">Remind me until fixed</span></div></div>
+    <div class="mut xs">Your personal record. Does not replace a required DVIR or compliance system.</div>
+  </div>
+  <div class="act"><a class="btn">Save · 1 issue</a></div>
+</div><figcaption><b>Quick PTI</b><ul>
+<li>8 groups, all pre-set OK; an all-clear PTI is one tap on Save <span class="tag">TM-D027</span></li>
+<li>An issue opens photo + note + follow-up reminder <span class="tag">TM-F022</span></li>
+<li>Timestamped, saved to inspection history; clear non-compliance wording <span class="tag">SRS §15</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-ptid"><div class="phone">
+  <div class="sb" data-t="05:52"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-ptiq">‹</a><div class="t">Detailed PTI</div></div><span class="ch">18 / 42</span></div>
+  <div class="bd">
+    <div class="bar"><i style="width:43%;background:var(--a-go)"></i></div>
+    <div class="sec">Engine compartment</div>
+    <div class="card" style="gap:0">
+      <div class="li"><div class="grow tt">Oil level</div><div class="qs" style="flex:0 0 116px"><span class="on">OK</span><span>Issue</span></div></div>
+      <div class="li"><div class="grow tt">Coolant</div><div class="qs" style="flex:0 0 116px"><span class="on">OK</span><span>Issue</span></div></div>
+      <div class="li"><div class="grow tt">Belts &amp; hoses</div><div class="qs" style="flex:0 0 116px"><span>OK</span><span>Issue</span></div></div>
+      <div class="li"><div class="grow tt">Steering box</div><div class="qs" style="flex:0 0 116px"><span>OK</span><span>Issue</span></div></div>
+    </div>
+    <div class="sec">Next · Cab &amp; in-cab</div>
+    <div class="card" style="gap:0">
+      <div class="li"><div class="grow tt mut">Gauges &amp; warning lights</div></div>
+      <div class="li"><div class="grow tt mut">Wipers &amp; horn</div></div>
+    </div>
+    <div class="mut xs">Progress saves if you leave; resume from More → Inspections.</div>
+  </div>
+  <div class="act"><a class="btn gh s" style="flex:0 0 110px;height:54px">All OK here</a><a class="btn">Next section</a></div>
+</div><figcaption><b>Detailed PTI</b><ul>
+<li>Section by section with progress; "All OK here" clears a section in one tap</li>
+<li>Resumable; saved to the same inspection history as Quick <span class="tag">TM-D027</span></li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= MONEY ================= -->
+<section id="money">
+<h2>10 · Money</h2>
+<p>A desk task, not a driving task, so it lives under More. The O/O tier sees revenue, expenses and settlements. The Company Driver tier sees a miles-based pay estimate. Every number is labelled either <b>estimate</b> or <b>confirmed</b>.</p>
+<div class="shots">
+<figure class="shot" id="s-money"><div class="phone">
+  <div class="sb" data-t="20:30"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Money</div></div><span class="ch">O/O</span></div>
+  <div class="bd">
+    <div class="seg"><span class="on">Week</span><span>Month</span><span>Year</span></div>
+    <div class="r sp"><span class="b">‹ Sep 21 – 27</span><span class="mut sm">3 loads</span></div>
+    <div class="card" style="gap:8px">
+      <div class="g2">
+        <div class="stat"><div class="k">Gross</div><div class="n">$6,840</div></div>
+        <div class="stat"><div class="k">Net estimate</div><div class="n">$4,842</div></div>
+        <div class="stat"><div class="k">Miles</div><div class="n">2,114</div><div class="mut xs">1,902 loaded · 212 deadhead</div></div>
+        <div class="stat"><div class="k">Per mile</div><div class="n">$3.24</div></div>
+        <div class="stat"><div class="k">Fuel</div><div class="n">$1,512</div></div>
+        <div class="stat"><div class="k">Other costs</div><div class="n">$486</div></div>
+      </div>
+      <div class="mut xs">Net is an estimate: truck payment &amp; insurance for this week not recorded yet.</div>
+    </div>
+    <a class="opt" href="#s-settle" style="border-color:var(--a-amb)"><span class="dot amb"></span><div class="grow"><div class="b">1 settlement to review</div><div class="mut">Sep 26 · 2 lines differ</div></div><svg class="i s"><use href="#i-chev"/></svg></a>
+    <div class="opt"><span class="dot blue"></span><div class="grow"><div class="b">2 loads awaiting settlement</div><div class="mut">57944 · 58213</div></div><svg class="i s"><use href="#i-chev"/></svg></div>
+    <div class="r"><a class="btn gh s" href="#s-expense">+ Expense</a><a class="btn gh s" href="#s-capture">+ Settlement</a><a class="btn gh s" href="#s-export">Export</a></div>
+  </div>
+  <nav class="tb" data-on="more"></nav>
+</div><figcaption><b>Money — O/O</b><ul>
+<li>Week / month / year; revenue per mile, fuel, expenses, net estimate <span class="tag">SRS §12</span></li>
+<li>Net labelled as an estimate, with the reason given <span class="tag">SRS §12</span></li>
+<li>Action rows for settlement review and awaiting-settlement loads <span class="tag">TM-D028</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-settle"><div class="phone">
+  <div class="sb" data-t="20:31"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-money">‹</a><div class="t">Settlement Sep 26</div></div></div>
+  <div class="bd">
+    <div class="mut sm">Blue Mesa Freight · matched line by line to your loads</div>
+    <div class="card" style="gap:0">
+      <div class="li"><span class="dot go"></span><div class="grow"><div class="tt">57980 · Linehaul</div><div class="mut">Matches rate con</div></div><span class="b num">$2,450.00</span></div>
+      <a class="li" href="#s-loaddetail"><span class="dot amb"></span><div class="grow"><div class="tt">57980 · Detention?</div><div class="mut">Not on settlement · you recorded 2 h 19 m at P1</div></div><span class="b num mut">—</span></a>
+      <div class="li"><span class="dot amb"></span><div class="grow"><div class="tt">57944 · Linehaul</div><div class="mut">Settlement $1,980 · rate con $2,080</div></div><span class="ch amb">−$100</span></div>
+      <div class="li"><span class="dot go"></span><div class="grow"><div class="tt">57712 · Linehaul</div><div class="mut">From Sep 5 · settled late, now matched</div></div><span class="b num">$1,760.00</span></div>
+      <div class="li"><span class="dot"></span><div class="grow"><div class="tt">Fuel advance</div><div class="mut">Not a load line</div></div><span class="b num">−$300.00</span></div>
+    </div>
+    <div class="mut xs">Differences are for your review. They don't necessarily mean the carrier made an error.</div>
+  </div>
+  <div class="act"><a class="btn gh s" style="height:54px">Open document</a><a class="btn">Mark reviewed</a></div>
+</div><figcaption><b>Settlement reconciliation</b><ul>
+<li>Line-by-line by load, across weeks (the Sep 5 load matched late) <span class="tag">TM-D028</span> RW-10</li>
+<li>Missing accessorial is linked to the dwell record the driver captured, so evidence is one tap away</li>
+<li>Neutral wording, no accusation <span class="tag">SRS §12</span></li></ul></figcaption></figure>
+
+<figure class="shot" id="s-expense"><div class="phone">
+  <div class="sb" data-t="16:05"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-capture">‹</a><div class="t">Add expense</div></div></div>
+  <div class="bd">
+    <div style="text-align:center;font-size:42px;font-weight:700" class="num">$184.50</div>
+    <div class="cat"><span>Fuel</span><span class="on">Repair</span><span>Tires</span><span>Tolls</span><span>Parking</span><span>Scale</span><span>Lumper</span><span>Other</span></div>
+    <div class="card" style="gap:0">
+      <div class="li"><div class="grow sm b">What</div><span class="mut sm">Air line replaced ›</span></div>
+      <div class="li"><div class="grow sm b">Where</div><span class="mut sm">Joliet IL (auto) ›</span></div>
+      <div class="li"><div class="grow sm b">Load</div><span class="mut sm">Not tied to a load ›</span></div>
+      <div class="li"><div class="grow sm b">Receipt</div><span class="ch">+ Scan</span></div>
+    </div>
+    <div class="keypad"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>.</span><span>0</span><span>⌫</span></div>
+  </div>
+  <div class="act"><a class="btn" href="#s-money">Save</a></div>
+</div><figcaption><b>Add expense</b><ul>
+<li>Amount + category are the only required taps; load link is optional and defaults off <span class="tag">TM-D039</span></li>
+<li>Receipt optional; line items, notes, unit and "repeats" sit under "More details"</li>
+<li>Scanning a receipt pre-fills this screen</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-pay"><div class="phone">
+  <div class="sb" data-t="20:30"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Pay estimate</div></div><span class="ch">Company Driver</span></div>
+  <div class="bd">
+    <div class="r sp"><span class="b">‹ Sep 21 – 27</span><span class="mut sm">3 loads</span></div>
+    <div class="card" style="gap:6px">
+      <div class="lbl">Estimated pay</div>
+      <div class="big" style="font-size:44px">$1,310</div>
+      <div class="mut sm num">2,114 paid miles × $0.62</div>
+      <span class="ch" style="align-self:flex-start">Estimate · settlement is the final number</span>
+    </div>
+    <div class="card" style="gap:0">
+      <div class="li"><div class="grow"><div class="tt">58213</div><div class="mut">Carrier miles 704</div></div><span class="b num">$436.48</span></div>
+      <div class="li"><div class="grow"><div class="tt">57980</div><div class="mut">Carrier miles 612</div></div><span class="b num">$379.44</span></div>
+      <div class="li"><div class="grow"><div class="tt">57944</div><div class="mut">Carrier miles 798</div></div><span class="b num">$494.76</span></div>
+    </div>
+    <div class="card r sp" style="flex-direction:row"><span class="sm"><b>Deadhead</b> · 212 mi · not paid</span><a class="xs b" style="color:var(--a-blue)">Settings</a></div>
+  </div>
+  <nav class="tb" data-on="more"></nav>
+</div><figcaption><b>Pay estimate — Company Driver</b><ul>
+<li>Cents-per-mile × paid miles, clearly an estimate <span class="tag">SRS §11</span> <span class="tag">TM-F027</span></li>
+<li>Deadhead pay configurable <span class="tag">TM-D008</span></li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= MORE ================= -->
+<section id="more">
+<h2>11 · More, export, trash &amp; settings</h2>
+<div class="shots">
+<figure class="shot" id="s-more"><div class="phone">
+  <div class="sb" data-t="20:40"></div>
+  <div class="ab"><div class="t">More</div></div>
+  <div class="bd">
+    <div class="card" style="gap:0">
+      <a class="li" href="#s-money"><svg class="i"><use href="#i-money"/></svg><div class="grow tt">Money</div><span class="ch amb">1 review</span></a>
+      <a class="li" href="#s-upcoming"><svg class="i"><use href="#i-cal"/></svg><div class="grow tt">Upcoming</div><span class="ch amb">3 this week</span></a>
+      <a class="li" href="#s-ptiq"><svg class="i"><use href="#i-check"/></svg><div class="grow tt">Inspections</div><span class="mut sm">Last 05:42</span></a>
+      <a class="li" href="#s-swap"><svg class="i"><use href="#i-truck"/></svg><div class="grow tt">Equipment</div><span class="mut sm">412 · 6120</span></a>
+    </div>
+    <div class="card" style="gap:0">
+      <a class="li" href="#s-export"><svg class="i"><use href="#i-share"/></svg><div class="grow tt">Export</div><svg class="i s"><use href="#i-chev"/></svg></a>
+      <a class="li" href="#s-trash"><svg class="i"><use href="#i-x"/></svg><div class="grow tt">Trash</div><span class="mut sm">2 items</span></a>
+      <a class="li" href="#s-settings"><svg class="i"><use href="#i-wrench"/></svg><div class="grow tt">Settings</div><svg class="i s"><use href="#i-chev"/></svg></a>
+    </div>
+    <div class="card" style="gap:3px"><div class="r sp"><span class="tt b">R. Alvarez</span><span class="ch go">Trial · 41 days</span></div><div class="mut sm">(312) 555-0148 · ralvarez.driver@email.com</div><div class="mut sm">O/O · Help &amp; support · Privacy</div></div>
+  </div>
+  <nav class="tb" data-on="more"></nav>
+</div><figcaption><b>More</b><ul>
+<li>Everything that isn't needed at a gate or dock</li>
+<li>Badges only where something needs action</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-export"><div class="phone">
+  <div class="sb" data-t="20:41"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Export</div></div></div>
+  <div class="bd">
+    <div class="lbl">What</div>
+    <div class="opt"><div class="rad"></div><div class="b grow">All my data</div></div>
+    <div class="opt on"><div class="rad"></div><div class="grow"><div class="b">Date range</div><div class="mut">Jan 1 – Sep 26, 2026</div></div></div>
+    <div class="opt"><div class="rad"></div><div class="b grow">One load</div></div>
+    <div class="opt"><div class="rad"></div><div class="b grow">Pick loads</div></div>
+    <div class="card" style="gap:4px"><div class="lbl">You'll get</div><div class="sm"><b>Excel workbook</b> — Summary · Loads &amp; income · Expenses · Settlements</div><div class="sm"><b>Documents</b> — folders by load, linked from the workbook</div><div class="mut xs num">142 loads · 611 files · about 480 MB · Wi-Fi recommended</div></div>
+  </div>
+  <div class="act"><a class="btn">Create export</a></div>
+</div><figcaption><b>Export</b><ul>
+<li>All / range / one load / selected loads <span class="tag">TM-D038</span></li>
+<li>Size stated before starting; built in the background and delivered to the share sheet when ready</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-trash"><div class="phone">
+  <div class="sb" data-t="20:42"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Trash</div></div></div>
+  <div class="bd">
+    <div class="mut sm">Items are permanently deleted 30 days after you delete them.</div>
+    <div class="card" style="gap:0">
+      <div class="li"><div class="thumb" style="width:36px;height:44px"></div><div class="grow"><div class="tt">Scale ticket · 57980</div><div class="mut">Deletes in 23 days</div></div><span class="ch dk">Restore</span></div>
+      <div class="li"><div class="thumb" style="width:36px;height:44px"></div><div class="grow"><div class="tt">Photo · duplicate BOL</div><div class="mut">Deletes in 2 days</div></div><span class="ch dk">Restore</span></div>
+    </div>
+  </div>
+  <nav class="tb" data-on="more"></nav>
+</div><figcaption><b>Trash</b><ul>
+<li>30-day restore window, days left per item <span class="tag">TM-D031</span></li>
+<li>No "empty trash now" in this design; that's a question for the owner, not added scope</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-settings"><div class="phone">
+  <div class="sb" data-t="20:43"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-more">‹</a><div class="t">Settings</div></div></div>
+  <div class="bd">
+    <div class="sec">Detention</div>
+    <div class="card" style="gap:0"><div class="li"><div class="grow tt">Default free time</div><span class="b">2 h</span></div><div class="li"><div class="grow tt">Remind me before</div><span class="b">15 min</span></div></div>
+    <div class="sec">Pay &amp; miles</div>
+    <div class="card" style="gap:0"><div class="li"><div class="grow tt">How I'm paid</div><span class="b">O/O</span></div><div class="li"><div class="grow tt">Cents per mile</div><span class="b">—</span></div><div class="li"><div class="grow tt">Track deadhead</div><span class="ch go">On</span></div></div>
+    <div class="sec">Notifications</div>
+    <div class="card" style="gap:0"><div class="li"><div class="grow tt">Expirations</div><span class="ch go">On</span></div><div class="li"><div class="grow tt">Upcoming items</div><span class="ch go">On</span></div><div class="li"><div class="grow tt">Detention reminder</div><span class="ch go">On</span></div><div class="li"><div class="grow tt">Open defects</div><span class="ch go">On</span></div><div class="li"><div class="grow tt">Facility questions</div><span class="ch go">On</span></div></div>
+    <div class="sec">Account · Location · Privacy · Sign out</div>
+  </div>
+  <nav class="tb" data-on="more"></nav>
+</div><figcaption><b>Settings</b><ul>
+<li>Detention default and reminder are user-configurable <span class="tag">TM-D046</span></li>
+<li>Each notification class switches on/off separately <span class="tag">SRS §17</span> (issue #10)</li>
+<li>Per-load free time can override the default from the dwell card</li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= OFFLINE ================= -->
+<section id="offline">
+<h2>12 · Offline, sync &amp; notifications</h2>
+<p>Offline is a normal state, not an error. One pill in the header says it ("Offline · 3 saved"). Items waiting to sync carry an "on phone" tag, and only a real conflict interrupts the driver.</p>
+<div class="shots">
+<figure class="shot" id="s-conflict"><div class="phone">
+  <div class="sb" data-t="18:02"></div>
+  <div class="ab"><div class="r"><a class="back" href="#s-today">‹</a><div class="t">Two versions</div></div></div>
+  <div class="bd">
+    <div class="mut">Check-out time at <b style="color:var(--a-ink)">P1 Prairie Fresh</b> was changed in two places. Pick the right one — the other is kept in history.</div>
+    <div class="opt on" style="align-items:flex-start"><div class="rad" style="margin-top:3px"></div><div class="grow"><div class="b" style="font-size:22px">12:21 PM</div><div class="mut">Edited on this phone · Fri 12:40 PM</div></div></div>
+    <div class="opt" style="align-items:flex-start"><div class="rad" style="margin-top:3px"></div><div class="grow"><div class="b" style="font-size:22px">12:35 PM</div><div class="mut">Edited on tablet · Fri 5:10 PM</div></div></div>
+    <div class="card sm" style="gap:3px"><div class="lbl">Original</div>12:21 PM · GPS on phone</div>
+  </div>
+  <div class="act"><a class="btn" href="#s-loaddetail">Keep 12:21 PM</a></div>
+</div><figcaption><b>Sync conflict (manual vs manual)</b><ul>
+<li>Never resolved silently by device clock; both versions shown with source <span class="tag">TM-D047</span></li>
+<li>The losing version stays in history, so the choice is recoverable</li>
+<li>Manual edits beat AI/inferred values automatically; those cases never reach this screen</li></ul></figcaption></figure>
+
+<figure class="shot" id="s-notifs"><div class="phone">
+  <div class="lock">
+    <div class="clock">11:47</div><div style="font-size:14px;opacity:.85;margin-bottom:14px">Friday, September 26</div>
+    <div class="nt"><div class="h"><span>CABPILOT</span><span>now</span></div><b>1 h 45 m at Prairie Fresh</b><br>Your 2 h free-time threshold is in 15 min. Tap to check out or share status.</div>
+    <div class="nt"><div class="h"><span>CABPILOT</span><span>7:00 AM</span></div><b>Truck insurance expires in 6 days</b><br>Scan the new card when you get it.</div>
+    <div class="nt"><div class="h"><span>CABPILOT</span><span>7:00 AM</span></div><b>Truck payment due Oct 1</b><br>Monthly · 5 days</div>
+  </div>
+</div><figcaption><b>Notifications</b><ul>
+<li>Detention reminder is local, so it works offline <span class="tag">TM-D046</span> RW-04</li>
+<li>Copy says "threshold", never "you'll be paid"</li>
+<li>Morning digest time for date-based reminders avoids alerts while driving at night</li></ul></figcaption></figure>
+</div>
+</section>
+
+<!-- ================= ADMIN ================= -->
+<section id="admin">
+<h2>13 · Lean admin panel (web)</h2>
+<p>A desktop web tool with five areas and three roles. The privacy boundary is visible in the interface: staff see that documents exist and when and where they were uploaded, never what is in them.</p>
+<div class="deskwrap"><figure class="shot" id="a-user" style="width:1000px;max-width:none"><div class="desk">
+  <div class="side"><div class="bn">Cab<i>Pilot</i> ops</div><a>Dashboard</a><a class="on">Users</a><a>Subscriptions</a><a>Support / Recovery</a><a>Controls</a><div class="role">Signed in as <b style="color:#fff">M. Chen</b><br>Role: Support</div></div>
+  <div class="mn">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h5>R. Alvarez</h5><span style="font-size:12px;color:#56615B">User ID u_7f3a…19c · joined Sep 7, 2026</span></div>
+    <div class="two">
+      <div class="pn" style="display:flex;flex-direction:column;gap:6px">
+        <b>Account</b>
+        <table><tr><td>Phone</td><td>(312) ***-0148 · verified</td></tr><tr><td>Email</td><td>ral***@email.com · verified</td></tr><tr><td>Tier</td><td>O/O</td></tr><tr><td>Subscription</td><td>Trial · day 19 of 60</td></tr><tr><td>Status</td><td>Active · app 1.0.3 (iOS)</td></tr></table>
+        <div style="display:flex;gap:8px;margin-top:6px"><span class="btnd off" title="Admin or Owner only">Extend trial</span><span class="btnd off" title="Admin or Owner only">Change tier</span><span style="font-size:12px;color:#56615B;align-self:center">Admin or Owner only</span></div>
+      </div>
+      <div class="pn" style="display:flex;flex-direction:column;gap:6px">
+        <b>Activity metadata</b>
+        <table><tr><th>When</th><th>Event</th><th>City</th></tr><tr><td>Sep 26 12:26</td><td>Upload · 2 pages</td><td>Joliet IL</td></tr><tr><td>Sep 26 10:02</td><td>Sync</td><td>Joliet IL</td></tr><tr><td>Sep 25 19:40</td><td>Upload · 3 pages</td><td>Gary IN</td></tr><tr><td>Sep 25 06:11</td><td>Sign-in (OTP)</td><td>—</td></tr></table>
+        <div style="background:#F4F5F2;border-radius:8px;padding:8px 10px;font-size:12.5px">🔒 <b>611 documents</b> · contents are private to the driver and cannot be opened by staff.</div>
+      </div>
+    </div>
+    <div class="pn"><b>Support case #1042 · Recovery request · Open</b>
+      <table style="margin-top:6px"><tr><td style="width:150px">Sep 26 14:10</td><td>Caller says new phone number; still has email access → directed to email sign-in path.</td><td style="width:90px">M. Chen</td></tr><tr><td>Sep 26 14:02</td><td>Case opened from help form.</td><td>system</td></tr></table>
+      <div style="margin-top:8px;display:flex;gap:8px"><span class="btnd">Add note</span><span class="btnd" style="background:#12181D">Set status</span></div>
+    </div>
+  </div>
+</div><figcaption><b>Users → user detail with support case (Support role)</b>Masked contact data, metadata-only activity (time + city), a document count with a lock and no viewer, and role-limited actions shown greyed with the reason. <span class="tag">TM-D052 D053</span> <span class="tag">SRS §37 §38</span> RW-12</figcaption></figure></div>
+
+<div class="deskwrap"><figure class="shot" id="a-dash" style="width:1000px;max-width:none"><div class="desk" style="height:470px">
+  <div class="side"><div class="bn">Cab<i>Pilot</i> ops</div><a class="on">Dashboard</a><a>Users</a><a>Subscriptions</a><a>Support / Recovery</a><a>Controls</a><div class="role">Signed in as <b style="color:#fff">K. Owner</b><br>Role: Owner</div></div>
+  <div class="mn">
+    <h5>Dashboard</h5>
+    <div class="kp"><div class="pn"><div class="k">Users</div><div class="n">1,284</div></div><div class="pn"><div class="k">In trial</div><div class="n">412</div></div><div class="pn"><div class="k">Active paid</div><div class="n">698</div></div><div class="pn"><div class="k">Past due</div><div class="n">31</div></div><div class="pn"><div class="k">Open cases</div><div class="n">7</div></div></div>
+    <div class="two">
+      <div class="pn"><b>Recent signups</b><table style="margin-top:6px"><tr><th>When</th><th>User</th><th>Tier</th></tr><tr><td>Today 09:12</td><td>u_91c…</td><td>Company Driver</td></tr><tr><td>Today 07:55</td><td>u_7aa…</td><td>O/O</td></tr><tr><td>Yesterday</td><td>u_3d0…</td><td>O/O</td></tr></table></div>
+      <div class="pn"><b>System &amp; job failures · 24 h</b><table style="margin-top:6px"><tr><td>Extraction failures</td><td>12 (0.9%)</td></tr><tr><td>Upload retries exhausted</td><td>3</td></tr><tr><td>Push delivery errors</td><td>41</td></tr><tr><td>Sync conflicts raised</td><td>5</td></tr></table></div>
+    </div>
+  </div>
+</div><figcaption><b>Dashboard (Owner)</b>Counts, recent signups, failures. No map, no loads, no document browser. <span class="tag">SRS §38</span></figcaption></figure></div>
+
+<div class="deskwrap"><figure class="shot" id="a-controls" style="width:1000px;max-width:none"><div class="desk" style="height:440px">
+  <div class="side"><div class="bn">Cab<i>Pilot</i> ops</div><a>Dashboard</a><a>Users</a><a>Subscriptions</a><a>Support / Recovery</a><a class="on">Controls</a><div class="role">Signed in as <b style="color:#fff">K. Owner</b><br>Role: Owner</div></div>
+  <div class="mn">
+    <h5>Controls</h5>
+    <div class="two">
+      <div class="pn"><b>Features by tier</b><table style="margin-top:6px"><tr><th>Feature</th><th>Company Driver</th><th>O/O</th></tr><tr><td>Load history &amp; search</td><td><span class="tg"></span></td><td><span class="tg"></span></td></tr><tr><td>Pay estimate (CPM)</td><td><span class="tg"></span></td><td><span class="tg off"></span></td></tr><tr><td>Revenue &amp; analytics</td><td><span class="tg off"></span></td><td><span class="tg"></span></td></tr><tr><td>Settlement reconciliation</td><td><span class="tg off"></span></td><td><span class="tg"></span></td></tr><tr><td>Expenses</td><td><span class="tg off"></span></td><td><span class="tg"></span></td></tr><tr><td>Excel export</td><td><span class="tg off"></span></td><td><span class="tg"></span></td></tr></table></div>
+      <div class="pn" style="display:flex;flex-direction:column;gap:10px"><b>Maintenance message</b><div style="border:1px solid #D6DAD3;border-radius:8px;padding:8px;color:#56615B">Off</div><b>Minimum app version</b><div style="border:1px solid #D6DAD3;border-radius:8px;padding:8px">iOS 1.0.2 · Android 1.0.2</div><span style="font-size:12px;color:#56615B">Changes are logged with who and when.</span></div>
+    </div>
+  </div>
+</div><figcaption><b>Controls</b>Tier entitlements as toggles (no job titles in code), maintenance message, minimum version. Subscriptions area follows the same table pattern: state + billing reference, with the billing provider as source of truth. <span class="tag">TM-D054</span> (issue #2 on the Expenses row)</figcaption></figure></div>
+</section>
+
+<!-- ================= REASONING ================= -->
+<section id="reasoning">
+<h2>14 · Reasoning behind the major decisions</h2>
+<div class="why">
+  <div><h4>One card, one button, fixed position</h4><p>The next step (Check In → Check Out → Scan BOL → Check In → Scan POD) is always the full-width green button above the tab bar, in the same spot. A driver builds muscle memory once. The card scrolls; the button never does.</p></div>
+  <div><h4>The number is the hero</h4><p>At a guard shack the question is "what's your pickup number?" So the card leads with it at 34px in a typeface built for low vision (Atkinson Hyperlegible: distinct 0/O, 1/l/I), one tap to copy. After pickup the hero switches to BOL / delivery ref.</p></div>
+  <div><h4>Gate info lives on the card</h4><p>TM-D049 rules out a Gate Pass screen, so the gate details (carrier, DOT/MC, truck, trailer, plates, driver) sit in a compact grid on the pickup card. Zero taps at the gate. Anything more is left to field testing, as the decision says.</p></div>
+  <div><h4>Amber means "don't get this wrong"</h4><p>Only Critical Load Instructions use solid amber. Countdown chips use light amber and red. Green is reserved for actions and "done". Colour is never the only signal: every chip also carries words.</p></div>
+  <div><h4>Scan is the one way in</h4><p>A single centre button takes every kind of paper. Classification and load attribution happen after capture, with the reason shown ("matches PU# 4471-0923"). The driver never has to decide where to go before scanning.</p></div>
+  <div><h4>Automation announces itself</h4><p>Stage changes from documents appear as a toast with Undo, never silently. Check In has no confirm dialog; Undo replaces "Are you sure?". That saves a tap on every correct action and still recovers mistakes.</p></div>
+  <div><h4>Driving view instead of blocking</h4><p>Rather than greying out the app while moving, Today switches to large read-only facts and one navigation button. The driver still sees what they need and there is nothing to type.</p></div>
+  <div><h4>Four tabs, not five</h4><p>Today, Loads, Wallet, More, plus Scan. Money and Upcoming are important but are desk tasks, so they go under More. Upcoming's top 3 still show on Today, satisfying "near the top of the working experience".</p></div>
+  <div><h4>Provenance as small tags, not warnings</h4><p>Every time and number carries a quiet tag (GPS · Edited · on phone · read from page). The record is honest and auditable without making the driver read disclaimers.</p></div>
+  <div><h4>Offline is a state, not an error</h4><p>One header pill plus "on phone" tags. Only a real manual-vs-manual conflict interrupts the driver. Everything else syncs quietly and idempotently.</p></div>
+</div>
+</section>
+
+<!-- ================= ISSUES ================= -->
+<section id="issues">
+<h2>15 · UX problems found (flagged, not solved by changing requirements)</h2>
+<p class="note">Each is a spot where the approved requirements, turned into screens, leave a gap, a tension or an ambiguity. The design above shows the least-assuming behaviour, marked "assumed", pending owner decision.</p>
+<div class="tblwrap"><table class="t">
+<tr><th style="width:36px">#</th><th style="width:210px">Problem</th><th>Why it matters on screen</th><th style="width:240px">What this design assumed</th><th style="width:80px">Impact</th></tr>
+<tr><td>1</td><td>"Upcoming" means two different things</td><td>SRS §36 names due items <b>Upcoming</b>; TM-D018 names future loads <b>Upcoming/Pre-planned Loads</b>. Both appear on Today. RW-09 explicitly tests this confusion.</td><td>Due items = "Upcoming"; loads always labelled "Pre-planned". Wording needs owner sign-off.</td><td><span class="sev h">High</span></td></tr>
+<tr><td>2</td><td>Tier naming and expense access are inconsistent</td><td>SRS §2/§12 say "Standard / Pro"; TM-D054 says "Company Driver / O/O". SRS §29 doesn't tier-limit expenses, but TM-F029/F054 mark them "(Pro)". A company driver who pays for their own parking or food may expect expenses.</td><td>UI uses Company Driver / O/O; expenses shown as an O/O toggle in Controls (switchable).</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>3</td><td>Offline document auto-advance</td><td>Stage auto-advance (TM-D032) depends on AI classification, which needs connectivity (TM-D024). A driver scanning a BOL with no signal expects In Transit and won't get it.</td><td>Scan is saved offline; card shows "BOL saved · stage updates when online" with a manual "Mark In Transit" button.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>4</td><td>Arrival vs Check In, and when the dwell clock starts</td><td>SRS §9 lists "arrival / check-in / departure" timestamps, but only a Check In action exists. Many facilities count free time from appointment time, not arrival, so an early arrival shows a false detention countdown.</td><td>Single Check In = arrival; timer runs from check-in; per-load override of free time only.</td><td><span class="sev h">High</span></td></tr>
+<tr><td>5</td><td>In-motion guardrail isn't specified</td><td>TM-D021 requires minimal interaction while moving, but not how motion is detected (needs location permission), whether passengers or team drivers can override, or what's allowed.</td><td>Driving view on sustained speed; no override. Needs owner decision and field test.</td><td><span class="sev h">High</span></td></tr>
+<tr><td>6</td><td>Implied check-out</td><td>SRS §8 allows "a normal workflow action" to signal check-out. If scanning the POD silently checks out, dwell may be recorded short because the driver often scans before leaving.</td><td>Never implied silently; after POD scan the Check Out button is highlighted as the next step.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>7</td><td>Facility prompt timing vs. driving</td><td>TM-D034 prompts "after pickup/delivery stops", which is exactly when the driver pulls away.</td><td>Prompt only in the check-out sheet flow while stationary; if dismissed, not re-asked while moving.</td><td><span class="sev l">Low</span></td></tr>
+<tr><td>8</td><td>Upcoming items have no "done/paid" behaviour</td><td>SRS §36 defines dates and reminders but not what happens after a bill is paid or oil is changed. Without it, reminders for paid bills keep firing until the date passes.</td><td>Swipe → Done moves a recurring item to its next date; one-time items move to history. Needs confirmation that this isn't new scope.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>9</td><td>What happens after the Current Load is delivered</td><td>TM-D018 allows Current + Pre-planned but doesn't say whether the next load becomes Current automatically, or when a load with open stops or pending paperwork stops being "current".</td><td>Offered with a Start button, never automatic; delivered load leaves Today when the driver starts the next one.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>10</td><td>Notification list is out of date</td><td>SRS §17 names only expirations and defects, but D046 (detention reminder), D050 (Upcoming reminders) and D034 (facility prompt) also notify.</td><td>Settings lists all five classes, each switchable. SRS §17 text should be aligned.</td><td><span class="sev l">Low</span></td></tr>
+<tr><td>11</td><td>Tier choice during a full-feature trial</td><td>TM-D035 gives everyone the full product for 60 days, yet the UI adapts to tier (rate fields, Money vs Pay estimate). It's unspecified whether a trialist sees both or picks one.</td><td>Ask "How are you paid?" at setup; tier sets defaults, while the trial unlocks all features.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>12</td><td>"V1 Candidate" features in a frozen baseline</td><td>TM-F016 (wrong-slot warning), F019 (replacement recognition), F022 (defect reminders), F027 (CPM pay estimate) are still "Candidate" while SRS text includes them.</td><td>Designed in, tagged in captions. Status needs a yes/no.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>13</td><td>Changing phone number isn't covered</td><td>SRS §37 covers losing both channels, not a planned number change while email still works, which is common for drivers switching carrier phones.</td><td>Not designed; support notes route to email sign-in (see admin mockup).</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>14</td><td>How settlements get in, and where deadhead starts</td><td>Reconciliation (TM-D028) needs settlement data, but intake (SRS §4) lists only load documents. Deadhead (TM-F023) needs a start point, which isn't defined when there was no previous stop.</td><td>Settlements come through the same Scan/Import flow; deadhead starts at the previous load's last stop, else location when the load is started.</td><td><span class="sev m">Medium</span></td></tr>
+<tr><td>15</td><td>Repository formatting defect</td><td><code>01_MASTER_SRS.md</code> §5 and §18 contain literal "\n" text in place of line breaks (list item 4 and the §18 body run into headings).</td><td>Content read as intended; files not edited (requirements frozen). Suggest a formatting-only fix.</td><td><span class="sev l">Low</span></td></tr>
+</table></div>
+</section>
+
+<!-- ================= COVERAGE ================= -->
+<section id="coverage">
+<h2>16 · Requirement coverage (self-check, simulated)</h2>
+<p class="note">A quick pass against <code>design/validation/REQUIREMENT_CHECK_TEMPLATE.md</code> areas. Tap counts are <b>simulated walkthroughs</b> of these mockups, not real-driver data.</p>
+<div class="tblwrap"><table class="t">
+<tr><th>Area</th><th>Where</th><th>Status</th><th>Scenario · simulated taps</th></tr>
+<tr><td>Current Load Card, stage-aware</td><td><a href="#s-today">Today</a>, <a href="#s-transit">In Transit</a>, <a href="#s-atdelivery">At delivery</a></td><td>Covered</td><td>RW-01: 0 taps to see PU# + gate info; 1 to check in</td></tr>
+<tr><td>Multi-stop, out-of-order Active Stop</td><td><a href="#s-stops">Stops sheet</a>, <a href="#s-delivered">Delivered/open</a></td><td>Covered</td><td>RW-03: 2 taps</td></tr>
+<tr><td>Current vs Pre-planned; attribution</td><td><a href="#s-loads">Loads</a>, <a href="#s-attrib">Attribution</a>, <a href="#s-review">Review</a></td><td>Covered · issue #9</td><td>RW-05: 3 taps (Scan → shutter → Save)</td></tr>
+<tr><td>Check-in/out, dwell, detention, provenance, share</td><td><a href="#s-dwell">Dwell</a>, <a href="#s-share">Share</a>, <a href="#s-notifs">Alerts</a></td><td>Covered · issues #4 #6</td><td>RW-04: reminder with no taps; share = 2 taps</td></tr>
+<tr><td>Offline, sync, conflicts</td><td><a href="#s-dwell">Offline pill</a>, <a href="#s-conflict">Conflict</a></td><td>Covered · issue #3</td><td>RW-02: same taps as online</td></tr>
+<tr><td>Mileage/deadhead provenance</td><td><a href="#s-miles">Miles</a></td><td>Covered · issue #14</td><td>—</td></tr>
+<tr><td>Quick/Detailed PTI, defects</td><td><a href="#s-ptiq">Quick</a>, <a href="#s-ptid">Detailed</a></td><td>Covered · issue #12</td><td>All-OK PTI: 2 taps from Scan</td></tr>
+<tr><td>Wallet, expirations, replacement</td><td><a href="#s-wallet">Wallet</a>, <a href="#s-walletdoc">Document</a></td><td>Covered</td><td>—</td></tr>
+<tr><td>Unified Upcoming</td><td><a href="#s-upcoming">List</a>, <a href="#s-addup">Add</a>, Today strip</td><td>Covered · issues #1 #8</td><td>RW-09: visible on Today, 0 taps</td></tr>
+<tr><td>Expenses, revenue, settlements, export</td><td><a href="#s-money">Money</a>, <a href="#s-settle">Settlement</a>, <a href="#s-expense">Expense</a>, <a href="#s-export">Export</a></td><td>Covered · issue #2</td><td>RW-10: 3 taps (More → Money → review)</td></tr>
+<tr><td>Dry Van/Reefer, swaps, Quick Trailer Check</td><td><a href="#s-reefer">Reefer</a>, <a href="#s-swap">Swap</a>, <a href="#s-trailercheck">Check</a></td><td>Covered</td><td>RW-07: 3 taps with a recent trailer; RW-08: 0 to view</td></tr>
+<tr><td>Critical Load Instructions</td><td>Amber block on every stage</td><td>Covered</td><td>—</td></tr>
+<tr><td>Partial/full rejection, disposition</td><td><a href="#s-exception">Exception</a>, <a href="#s-disposition">Disposition</a></td><td>Covered</td><td>RW-06: ~6 taps, no typing</td></tr>
+<tr><td>Facility intelligence</td><td><a href="#s-facility">Report</a>, <a href="#s-facility-info">Facility page</a></td><td>Covered · issue #7</td><td>—</td></tr>
+<tr><td>Parallel statuses</td><td>Chips on cards, history, detail</td><td>Covered</td><td>—</td></tr>
+<tr><td>Load History + search (base tier)</td><td><a href="#s-history">Search</a></td><td>Covered</td><td>RW-11: 3 taps + type</td></tr>
+<tr><td>Auth &amp; recovery boundary</td><td><a href="#s-login">Sign in</a>, <a href="#s-setup">Setup</a></td><td>Covered · issue #13</td><td>—</td></tr>
+<tr><td>Tiers, entitlements, admin, privacy</td><td><a href="#a-user">Admin user</a>, <a href="#a-controls">Controls</a></td><td>Covered · issues #2 #11</td><td>RW-12: metadata only, no document viewer</td></tr>
+<tr><td>Trash / deletion</td><td><a href="#s-trash">Trash</a></td><td>Covered</td><td>—</td></tr>
+<tr><td>In-motion safety &amp; accessibility</td><td><a href="#s-driving">Driving view</a>; 54px targets; Atkinson type; words on every colour</td><td>Covered · issue #5</td><td>Needs real-device contrast test in sunlight</td></tr>
+<tr><td>Scope lock</td><td>No new features added; items outside the text are flagged above</td><td>Pass</td><td>—</td></tr>
+</table></div>
+<p class="note" style="margin-top:24px">Prepared by Claude as the Stage-1 independent design. Not self-approved: per AGENTS.md this awaits the Stage-2 requirement check and owner review.</p>
+</section>
+</main>
+
+<script>
+(function(){
+  var tabs=[["today","Today","i-home","#s-today"],["loads","Loads","i-truck","#s-loads"],["scan","Scan","i-scan","#s-capture"],["wallet","Wallet","i-wallet","#s-wallet"],["more","More","i-more","#s-more"]];
+  document.querySelectorAll("nav.tb").forEach(function(n){
+    var on=n.getAttribute("data-on");
+    n.setAttribute("aria-label","App tabs");
+    n.innerHTML=tabs.map(function(t){
+      if(t[0]==="scan") return '<a class="sc" href="'+t[3]+'"><span><svg class="i"><use href="#'+t[2]+'"/></svg></span></a>';
+      return '<a class="'+(t[0]===on?"on":"")+'" href="'+t[3]+'"><svg class="i"><use href="#'+t[2]+'"/></svg>'+t[1]+'</a>';
+    }).join("");
+  });
+  document.querySelectorAll(".sb").forEach(function(s){
+    var t=s.getAttribute("data-t")||"9:41", off=s.getAttribute("data-net")==="off";
+    s.innerHTML='<span>'+t+'</span><span>'+(off?'No service':'LTE ▮▮▮')+' · 82%</span>';
+  });
+})();
+</script>
