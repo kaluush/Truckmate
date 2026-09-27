@@ -1,5 +1,9 @@
 # TruckMate — Changelog
 
+## 2026-09-26 — Trial billing timing clarified
+- Added TM-D077 (clarifies TM-D073/TM-D076): day-10 message is a notice only; add-payment step opens at day 14 so the store's 2-week trial starts when the no-card period ends; charge-related screens show the calendar date of the first charge instead of a day count.
+- Updated SRS §24, TM-F036, and the AI handoff (early-charge implementation note resolved).
+
 ## 2026-09-26 — Follow-up owner rulings
 - Aligned SRS §8 (Onsite timer wording), §12 (no automatic missing-detention flag), §17 (five notification classes + no-input rule) and §37 (phone-number change) with TM-D058, TM-D059, TM-D062 and TM-D068. Wording alignment only.
 - Added TM-D075: O/O → Company Driver downgrade at next billing date; O/O-only data kept hidden, never deleted, restored on re-upgrade. SRS §24 and §39 updated.

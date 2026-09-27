@@ -39,7 +39,7 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F033 | Driver-sourced facility intelligence | V1 Core | Opt-in post-stop structured reports; timestamp/source; supplement conflicting public info without exposing driver history. |
 | TM-F034 | Gmail automatic rate-con detection/import | Future | Requires permissions/verification design. |
 | TM-F035 | Subscription billing | Future before public monetization | Add after field validation. |
-| TM-F036 | Full-feature trial | Monetization target | 14 days no payment method; optional payment method unlocks 2 more weeks (28 days total, no charge during trial); then Company Driver from $14.99/mo or O/O from $29.99/mo (TM-D072/TM-D073/TM-D076). |
+| TM-F036 | Full-feature trial | Monetization target | 14 days no payment method (day-10 notice only); add-payment step at day 14 unlocks 2 more weeks (28 days total, no charge during trial; charge screens show the calendar date of first charge); then Company Driver from $14.99/mo or O/O from $29.99/mo (TM-D072/TM-D073/TM-D076/TM-D077). |
 | TM-F037 | Offline/poor-network operation | V1 Core | Everything technically feasible stays usable offline; safe queued sync; manual user corrections outrank AI/inference; material manual conflicts preserve recovery/provenance. |
 | TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. |
 | TM-F039 | Large roadside service marketplace | Rejected/Out of Scope | Feature bloat for V1. |

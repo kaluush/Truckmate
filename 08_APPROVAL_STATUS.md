@@ -14,7 +14,7 @@ The owner approved the final V1 additions through **TM-D055** on 2026-09-23. The
 - TM-Q012 public replacement name: RESOLVED → **CabPilot** / **cabpilotapp.com** (TM-D056).
 - Claude Stage 1 design issues #1–#15: ALL 15 RESOLVED by owner rulings 2026-09-26 → TM-D057–TM-D074 (see `design/independent/claude/OWNER_RULINGS_2026-09-26.md`).
 - TM-D056 row restored to `02_MASTER_DECISIONS.md` (was referenced but missing from the table).
-- V1 requirements baseline: FINAL, APPROVED, AND FROZEN FOR UX/DESIGN (owner rulings through TM-D076 included).
+- V1 requirements baseline: FINAL, APPROVED, AND FROZEN FOR UX/DESIGN (owner rulings through TM-D077 included).
 
 ## Design/coding gate
 Proceed to UX/design using Master Decisions and Master SRS as product truth. **Do not add new V1 features.** New ideas go to V2 unless a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement requires repair. Coding should follow designed/approved flows rather than inventing behavior.

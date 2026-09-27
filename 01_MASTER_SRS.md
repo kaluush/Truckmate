@@ -1,6 +1,6 @@
 # TruckMate — Master Software Requirements Specification
 
-**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**. Amended 2026-09-26 by owner rulings (tier terminology, pricing/trial, formatting, wording alignment, downgrade; TM-D058–TM-D076).
+**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**. Amended 2026-09-26 by owner rulings (tier terminology, pricing/trial, formatting, wording alignment, downgrade, trial billing; TM-D058–TM-D077).
 
 The structure is intentionally sized to TruckMate. PWT does not impose a fixed section count.
 
@@ -148,7 +148,7 @@ Common driver actions SHALL be optimized for fast comprehension and large, clear
 ## 24. Trial and Monetization
 The trial SHALL expose the real product rather than an artificially crippled version (TM-D014).
 
-**Trial (TM-D073):** days 1–14 provide full-feature access with no payment method required. Before day 14 (around day 10) the app SHALL offer to unlock 2 more free weeks (28 days total) by adding a payment method. No charge SHALL occur during the 28-day trial; wording SHALL be clear (e.g. "No charge for 28 days. Cancel anytime.") and a clear reminder SHALL be shown before the first charge (TM-D073 as clarified by TM-D076). Support staff MAY extend a trial case by case through the admin Subscriptions area.
+**Trial (TM-D073):** days 1–14 provide full-feature access with no payment method required. Around day 10 the app SHALL show a notice only (e.g. "Your free period ends in X days"). At day 14 the app SHALL offer to unlock 2 more free weeks (28 days total) by adding a payment method, so the store's 2-week trial starts when the no-card period ends. No charge SHALL occur during the 28-day trial. Any charge-related screen SHALL show the actual calendar date of the first charge rather than a day count (e.g. "No charge until October 12. Cancel anytime."), and a clear reminder SHALL be shown before the first charge (TM-D073 as clarified by TM-D076 and TM-D077). Support staff MAY extend a trial case by case through the admin Subscriptions area.
 
 **Pricing (TM-D072):**
 - **Company Driver:** $14.99 monthly; $12.49/mo billed $37.47 per 3 months; $10.99/mo billed $65.94 per 6 months.
