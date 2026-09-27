@@ -1,5 +1,20 @@
 # TruckMate — Changelog
 
+## 2026-09-26 — Owner rulings on Claude Stage 1 design issues
+- Added TM-D057–TM-D074; all 15 issues flagged in `design/independent/claude/DESIGN_V1.md` resolved.
+- TM-D057: UI labels **Reminders** (due items) and **Next Loads** (pre-planned loads); "Upcoming" retired as a UI label.
+- TM-D058: stop timer labelled **Onsite**, starts at arrival, shows "Appt [time]"; neutral reminders; no automatic missing-detention flag in reconciliation (clarifies TM-D046).
+- TM-D059: no in-motion restriction or driving mode in V1; notifications never require input (clarifies TM-D021). Driving view and fleet-admin in-motion lock moved to V2 (TM-F066, TM-F067).
+- TM-D060: Company Driver / O/O naming everywhere; expenses available to both tiers; SRS §2/§4/§12/§18 terminology updated.
+- TM-D061: TM-F016, TM-F019, TM-F022, TM-F027 promoted to V1 Core.
+- TM-D062: phone-number change flow (OTP to new number + old number or verified email, else support/recovery).
+- TM-D063–TM-D071: Claude's assumptions approved for issues #3, #6, #7, #8, #9, #10, #11, #14, #15; SRS §5/§18 literal "\n" fixed.
+- TM-D072: new tiered pricing (Company Driver from $14.99/mo; O/O from $29.99/mo; 3- and 6-month plans). TM-D073: 14-day no-card trial + 16 more days with payment method. TM-D035 marked SUPERSEDED; SRS §24 updated.
+- TM-D074: launch policy — first 20–50 drivers may get free access for feedback via existing admin controls.
+- Restored the missing TM-D056 row in `02_MASTER_DECISIONS.md`.
+- Added `design/independent/claude/OWNER_RULINGS_2026-09-26.md`; independent design files left unedited.
+
+
 ## 2026-09-23 — CabPilot public brand selected
 - Resolved TM-Q012.
 - Added TM-D056.

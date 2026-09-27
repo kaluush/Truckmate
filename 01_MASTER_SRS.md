@@ -1,6 +1,6 @@
 # TruckMate — Master Software Requirements Specification
 
-**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**.
+**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**. Amended 2026-09-26 by owner rulings (tier terminology, pricing/trial, formatting; TM-D060, TM-D071–TM-D073).
 
 The structure is intentionally sized to TruckMate. PWT does not impose a fixed section count.
 
@@ -9,8 +9,8 @@ TruckMate SHALL provide a private, simple mobile work companion for CDL drivers 
 
 ## 2. Users, Modes, and Access
 TruckMate SHALL support at minimum:
-- Standard/mileage driver needs.
-- Pro financial needs for percentage-paid drivers and owner-operators.
+- Company Driver/mileage driver needs.
+- O/O financial needs for percentage-paid drivers and owner-operators.
 Functional capability SHALL be based on need/tier rather than job-title assumptions. A user SHALL control their own operational/business records. Sharing SHALL require an intentional user action unless a future integration is explicitly authorized.
 
 ## 3. Current Load Card
@@ -27,7 +27,7 @@ The user SHALL be able to correct extracted information.
 ## 4. Load Creation and Document Intake
 V1 SHALL allow load creation from practical intake methods such as PDF/image upload, in-app scan, and OS share/import. The system SHOULD minimize manual transcription.
 
-AI extraction SHOULD identify, when present: shipper, receiver, addresses, pickup/delivery references, load number, BOL/reference number, appointments, contacts, rate/pay for authorized Pro use, Critical Load Instructions, and other necessary operational fields. For reefer loads, extraction SHOULD also identify set-point temperature, operating mode, reefer fuel information, unit/alarm status, and actual temperature when present.
+AI extraction SHOULD identify, when present: shipper, receiver, addresses, pickup/delivery references, load number, BOL/reference number, appointments, contacts, rate/pay for authorized O/O use, Critical Load Instructions, and other necessary operational fields. For reefer loads, extraction SHOULD also identify set-point temperature, operating mode, reefer fuel information, unit/alarm status, and actual temperature when present.
 
 Extraction confidence/failure SHALL NOT silently create trusted incorrect data. Important ambiguous fields SHOULD be surfaced for quick confirmation/correction. When more than one load could receive a scan/import, the system SHALL require reliable attribution to the intended load and SHALL request confirmation when attribution is ambiguous.
 
@@ -37,7 +37,8 @@ Gmail automatic detection/import is deferred and SHALL NOT be a V1 launch depend
 Each load SHALL maintain one organized package containing source documents and structured data. Expected document categories include:
 1. Rate/load confirmation.
 2. Pickup BOL/shipping papers.
-3. Signed delivery BOL/POD.\n4. Other Load Documents, a flexible category for load-specific paperwork such as lumper receipts, scale tickets, washout receipts, accessorial/detention paperwork, damage photos, and similar items.
+3. Signed delivery BOL/POD.
+4. Other Load Documents, a flexible category for load-specific paperwork such as lumper receipts, scale tickets, washout receipts, accessorial/detention paperwork, damage photos, and similar items.
 
 Multi-page documents SHALL remain associated with the same load. Original source files SHALL remain retrievable even after AI extraction.
 
@@ -73,8 +74,8 @@ The system SHALL preserve distinct values when applicable: **carrier-paid miles*
 ## 11. Mileage Driver Pay Estimate
 Where enabled, a mileage-paid driver MAY configure cents-per-mile and deadhead compensation behavior. TruckMate SHOULD estimate weekly paid miles/pay while clearly identifying estimates versus confirmed settlement amounts.
 
-## 12. Pro Financial Layer
-Pro functionality SHOULD support load revenue, fuel, expenses, miles, deadhead, loaded miles, total miles, revenue per mile, and weekly/monthly/yearly summaries.
+## 12. O/O Financial Layer
+O/O functionality SHOULD support load revenue, fuel, expenses, miles, deadhead, loaded miles, total miles, revenue per mile, and weekly/monthly/yearly summaries. Expense capture (§29) is available to both Company Driver and O/O tiers (TM-D060).
 
 Financial analytics SHALL preserve source/provenance where practical so a user can understand where a number came from. Net/profit figures SHALL be clearly labeled as estimates unless all required costs are known.
 
@@ -105,7 +106,10 @@ Facility reports SHALL be timestamped and source-labeled. Recent TruckMate-drive
 ## 17. Notifications
 Notifications SHALL be purposeful and controllable. Primary V1 notification classes include document expirations and, if approved, unresolved defect reminders. Notification logic SHALL avoid duplicate/stale alerts after state changes.
 
-## 18. Load History and Search\nV1 SHALL provide base-tier Load History and search so all users can retrieve past loads and associated documents without requiring Pro financial analytics. Search SHOULD prioritize practical driver retrieval needs such as load/reference number, facility, date, and document.\n\n## 19. Privacy, Security, and Data Control
+## 18. Load History and Search
+V1 SHALL provide base-tier Load History and search so all users can retrieve past loads and associated documents without requiring O/O financial analytics. Search SHOULD prioritize practical driver retrieval needs such as load/reference number, facility, date, and document.
+
+## 19. Privacy, Security, and Data Control
 Authentication SHALL protect user data. Authorization SHALL prevent cross-user access. Sensitive documents SHALL be protected in transit and at rest using appropriate platform/cloud controls. Secrets SHALL never be embedded in client code or committed to the repository.
 
 Deleted documents SHALL enter a user-restorable Trash state for 30 days and then be permanently deleted. A linked load/history record MAY retain that a document was deleted but SHALL NOT retain the deleted file after permanent deletion.
@@ -140,7 +144,15 @@ The system SHALL plan for failed uploads, partial scans, AI extraction failures,
 Common driver actions SHALL be optimized for fast comprehension and large, clear touch targets. High-priority references such as pickup/delivery numbers SHALL be visually prominent at the correct trip stage. The app SHOULD minimize typing and unnecessary popups. While the vehicle is moving, core workflows SHALL minimize interaction and SHALL NOT depend on multi-field forms or required typing. Accessibility, readability, contrast, and one-handed/mobile use SHALL be considered during design validation.
 
 ## 24. Trial and Monetization
-The launch monetization target is a **60-day full-feature trial**, followed by **$59.98/month**. The trial SHALL expose the real product rather than an artificially crippled version. Billing/store implementation details remain a later implementation decision.
+The trial SHALL expose the real product rather than an artificially crippled version (TM-D014).
+
+**Trial (TM-D073):** days 1–14 provide full-feature access with no payment method required. Before day 14 (around day 10) the app SHALL offer to unlock 16 more free days (30 days total) by adding a payment method. No charge SHALL occur before day 30; wording SHALL be clear (e.g. "No charge until day 30. Cancel anytime.") and a clear reminder SHALL be shown before the first charge. Support staff MAY extend a trial case by case through the admin Subscriptions area.
+
+**Pricing (TM-D072):**
+- **Company Driver:** $14.99 monthly; $12.49/mo billed $37.47 per 3 months; $10.99/mo billed $65.94 per 6 months.
+- **O/O:** $29.99 monthly; $24.99/mo billed $74.97 per 3 months; $21.99/mo billed $131.94 per 6 months.
+
+A user MAY switch from Company Driver to O/O at any time. Billing/store implementation details remain an implementation-stage decision.
 
 ## 25. Data Model — Initial Conceptual Entities
 At minimum the architecture should anticipate: User, DriverProfile, Vehicle, Trailer, EquipmentAssignment, TrailerInspection, CarrierProfile, Load, LoadStop, LoadReference, LoadDocument, ExtractedField/Provenance, CheckEvent, DwellRecord, SharedStatusTemplate, EssentialDocument, ExpirationReminder, Inspection, Defect, MileageRecord, Expense, RecurringExpense, FuelRecord, Settlement/SettlementLine, and Subscription/Entitlement when monetization is added.

@@ -26,4 +26,4 @@ Discovery / requirements consolidation → independent gap review → owner reco
 TruckMate does not target a predetermined number of SRS sections. Add/remove structure according to actual project complexity and clarity.
 
 ## Current core domains
-Current Load Card; load intake/extraction; load documents/BOL/POD; check-in/out and detention evidence; copy/share status; mileage/deadhead; driver pay estimate; Pro financials/reconciliation; Essentials document wallet; expiration reminders; PTI; lightweight nearby help; notifications; privacy/security/data control; offline/recovery; architecture; UX/accessibility; field validation; future monetization/integrations.
+Current Load Card; load intake/extraction; load documents/BOL/POD; check-in/out and detention evidence; copy/share status; mileage/deadhead; driver pay estimate; O/O financials/reconciliation; Essentials document wallet; expiration reminders; PTI; lightweight nearby help; notifications; privacy/security/data control; offline/recovery; architecture; UX/accessibility; field validation; future monetization/integrations.
