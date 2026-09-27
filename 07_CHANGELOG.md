@@ -1,5 +1,8 @@
 # TruckMate — Changelog
 
+## 2026-09-26 — AGENTS freeze rule updated
+- `AGENTS.md` Final V1 freeze rule now states the baseline is frozen through TM-D077 (was TM-D055) and that TM-D057–TM-D077 are owner-approved rulings. Wording only.
+
 ## 2026-09-26 — Trial billing timing clarified
 - Added TM-D077 (clarifies TM-D073/TM-D076): day-10 message is a notice only; add-payment step opens at day 14 so the store's 2-week trial starts when the no-card period ends; charge-related screens show the calendar date of the first charge instead of a day count.
 - Updated SRS §24, TM-F036, and the AI handoff (early-charge implementation note resolved).
