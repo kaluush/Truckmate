@@ -1,5 +1,10 @@
 # TruckMate — Changelog
 
+## 2026-09-26 — Follow-up owner rulings
+- Aligned SRS §8 (Onsite timer wording), §12 (no automatic missing-detention flag), §17 (five notification classes + no-input rule) and §37 (phone-number change) with TM-D058, TM-D059, TM-D062 and TM-D068. Wording alignment only.
+- Added TM-D075: O/O → Company Driver downgrade at next billing date; O/O-only data kept hidden, never deleted, restored on re-upgrade. SRS §24 and §39 updated.
+- Added TM-D076 (clarifies TM-D073): second trial period is 2 weeks, 28 days total, to fit App Store trial durations. SRS §24, TM-F036 and TM-F065 updated.
+
 ## 2026-09-26 — Owner rulings on Claude Stage 1 design issues
 - Added TM-D057–TM-D074; all 15 issues flagged in `design/independent/claude/DESIGN_V1.md` resolved.
 - TM-D057: UI labels **Reminders** (due items) and **Next Loads** (pre-planned loads); "Upcoming" retired as a UI label.

@@ -9,9 +9,10 @@ All 15 Claude Stage 1 design issues are resolved; see `design/independent/claude
 - Stop timer labelled **Onsite**, starts at arrival, shows "Appt [time]"; never "Detention"; reconciliation does not auto-flag missing detention from it.
 - **No in-motion restriction or driving mode** in V1. Notifications may arrive while moving but must never require input to dismiss/continue.
 - Tiers are Company Driver / O/O everywhere; expenses available to both tiers.
-- Pricing and trial replaced (TM-D072/TM-D073): 14 days no card, +16 days with payment method, no charge before day 30.
-- Where SRS text still says detention flagging (§8, §12), or §37 without phone change, the newer decisions govern.
-- Implementation note (not a product question): store trial mechanics are fixed-duration on Apple (e.g. 2 weeks, 1 month), so "no charge before day 30" must be verified against the chosen store/billing setup at implementation.
+- Pricing and trial replaced (TM-D072/TM-D073/TM-D076): 14 days no card, +2 weeks with payment method (28 days total), no charge during the trial.
+- Downgrade O/O → Company Driver takes effect at next billing date; O/O data kept hidden, never deleted (TM-D075).
+- SRS §8, §12, §17, §24, §37 and §39 now match these decisions.
+- Implementation note (not a product question): if the payment method is added around day 10, the store's 2-week trial must still end at day 28 total (e.g. start it when the no-card period ends), not ~day 24.
 
 ## Final additions now in project truth
 - **Upcoming due/reminders:** one unified flow for one-time expiration/due dates or recurring schedules; supports bills, expiring documents, maintenance and similar obligations; distinct from Upcoming/Pre-planned Loads.

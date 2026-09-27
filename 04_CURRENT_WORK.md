@@ -17,7 +17,7 @@ Translate the final approved V1 into UX/design without adding product scope.
 6. Use **CabPilot** as the public product name and **cabpilotapp.com** as the approved domain; the repository may remain named TruckMate for continuity.
 
 ## Baseline state
-Owner-approved project truth now includes TM-D074. The final V1 feature additions remain Upcoming due/reminders and the lean admin/operations layer. TM-Q012 is resolved: public product name **CabPilot**, domain **cabpilotapp.com**. No material V1 product question is intentionally open.
+Owner-approved project truth now includes TM-D076. The final V1 feature additions remain Upcoming due/reminders and the lean admin/operations layer. TM-Q012 is resolved: public product name **CabPilot**, domain **cabpilotapp.com**. No material V1 product question is intentionally open.
 
 ## Scope rule
 **No more V1 feature additions.** New ideas go to V2 unless field evidence reveals a contradiction, security/privacy flaw, implementation blocker, or genuine gap in an already-approved requirement.

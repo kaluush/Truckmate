@@ -1,6 +1,6 @@
 # TruckMate — Master Software Requirements Specification
 
-**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**. Amended 2026-09-26 by owner rulings (tier terminology, pricing/trial, formatting; TM-D060, TM-D071–TM-D073).
+**Status:** Owner-approved final V1 requirements baseline for UX/design as of 2026-09-23. Public brand resolved as **CabPilot**; approved domain **cabpilotapp.com**. Amended 2026-09-26 by owner rulings (tier terminology, pricing/trial, formatting, wording alignment, downgrade; TM-D058–TM-D076).
 
 The structure is intentionally sized to TruckMate. PWT does not impose a fixed section count.
 
@@ -59,7 +59,7 @@ A Check In action SHALL record timestamp, load/facility context, and location wh
 
 The system SHOULD support both shipper and receiver dwell records. A normal workflow action MAY provide a checkout signal when reliable, but manual correction SHALL remain possible.
 
-TruckMate MAY flag possible detention based on configurable/free-time rules. When no load-specific threshold is known, the user MAY use a default threshold of 2 hours. V1 MAY schedule a local reminder 15 minutes before the configured threshold. It SHALL describe this as supporting evidence/recordkeeping and a configured threshold, not as guaranteed billable detention, eligibility, or payment.
+Each stop SHALL show an **Onsite** timer that starts at actual arrival/check-in, regardless of appointment time. When the stop has an appointment time, it SHALL be shown beside the timer as "Appt [time]" (e.g. "Onsite 3h 10m · Appt 8:00 AM"). The timer SHALL NOT be labelled "Detention", and TruckMate SHALL NOT state or imply that detention is owed. The threshold is configurable; when no load-specific threshold is known, the user MAY use a default threshold of 2 hours. V1 MAY schedule a local reminder 15 minutes before the configured threshold using neutral wording (e.g. "Onsite 1h 45m"). The timer is supporting recordkeeping, not guaranteed billable detention, eligibility, or payment (TM-D058).
 
 ## 9. Copy and Share Status
 After arrival/check-in/check-out, TruckMate SHALL generate a concise reusable status summary. Fields MAY include facility, city/location, pickup/delivery number, truck/trailer, arrival/check-in/departure timestamps, and dwell time.
@@ -79,7 +79,7 @@ O/O functionality SHOULD support load revenue, fuel, expenses, miles, deadhead, 
 
 Financial analytics SHALL preserve source/provenance where practical so a user can understand where a number came from. Net/profit figures SHALL be clearly labeled as estimates unless all required costs are known.
 
-Settlement reconciliation SHALL support line-by-line matching by load rather than assuming that all loads settle in the week completed. Completed loads MAY remain Awaiting Settlement until matched on a later settlement. The system SHOULD surface missing/mismatched load pay, detention/accessorial amounts, duplicates, omissions, or other differences for user review. It SHALL NOT silently assert that a carrier made an error without sufficient evidence.
+Settlement reconciliation SHALL support line-by-line matching by load rather than assuming that all loads settle in the week completed. Completed loads MAY remain Awaiting Settlement until matched on a later settlement. The system SHOULD surface missing/mismatched load pay, accessorial amounts, duplicates, omissions, or other differences for user review. It SHALL NOT automatically flag missing detention based on the Onsite timer (TM-D058). It SHALL NOT silently assert that a carrier made an error without sufficient evidence.
 
 ## 13. Document Wallet / Essentials
 TruckMate SHALL provide an always-accessible wallet separate from load paperwork. It SHALL provide standard document slots (such as CDL/license, medical certification/card where applicable, truck registration, trailer registration, insurance, IFTA/permits/annual inspection where applicable) and SHALL allow user-created custom document types.
@@ -104,7 +104,9 @@ V1 SHALL NOT expose a live nearby-driver map/request network. Instead, after pic
 Facility reports SHALL be timestamped and source-labeled. Recent TruckMate-driver information MAY be displayed alongside public-source information, including when they conflict, without exposing the reporting driver's private load history/location.
 
 ## 17. Notifications
-Notifications SHALL be purposeful and controllable. Primary V1 notification classes include document expirations and, if approved, unresolved defect reminders. Notification logic SHALL avoid duplicate/stale alerts after state changes.
+Notifications SHALL be purposeful and controllable. V1 Settings SHALL list five notification classes, each switchable: document expirations, reminders, Onsite threshold reminder, open defects, and facility report prompts (TM-D068). Notification logic SHALL avoid duplicate/stale alerts after state changes.
+
+Notifications and reminders MAY appear at any time, including while the vehicle is moving, but SHALL NOT require the driver to respond, type, or act in order to dismiss or continue. Any input-requiring step SHALL wait until the driver opens the app (TM-D059).
 
 ## 18. Load History and Search
 V1 SHALL provide base-tier Load History and search so all users can retrieve past loads and associated documents without requiring O/O financial analytics. Search SHOULD prioritize practical driver retrieval needs such as load/reference number, facility, date, and document.
@@ -146,13 +148,13 @@ Common driver actions SHALL be optimized for fast comprehension and large, clear
 ## 24. Trial and Monetization
 The trial SHALL expose the real product rather than an artificially crippled version (TM-D014).
 
-**Trial (TM-D073):** days 1–14 provide full-feature access with no payment method required. Before day 14 (around day 10) the app SHALL offer to unlock 16 more free days (30 days total) by adding a payment method. No charge SHALL occur before day 30; wording SHALL be clear (e.g. "No charge until day 30. Cancel anytime.") and a clear reminder SHALL be shown before the first charge. Support staff MAY extend a trial case by case through the admin Subscriptions area.
+**Trial (TM-D073):** days 1–14 provide full-feature access with no payment method required. Before day 14 (around day 10) the app SHALL offer to unlock 2 more free weeks (28 days total) by adding a payment method. No charge SHALL occur during the 28-day trial; wording SHALL be clear (e.g. "No charge for 28 days. Cancel anytime.") and a clear reminder SHALL be shown before the first charge (TM-D073 as clarified by TM-D076). Support staff MAY extend a trial case by case through the admin Subscriptions area.
 
 **Pricing (TM-D072):**
 - **Company Driver:** $14.99 monthly; $12.49/mo billed $37.47 per 3 months; $10.99/mo billed $65.94 per 6 months.
 - **O/O:** $29.99 monthly; $24.99/mo billed $74.97 per 3 months; $21.99/mo billed $131.94 per 6 months.
 
-A user MAY switch from Company Driver to O/O at any time. Billing/store implementation details remain an implementation-stage decision.
+A user MAY switch from Company Driver to O/O at any time. A user MAY switch from O/O to Company Driver; the downgrade takes effect at the next billing date (TM-D075, see §39). Billing/store implementation details remain an implementation-stage decision.
 
 ## 25. Data Model — Initial Conceptual Entities
 At minimum the architecture should anticipate: User, DriverProfile, Vehicle, Trailer, EquipmentAssignment, TrailerInspection, CarrierProfile, Load, LoadStop, LoadReference, LoadDocument, ExtractedField/Provenance, CheckEvent, DwellRecord, SharedStatusTemplate, EssentialDocument, ExpirationReminder, Inspection, Defect, MileageRecord, Expense, RecurringExpense, FuelRecord, Settlement/SettlementLine, and Subscription/Entitlement when monetization is added.
@@ -239,6 +241,8 @@ The design SHALL avoid separate features for expirations, bills, and maintenance
 ## 37. Authentication and Account Recovery
 V1 authentication SHALL use phone OTP as the primary login method, with optional email attached to the account. V1 SHALL NOT require a password.
 
+A user SHALL be able to change their phone number in Settings. The change SHALL require an OTP to the new number plus confirmation through either the old number or the verified backup email. If neither is available, the case goes to the support/recovery process below (TM-D062).
+
 If a user loses access to both the phone number and optional email, TruckMate SHALL NOT promise automatic self-service recovery in V1. Support tooling MAY expose limited account/activity metadata needed to investigate a recovery request, but SHALL NOT expose private document contents. Support-visible metadata MAY include account status, activity timestamps, and upload time/city metadata when available.
 
 Any later manual credential-recovery procedure SHALL require a separate approved security design rather than ad hoc support action.
@@ -263,6 +267,8 @@ The working V1 tier model SHALL support:
 - **O/O** tier for owner-operators and percentage-paid drivers who need the financial/business layer.
 
 The entitlement model SHALL allow features to be enabled/disabled by tier without hard-coding job titles into core data. Additional tiers MAY be added later without redesigning the user model.
+
+A user MAY switch from Company Driver to O/O at any time, and from O/O to Company Driver with effect at the next billing date. On a downgrade, O/O-only data (financial layer, settlements, miles analytics) SHALL be kept and hidden, never deleted, and SHALL return if the user switches back to O/O (TM-D075).
 
 ## 40. Final V1 Scope Lock
 The additions in Sections 36–39 are the final owner-approved V1 feature additions before UX/design. After this baseline, new feature ideas SHALL be placed in V2/future scope.

@@ -20,4 +20,4 @@
 | 14 | Settlement intake / deadhead start | Approved as assumed: Scan/Import; deadhead from previous last stop, else device location at load start. | TM-D070 |
 | 15 | Literal `\n` in SRS §5/§18 | Approved: formatting fixed. | TM-D071 |
 
-Also decided the same day (not design issues): pricing TM-D072, trial TM-D073 (supersede TM-D035), launch free-access policy TM-D074. The setup/paywall screens in the next round should reflect the 14 + 16-day trial and the two-tier price table.
+Also decided the same day (not design issues): pricing TM-D072, trial TM-D073 (supersede TM-D035), launch free-access policy TM-D074. Follow-up the same day: downgrade O/O → Company Driver at next billing date with O/O data kept hidden (TM-D075); second trial period is 2 weeks, 28 days total (TM-D076). The setup/paywall screens in the next round should reflect the 14 + 14-day trial and the two-tier price table.
