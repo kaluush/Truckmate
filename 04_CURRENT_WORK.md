@@ -6,7 +6,7 @@ Final V1 requirements baseline owner-approved; UX/design may proceed. Public bra
 ## Current milestone
 Translate the final approved V1 into UX/design without adding product scope.
 
-**Stage 1 status:** independent designs exist (GPT, Claude, Gemini folders). All 15 issues flagged by the Claude Stage 1 design are **RESOLVED** by owner rulings on 2026-09-26 (TM-D057–TM-D074; summary in `design/independent/claude/OWNER_RULINGS_2026-09-26.md`). Independent designs stay unedited; the rulings apply from the next design round onward.
+**Stage 1 status:** All three independent designs (GPT, Claude, and Gemini) are now complete. All 15 issues flagged by the Claude Stage 1 design are **RESOLVED** by owner rulings on 2026-09-26 (TM-D057–TM-D074; summary in `design/independent/claude/OWNER_RULINGS_2026-09-26.md`). Independent designs stay unedited; the rulings apply from the next design round onward.
 
 ## Current focus
 1. Design the Current Load Card and multi-stop flow, including out-of-order Active Stop selection and prominent gate/check-in references without a separate Gate Pass screen.

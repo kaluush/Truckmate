@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CabPilot V1 — Gemini Interactive Design Mockup</title>
+    <style>
+        :root {
+            --bg-color: #0c0f12;
+            --card-bg: #161b21;
+            --text-color: #f0f4f8;
+            --text-muted: #8b9bb0;
+            --primary-color: #f2a900; /* High visibility gold */
+            --success-color: #2e7d32; /* Rich green */
+            --accent-blue: #0288d1; /* Safe blue */
+            --error-color: #d32f2f; /* Alert red */
+            --border-color: #2c3540;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #050709;
+            color: var(--text-color);
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .workspace-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Mock Mobile Device Bezel */
+        .phone-bezel {
+            width: 380px;
+            height: 760px;
+            background-color: #000;
+            border: 12px solid #222;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Phone Screen area */
+        .phone-screen {
+            flex: 1;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        /* Status Bar Mockup */
+        .phone-status-bar {
+            height: 24px;
+            background-color: #000;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        .phone-status-bar .icons span {
+            margin-left: 5px;
+        }
+
+        /* App Main Area */
+        .app-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* App Header */
+        .app-header {
+            height: 56px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 5;
+        }
+
+        .app-header .logo {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .sync-badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .sync-badge.online {
+            background-color: rgba(46, 125, 50, 0.15);
+            color: #81c784;
+            border: 1px solid #2e7d32;
+        }
+
+        .sync-badge.offline {
+            background-color: rgba(242, 169, 0, 0.15);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            display: none;
+        }
+
+        /* Main View Container */
+        .view-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Custom Scrollbar for Phone Container */
+        .view-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .view-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        /* Standard Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .card-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Reminder Banner Carousel */
+        .reminders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .reminder-banner {
+            background: rgba(211, 47, 47, 0.1);
+            border: 1px solid var(--error-color);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .reminder-banner.warning {
+            background: rgba(242, 169, 0, 0.1);
+            border: 1px solid var(--primary-color);
+        }
+
+        .reminder-banner .text {
+            font-weight: 600;
+        }
+
+        .reminder-banner .subtext {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .reminder-btn {
+            background-color: transparent;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .reminder-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Big Action Buttons */
+        .primary-action-btn {
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            height: 52px;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s, opacity 0.1s;
+        }
+
+        .primary-action-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .primary-action-btn.success {
+            background-color: var(--success-color);
+            color: #fff;
+        }
+
+        .primary-action-btn.blue {
+            background-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 12px;
+            height: 44px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Gate drawer style */
+        .drawer-header {
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 1px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .drawer-content {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 12px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+        }
+
+        .drawer-content div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .drawer-content span {
+            color: var(--text-muted);
+        }
+
+        .drawer-content strong {
+            color: #fff;
+        }
+
+        /* Stop stack */
+        .stop-row {
+            display: flex;
+            gap: 12px;
+            position: relative;
+        }
+
+        .stop-marker {
+            width: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stop-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            z-index: 2;
+        }
+
+        .stop-dot.active {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 8px var(--primary-color);
+        }
+
+        .stop-dot.completed {
+            background-color: var(--success-color);
+        }
+
+        .stop-line {
+            width: 2px;
+            flex: 1;
+            background-color: var(--border-color);
+            margin: 4px 0;
+        }
+
+        .stop-info {
+            flex: 1;
+            padding-bottom: 16px;
+        }
+
+        .stop-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+        }
+
+        .stop-info p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Bottom Tab Navigation Bar */
+        .bottom-nav {
+            height: 64px;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .nav-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            cursor: pointer;
+            flex: 1;
+            height: 100%;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .nav-tab.active {
+            color: var(--primary-color);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        /* Multi-view engine */
+        .app-view {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .app-view.active {
+            display: flex;
+        }
+
+        /* Wallet view details */
+        .wallet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .wallet-tile {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .wallet-tile .icon {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .wallet-tile .title {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .wallet-tile .status {
+            font-size: 11px;
+            color: #81c784;
+        }
+
+        .wallet-tile .status.warning {
+            color: var(--primary-color);
+        }
+
+        /* Interactive controls panel (right side of desktop workspace) */
+        .controls-panel {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            width: 400px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .controls-panel h2 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .scenario-box {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .scenario-box:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .scenario-box h3 {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .scenario-box h3 span {
+            font-size: 10px;
+            background-color: var(--border-color);
+            padding: 2px 6px;
+            border-radius: 8px;
+            color: var(--text-muted);
+        }
+
+        .scenario-box p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* O/O Finance Hub styles */
+        .finance-metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .finance-card {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .finance-card h5 {
+            margin: 0;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .finance-card p {
+            margin: 5px 0 0 0;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        /* Dialog overlays */
+        .overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .overlay-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .overlay-card h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+
+        .overlay-card p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Form Inputs */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .input-group input, .input-group select {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 38px;
+            padding: 0 12px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: absolute;
+            bottom: 80px;
+            left: 16px;
+            right: 16px;
+            background-color: #1a2332;
+            border-left: 4px solid var(--accent-blue);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 150;
+            font-size: 13px;
+        }
+
+        .toast-action {
+            color: var(--primary-color);
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CabPilot V1</h1>
+        <p>Gemini Stage 1 Interactive UX Mockup — Pure Vanilla CSS/JS</p>
+    </header>
+
+    <div class="workspace-container">
+        <!-- Interactive Mock Device -->
+        <div class="phone-bezel">
+            <div class="phone-status-bar">
+                <span id="live-time">08:00 AM</span>
+                <div class="icons">
+                    <span>📶</span>
+                    <span id="signal-icon">LTE</span>
+                    <span>🔋 98%</span>
+                </div>
+            </div>
+
+            <div class="phone-screen">
+                <div class="app-container">
+                    <!-- App Top Bar -->
+                    <div class="app-header">
+                        <span class="logo">CABPILOT</span>
+                        <div class="sync-badge online" id="sync-badge">ONLINE</div>
+                    </div>
+
+                    <!-- App Views -->
+                    
+                    <!-- 1. TODAY VIEW -->
+                    <div class="app-view active" id="view-today">
+                        <div class="view-content">
+                            <!-- Reminders carousel container -->
+                            <div class="reminders-container" id="reminders-container">
+                                <div class="reminder-banner" id="banner-insurance">
+                                    <div>
+                                        <div class="text">⚠️ CDL Insurance Expiry</div>
+                                        <div class="subtext">Expires in 6 days</div>
+                                    </div>
+                                    <button class="reminder-btn" onclick="dismissReminder('banner-insurance')">Mark Done</button>
+                                </div>
+                            </div>
+
+                            <!-- Current Load Card -->
+                            <div class="card" id="current-load-card">
+                                <div class="card-header">
+                                    <span class="card-subtitle" id="load-stage-label">Active Trip · STAGE 2</span>
+                                    <span style="font-size: 12px; font-weight: bold; color: var(--primary-color);">LOAD #2609A</span>
+                                </div>
+                                <h3 class="card-title" id="load-card-title">Chicago Brewery → Dallas Whse</h3>
+                                
+                                <!-- Gate reference drawer (TM-D049) -->
+                                <div class="drawer-header" onclick="toggleGateDrawer()">
+                                    <span>🚛 Gate & Check-In References</span>
+                                    <span id="drawer-arrow">▼</span>
+                                </div>
+                                <div class="drawer-content" id="gate-drawer-content">
+                                    <div><span>Truck:</span> <strong>T-409 (Plate: IL-88192)</strong></div>
+                                    <div><span>Trailer:</span> <strong>R-201 (Plate: IL-77281)</strong></div>
+                                    <div><span>Release Code:</span> <strong>PU-992182B</strong></div>
+                                    <div><span>Carrier:</span> <strong>Midwest Transport</strong></div>
+                                </div>
+
+                                <div style="font-size: 13px; border-left: 2px solid var(--primary-color); padding-left: 10px;">
+                                    <strong style="color: var(--primary-color);">CRITICAL INSTRUCTIONS:</strong><br>
+                                    Seal #449219 - DO NOT BREAK SEAL EN ROUTE. Continuous Reefer Temp.
+                                </div>
+
+                                <!-- Dynamic Onsite Timer display -->
+                                <div id="onsite-timer-display" style="display:none; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; text-align: center; border: 1px solid var(--border-color);">
+                                    <span style="color: var(--text-muted); font-size: 11px; text-transform: uppercase;">Stop Stop Dwell:</span>
+                                    <div style="font-size: 22px; font-weight: 800; color: #fff; margin: 4px 0;" id="timer-val">Onsite 0h 00m 00s</div>
+                                    <span style="font-size: 11px; color: var(--primary-color);">Appt 08:00 AM · Neutral recordkeeping</span>
+                                </div>
+
+                                <!-- Main Dynamic Action Button -->
+                                <button class="primary-action-btn success" id="stage-action-btn" onclick="handleStageAction()">
+                                    Arrived & Check In
+                                </button>
+                                
+                                <button class="secondary-btn" id="scan-bol-btn" style="display:none;" onclick="triggerMockScan()">
+                                    📸 Scan & Upload BOL
+                                </button>
+                            </div>
+
+                            <!-- Reefer status row (TM-D043, TM-F059) -->
+                            <div class="card" id="reefer-card" style="border-color: var(--accent-blue);">
+                                <div class="card-header">
+                                    <span class="card-subtitle" style="color: var(--accent-blue);">Reefer Status Panel</span>
+                                    <span style="font-size: 10px; background: rgba(2, 136, 209, 0.15); color: #4fc3f7; padding: 2px 6px; border-radius: 6px;">R-201</span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+                                    <div>Temp Set-Point: <strong style="color: #fff;">-10°F</strong></div>
+                                    <div>Operating Mode: <strong style="color: #fff;">Continuous</strong></div>
+                                    <div>Reefer Fuel: <strong style="color: #fff;">85% (3/4 Tank)</strong></div>
+                                    <div>Alarms / Unit: <strong style="color: #81c784;">OK / RUNNING</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. NEXT LOADS VIEW -->
+                    <div class="app-view" id="view-next">
+                        <div class="view-content">
+                            <h3 style="margin: 0 0 5px 0;">Pre-Planned Freight</h3>
+                            <p style="font-size: 12px; color: var(--text-muted); margin: 0 0 10px 0;">Next Loads never promote automatically. You must complete your current load first.</p>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-subtitle">Scheduled Tomorrow</span>
+                                    <span style="font-weight: bold; color: var(--primary-color);">LOAD #2610B</span>
+                                </div>
+                                <h4 style="margin: 0;">Dallas Warehouse → El Paso Yard</h4>
+                                <div style="font-size: 12px; color: var(--text-muted);">
+                                    <div>Ready: 09/27 @ 10:00 AM</div>
+                                    <div>Planned Miles: 610 loaded</div>
+                                </div>
+                                <button class="secondary-btn" style="font-size: 11px; height: 32px;" disabled>Awaiting Current Completion</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. FINANCE VIEW (O/O ONLY) -->
+                    <div class="app-view" id="view-finance">
+                        <div class="view-content">
+                            <h3 style="margin: 0 0 5px 0;">O/O Financial Dashboard</h3>
+                            
+                            <div class="finance-metric-grid">
+                                <div class="finance-card">
+                                    <h5>Gross Revenue</h5>
+                                    <p style="color: #81c784;">$3,500.00</p>
+                                </div>
+                                <div class="finance-card">
+                                    <h5>Fuel & Expenses</h5>
+                                    <p style="color: var(--error-color);">-$420.00</p>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h4 style="margin:0; font-size:14px;">Log Work Expense</h4>
+                                <div class="input-group">
+                                    <label>Amount ($)</label>
+                                    <input type="number" id="exp-amount" placeholder="e.g. 150">
+                                </div>
+                                <div class="input-group">
+                                    <label>Category</label>
+                                    <select id="exp-category">
+                                        <option value="Fuel">Fuel Purchase</option>
+                                        <option value="Maintenance">Maintenance / Repair</option>
+                                        <option value="Toll">Road Tolls</option>
+                                        <option value="Lumper">Lumper Fee</option>
+                                        <option value="Other">Other Overhead</option>
+                                    </select>
+                                </div>
+                                <button class="primary-action-btn" style="height: 38px; font-size: 13px;" onclick="addExpense()">Add Expense</button>
+                            </div>
+
+                            <div class="card">
+                                <h4 style="margin:0; font-size:14px; color: var(--primary-color);">Line-by-Line Settlement Match</h4>
+                                <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Discrepancy Surfaced</div>
+                                <div style="font-size: 12px; border-left: 2px solid var(--error-color); padding-left: 8px;">
+                                    <strong>LOAD #2605B Mismatch:</strong><br>
+                                    Rate Con Rate: $1,400.00<br>
+                                    Carrier Statement Paid: $1,200.00<br>
+                                    <span style="color: var(--error-color);">Discrepancy: -$200.00 (Unpaid Detention)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. WALLET VIEW -->
+                    <div class="app-view" id="view-wallet">
+                        <div class="view-content">
+                            <h3 style="margin: 0 0 5px 0;">Essentials Wallet</h3>
+                            <p style="font-size: 12px; color: var(--text-muted); margin: 0 0 10px 0;">Access your core credentials offline at any gate check-in.</p>
+                            
+                            <div class="wallet-grid">
+                                <div class="wallet-tile" onclick="openDocOverlay('Commercial Driver License (CDL)', 'Valid through 09/26/2030', 'CDL_Preview.jpg')">
+                                    <div class="icon">🪪</div>
+                                    <div class="title">CDL License</div>
+                                    <div class="status">Active / OK</div>
+                                </div>
+                                <div class="wallet-tile" onclick="openDocOverlay('Medical Certificate', 'Expires in 12 days', 'Med_Preview.jpg')">
+                                    <div class="icon">🩺</div>
+                                    <div class="title">Medical Card</div>
+                                    <div class="status warning">Due in 12d</div>
+                                </div>
+                                <div class="wallet-tile" onclick="openDocOverlay('Cab Card Registration', 'Valid through 12/31/2026', 'Reg_Preview.jpg')">
+                                    <div class="icon">🚛</div>
+                                    <div class="title">Truck Registration</div>
+                                    <div class="status">Active / OK</div>
+                                </div>
+                                <div class="wallet-tile" onclick="openDocOverlay('IFTA Fuel Permit', 'Valid through 12/31/2026', 'IFTA_Preview.jpg')">
+                                    <div class="icon">⛽</div>
+                                    <div class="title">IFTA Decal</div>
+                                    <div class="status">Active / OK</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. MORE VIEW (Settings/Trash/PTI) -->
+                    <div class="app-view" id="view-more">
+                        <div class="view-content">
+                            <div class="card">
+                                <h4 style="margin: 0; font-size:15px;">App Tier Configuration</h4>
+                                <div class="input-group">
+                                    <label>Active Work Profile</label>
+                                    <select id="user-tier-select" onchange="toggleUserTier()">
+                                        <option value="Company">Company Driver (Simplified View)</option>
+                                        <option value="OO">O/O Tier (Full Financial Suite)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h4 style="margin: 0; font-size: 15px;">Interactive Phone Swap Flow (TM-D062)</h4>
+                                <button class="secondary-btn" onclick="startPhoneChange()">Initiate Phone Change</button>
+                            </div>
+
+                            <div class="card" style="border-color: var(--error-color);">
+                                <h4 style="margin: 0; font-size: 15px; color: var(--error-color);">Trash Repository (30-Day Recovery)</h4>
+                                <p style="font-size: 11px; color: var(--text-muted); margin: 0;">Deleted files are preserved for 30 days before permanent erasure.</p>
+                                <button class="secondary-btn" style="border-color: var(--error-color); color: var(--error-color);" onclick="alert('Trash empty. Deleted documents automatically enter here.')">Open Trash Bin</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Nav Bar -->
+                    <div class="bottom-nav">
+                        <div class="nav-tab active" onclick="switchTab('today', this)">
+                            <div class="nav-icon">📅</div>
+                            <span>Today</span>
+                        </div>
+                        <div class="nav-tab" onclick="switchTab('next', this)">
+                            <div class="nav-icon">🚚</div>
+                            <span>Next Loads</span>
+                        </div>
+                        <div class="nav-tab" id="finance-tab" style="display:none;" onclick="switchTab('finance', this)">
+                            <div class="nav-icon">💰</div>
+                            <span>Finance</span>
+                        </div>
+                        <div class="nav-tab" onclick="switchTab('wallet', this)">
+                            <div class="nav-icon">🪪</div>
+                            <span>Wallet</span>
+                        </div>
+                        <div class="nav-tab" onclick="switchTab('more', this)">
+                            <div class="nav-icon">⚙️</div>
+                            <span>More</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toast Notification Box -->
+                <div class="toast" id="app-toast">
+                    <span id="toast-text">BOL scanned. Stage set to In Transit.</span>
+                    <span class="toast-action" id="toast-action" onclick="undoAction()">Undo</span>
+                </div>
+
+                <!-- Interactivity Screen Overlays -->
+                <div class="overlay" id="mock-scan-overlay">
+                    <div class="overlay-card" style="text-align: center;">
+                        <h3 style="color: var(--accent-blue);">📸 Document Scanner Mode</h3>
+                        <div style="height: 120px; border: 2px dashed var(--accent-blue); display: flex; justify-content: center; align-items: center; border-radius: 12px; font-size: 40px;">
+                            📄
+                        </div>
+                        <p>Aligning document... Page captured automatically.</p>
+                        <button class="primary-action-btn blue" onclick="finalizeMockScan()">Accept Page</button>
+                    </div>
+                </div>
+
+                <!-- Document viewer overlay -->
+                <div class="overlay" id="doc-viewer-overlay">
+                    <div class="overlay-card">
+                        <h3 id="overlay-doc-title">CDL License</h3>
+                        <p id="overlay-doc-meta">Valid through 09/26/2030</p>
+                        <div style="background: #333; height: 150px; border-radius: 10px; display: flex; justify-content: center; align-items: center; color: var(--text-muted); border: 1px solid var(--border-color);" id="overlay-doc-canvas">
+                            [ MOCK DOCUMENT VIEW ]
+                        </div>
+                        <button class="secondary-btn" onclick="closeDocOverlay()">Close View</button>
+                    </div>
+                </div>
+
+                <!-- Phone number change overlay -->
+                <div class="overlay" id="phone-change-overlay">
+                    <div class="overlay-card" id="phone-overlay-card">
+                        <!-- Step 1 -->
+                        <div id="phone-step-1">
+                            <h3>Change Phone Number</h3>
+                            <p>Verify your identity to proceed with the planned number transfer.</p>
+                            <div class="input-group">
+                                <label>New Phone Number</label>
+                                <input type="tel" id="new-phone" placeholder="+1 (555) 019-2831">
+                            </div>
+                            <button class="primary-action-btn" onclick="phoneNextStep(2)" style="margin-top: 10px;">Send Verification OTP</button>
+                        </div>
+                        <!-- Step 2 -->
+                        <div id="phone-step-2" style="display:none;">
+                            <h3>Verify New Line</h3>
+                            <p>Enter the 6-digit verification code sent to your new phone number.</p>
+                            <div class="input-group">
+                                <label>Verification Code</label>
+                                <input type="number" id="new-phone-otp" placeholder="123456">
+                            </div>
+                            <button class="primary-action-btn success" onclick="phoneNextStep(3)" style="margin-top: 10px;">Verify & Continue</button>
+                        </div>
+                        <!-- Step 3 -->
+                        <div id="phone-step-3" style="display:none;">
+                            <h3>Security Fallback (TM-D062)</h3>
+                            <p>A second confirmation code has been dispatched to protect your account security.</p>
+                            <div class="input-group" style="margin-bottom: 10px;">
+                                <label>Verify Via Old Number</label>
+                                <input type="number" id="old-phone-otp" placeholder="Enter Old Phone OTP">
+                            </div>
+                            <div class="input-group">
+                                <label>Verify Via Backup Email</label>
+                                <input type="number" id="email-otp" placeholder="Enter Email Verification Code">
+                            </div>
+                            <button class="primary-action-btn" onclick="finalizePhoneChange()" style="margin-top: 15px; background-color: var(--primary-color);">Confirm Number Swap</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario Tester Control Panel -->
+        <div class="controls-panel">
+            <h2>Scenario Playground</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Click any scenario card below to trigger simulated UI state changes on the mock mobile app!</p>
+            
+            <div class="scenario-box" onclick="runScenario('rw01')">
+                <h3>RW-01 — Arrive at pickup <span>2 Taps</span></h3>
+                <p>Loads gate references drawer and displays shipper details. Click check-in to start timer.</p>
+            </div>
+
+            <div class="scenario-box" onclick="runScenario('rw02')">
+                <h3>RW-02 — No signal offline <span>3 Taps</span></h3>
+                <p>Simulates cellular failure. Changes app to working offline. Events queue locally.</p>
+            </div>
+
+            <div class="scenario-box" onclick="runScenario('rw05')">
+                <h3>RW-05 — Document Stage Change <span>3 Taps</span></h3>
+                <p>Triggers camera mock. Scanning a Pickup BOL automatically advances load to In Transit.</p>
+            </div>
+
+            <div class="scenario-box" onclick="runScenario('rw09')">
+                <h3>RW-09 — Expiring Insurance <span>2 Taps</span></h3>
+                <p>Places active expiration and recurring bill alerts in Today's carousel.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Navigation
+        function switchTab(viewId, element) {
+            document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById('view-' + viewId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Toggle user tier (Company vs O/O)
+        function toggleUserTier() {
+            const select = document.getElementById('user-tier-select');
+            const financeTab = document.getElementById('finance-tab');
+            if (select.value === 'OO') {
+                financeTab.style.display = 'flex';
+            } else {
+                financeTab.style.display = 'none';
+                // If on finance view, switch back to today
+                if (document.getElementById('view-finance').classList.contains('active')) {
+                    switchTab('today', document.querySelector('.nav-tab'));
+                }
+            }
+        }
+
+        // Gate Pass Reference drawer toggle
+        function toggleGateDrawer() {
+            const content = document.getElementById('gate-drawer-content');
+            const arrow = document.getElementById('drawer-arrow');
+            if (content.style.display === 'flex') {
+                content.style.display = 'none';
+                arrow.textContent = '▼';
+            } else {
+                content.style.display = 'flex';
+                arrow.textContent = '▲';
+            }
+        }
+
+        // Live timer tracker (simulating clock)
+        setInterval(() => {
+            const now = new Date();
+            const hours = String(now.getHours() % 12 || 12).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+            document.getElementById('live-time').textContent = `${hours}:${minutes} ${ampm}`;
+        }, 1000);
+
+        // Interactive states
+        let tripState = 'AtPickup'; // AtPickup, InTransit, Delivered
+        let onsiteTimer = null;
+        let elapsedSeconds = 0;
+
+        function handleStageAction() {
+            const btn = document.getElementById('stage-action-btn');
+            const timerDisplay = document.getElementById('onsite-timer-display');
+            const scanBtn = document.getElementById('scan-bol-btn');
+
+            if (tripState === 'AtPickup') {
+                // Clicking "Arrived & Check In"
+                btn.textContent = 'Checked In · Tapping Starts Checkout';
+                btn.className = 'primary-action-btn blue';
+                timerDisplay.style.display = 'block';
+                scanBtn.style.display = 'flex';
+                startOnsiteTimer();
+                tripState = 'PendingScan';
+            } else if (tripState === 'PendingScan') {
+                alert('Please upload your Pickup BOL first to confirm cargo transfer.');
+            } else if (tripState === 'InTransit') {
+                // Arrived at receiver
+                btn.textContent = 'Checked In at Receiver';
+                btn.className = 'primary-action-btn success';
+                elapsedSeconds = 0; // reset timer
+                startOnsiteTimer();
+                tripState = 'AtReceiver';
+                scanBtn.textContent = '📸 Scan Delivery POD';
+                scanBtn.style.display = 'flex';
+            } else if (tripState === 'AtReceiver') {
+                // Tapping check out
+                alert('Check out complete. Trip Delivered!');
+                stopOnsiteTimer();
+                timerDisplay.style.display = 'none';
+                btn.textContent = 'Trip Delivered — Tap to Reset';
+                btn.className = 'primary-action-btn';
+                tripState = 'Done';
+            } else if (tripState === 'Done') {
+                // Reset mockup
+                tripState = 'AtPickup';
+                btn.textContent = 'Arrived & Check In';
+                btn.className = 'primary-action-btn success';
+                timerDisplay.style.display = 'none';
+                scanBtn.style.display = 'none';
+                elapsedSeconds = 0;
+            }
+        }
+
+        function startOnsiteTimer() {
+            stopOnsiteTimer();
+            onsiteTimer = setInterval(() => {
+                elapsedSeconds++;
+                const hours = Math.floor(elapsedSeconds / 3600);
+                const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+                const seconds = elapsedSeconds % 60;
+                document.getElementById('timer-val').textContent = 
+                    `Onsite ${hours}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+            }, 1000);
+        }
+
+        function stopOnsiteTimer() {
+            if (onsiteTimer) clearInterval(onsiteTimer);
+        }
+
+        // Mock scan actions
+        function triggerMockScan() {
+            document.getElementById('mock-scan-overlay').style.display = 'flex';
+        }
+
+        function finalizeMockScan() {
+            document.getElementById('mock-scan-overlay').style.display = 'none';
+            showToast("BOL Scanned. Gemini AI Processing... Confirmed! Load Stage set to In Transit.");
+            
+            // Advance stage dynamically (TM-D016)
+            tripState = 'InTransit';
+            const btn = document.getElementById('stage-action-btn');
+            btn.textContent = 'Arrived at Receiver';
+            btn.className = 'primary-action-btn success';
+            document.getElementById('load-stage-label').textContent = 'Active Trip · STAGE 3';
+            document.getElementById('load-card-title').textContent = 'En Route → Dallas Whse';
+            document.getElementById('scan-bol-btn').style.display = 'none';
+            stopOnsiteTimer();
+            document.getElementById('onsite-timer-display').style.display = 'none';
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('app-toast');
+            document.getElementById('toast-text').textContent = text;
+            toast.style.display = 'flex';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 6000);
+        }
+
+        function undoAction() {
+            document.getElementById('app-toast').style.display = 'none';
+            // Undo transit transition
+            tripState = 'AtPickup';
+            const btn = document.getElementById('stage-action-btn');
+            btn.textContent = 'Arrived & Check In';
+            btn.className = 'primary-action-btn success';
+            document.getElementById('load-stage-label').textContent = 'Active Trip · STAGE 2';
+            document.getElementById('load-card-title').textContent = 'Chicago Brewery → Dallas Whse';
+            document.getElementById('scan-bol-btn').style.display = 'none';
+        }
+
+        // Wallet Doc preview Overlay
+        function openDocOverlay(title, meta, preview) {
+            document.getElementById('overlay-doc-title').textContent = title;
+            document.getElementById('overlay-doc-meta').textContent = meta;
+            document.getElementById('doc-viewer-overlay').style.display = 'flex';
+        }
+
+        function closeDocOverlay() {
+            document.getElementById('doc-viewer-overlay').style.display = 'none';
+        }
+
+        // Phone number change interactive overlay
+        function startPhoneChange() {
+            document.getElementById('phone-change-overlay').style.display = 'flex';
+        }
+
+        function phoneNextStep(step) {
+            document.getElementById('phone-step-1').style.display = 'none';
+            document.getElementById('phone-step-2').style.display = 'none';
+            document.getElementById('phone-step-3').style.display = 'none';
+            document.getElementById('phone-step-' + step).style.display = 'block';
+        }
+
+        function finalizePhoneChange() {
+            document.getElementById('phone-change-overlay').style.display = 'none';
+            alert('Phone Number Swapped! Verification successful using backup secure credentials (TM-D062).');
+            // Reset overlay form
+            phoneNextStep(1);
+        }
+
+        // Add mock expense (Finance view)
+        function addExpense() {
+            const amount = document.getElementById('exp-amount').value;
+            const category = document.getElementById('exp-category').value;
+            if (!amount) return alert('Please enter expense amount.');
+            alert(`Logged Overhead Expense of $${amount} as [${category}]. Syncing with offline ledger.`);
+            document.getElementById('exp-amount').value = '';
+        }
+
+        // Dismiss alerts
+        function dismissReminder(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Play scenarios
+        function runScenario(scen) {
+            if (scen === 'rw01') {
+                switchTab('today', document.querySelector('.nav-tab'));
+                toggleGateDrawer();
+                alert('Scenario Loaded: At Gate. Expanded the Gate drawer with plates and broker release codes.');
+            } else if (scen === 'rw02') {
+                document.getElementById('sync-badge').textContent = 'OFFLINE';
+                document.getElementById('sync-badge').className = 'sync-badge offline';
+                document.getElementById('sync-badge').style.display = 'block';
+                document.getElementById('signal-icon').textContent = 'No Signal';
+                alert('Scenario Loaded: Offline Mode activated. Feel free to log check-ins, scans or expenses. They will queue securely in the sandbox.');
+            } else if (scen === 'rw05') {
+                switchTab('today', document.querySelector('.nav-tab'));
+                triggerMockScan();
+            } else if (scen === 'rw09') {
+                switchTab('today', document.querySelector('.nav-tab'));
+                document.getElementById('banner-insurance').style.display = 'flex';
+                alert('Scenario Loaded: Expiration alert inserted into Today view.');
+            }
+        }
+    </script>
+</body>
+</html>
