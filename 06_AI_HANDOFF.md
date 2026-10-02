@@ -16,6 +16,11 @@ All 15 Claude Stage 1 design issues are resolved; see `design/independent/claude
 ## Owner ruling — 2026-10-01 (TM-D078)
 - V1 load-photo evidence is fixed: stage = pickup or delivery; type = load/cargo, seal, temp, or other; capture time and GPS are automatic when available; short note optional; evidence attaches to the correct load stop. This is treated as a field-validated repair to the existing load-document/evidence workflow, not a new standalone module.
 
+## Data model draft — 2026-10-01 (NOT APPROVED)
+- `specs/data-model/DATA_MODEL.md` (Claude draft v0.1) expands SRS §25 into cross-cutting rules, four Mermaid relationship diagrams and a data dictionary. The dictionary is the source of truth; diagrams are derived from it and must change in the same commit.
+- It adds no product behavior; every field cites an SRS section or decision. Items needing a product decision are listed as DM-Q01–DM-Q07 (tracked as TM-Q029).
+- **Next AI:** if you are GPT or Gemini, review it using `specs/data-model/REVIEW_TEMPLATE.md` and save to `specs/data-model/reviews/<ai-name>.md`. Do not edit `DATA_MODEL.md` directly and do not treat it as approved truth.
+
 ## Final additions now in project truth
 - **Upcoming due/reminders:** one unified flow for one-time expiration/due dates or recurring schedules; supports bills, expiring documents, maintenance and similar obligations; distinct from Upcoming/Pre-planned Loads.
 - **Authentication:** phone OTP, optional email, no password; no automatic self-service recovery if both access channels are lost.

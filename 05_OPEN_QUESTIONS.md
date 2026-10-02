@@ -52,3 +52,7 @@ No new open V1 product question was created.
 
 ## Resolved public naming — 2026-09-23
 - TM-Q012 → TM-D056: approved public product name **CabPilot**; approved domain **cabpilotapp.com**. The repository/internal working name may remain TruckMate for continuity/history.
+
+
+## Data model draft — 2026-10-01 (OPEN)
+- TM-Q029 — Data-structure questions DM-Q01–DM-Q07 in `specs/data-model/DATA_MODEL.md` §6: load/record deletion, account deletion, recurring bill → expense link, PTI/trailer-check merge, cancelled loads, disposition-stop photo stage, facility de-duplication. Each has a draft position; owner decision needed before the model is approved.

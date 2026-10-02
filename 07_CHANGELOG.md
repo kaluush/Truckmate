@@ -1,5 +1,10 @@
 # TruckMate — Changelog
 
+## 2026-10-01 — V1 data model draft for review
+- Added `specs/data-model/DATA_MODEL.md` (DRAFT v0.1, not approved): cross-cutting data rules, four relationship diagrams and a data dictionary expanding SRS §25. No new product behavior; every field traces to the SRS or a decision.
+- Added `specs/data-model/REVIEW_TEMPLATE.md`: reviewers must answer what is missing, overcomplicated, wrongly related, needs flexibility (only for recorded future needs), could cause migration pain, and what to change before implementation, plus walk RW-01–RW-12 through the model.
+- Opened TM-Q029 for data-structure questions DM-Q01–DM-Q07.
+
 ## 2026-10-01 — V1 load photo evidence fixed
 - Added TM-D078 and TM-F068 as a field-validated repair to the existing load-document/evidence workflow.
 - Photos are captured at **pickup or delivery** and typed as **load/cargo, seal, temp, or other**.

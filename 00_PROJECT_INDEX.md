@@ -15,6 +15,9 @@
 - `05_OPEN_QUESTIONS.md` — unresolved matters; not approved truth.
 - `07_CHANGELOG.md` — meaningful project-level history.
 
+## Specifications
+- `specs/data-model/DATA_MODEL.md` — V1 data model (DRAFT, under review; not yet approved truth).
+
 ## AI entry files
 - `CLAUDE.md` — Claude entry point; delegates to AGENTS.
 - `GEMINI.md` — Gemini entry point; delegates to AGENTS.
