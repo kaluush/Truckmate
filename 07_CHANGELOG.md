@@ -1,5 +1,12 @@
 # TruckMate — Changelog
 
+## 2026-10-01 — V1 load photo evidence fixed
+- Added TM-D078 and TM-F068 as a field-validated repair to the existing load-document/evidence workflow.
+- Photos are captured at **pickup or delivery** and typed as **load/cargo, seal, temp, or other**.
+- Capture time and GPS location are recorded automatically when available; a short note is optional.
+- Photo evidence is attributed to the correct load stop so the model works cleanly with multi-stop loads.
+- Updated the Master SRS, Current Work, AI Handoff, and approval baseline accordingly.
+
 ## 2026-09-26 — AGENTS freeze rule updated
 - `AGENTS.md` Final V1 freeze rule now states the baseline is frozen through TM-D077 (was TM-D055) and that TM-D057–TM-D077 are owner-approved rulings. Wording only.
 
