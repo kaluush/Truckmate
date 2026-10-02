@@ -1,5 +1,10 @@
 # TruckMate — Changelog
 
+## 2026-10-02 — Gemini V1 data model review complete
+- Completed Gemini independent data model review in `specs/data-model/reviews/gemini.md` following `REVIEW_TEMPLATE.md`.
+- Identified 15 findings, including settlement document decoupling, appointment/event time-zone preservation on `LoadStop`, `CANCELLED` operational status for TONU tracking, line-level settlement reconciliation linking, recurring reminder lifecycle correction, and admin audit privacy boundaries.
+- Evaluated DM-Q01–DM-Q07 and walked simulated scenarios RW-01–RW-12 through the draft model.
+
 ## 2026-10-01 — V1 data model draft for review
 - Added `specs/data-model/DATA_MODEL.md` (DRAFT v0.1, not approved): cross-cutting data rules, four relationship diagrams and a data dictionary expanding SRS §25. No new product behavior; every field traces to the SRS or a decision.
 - Added `specs/data-model/REVIEW_TEMPLATE.md`: reviewers must answer what is missing, overcomplicated, wrongly related, needs flexibility (only for recorded future needs), could cause migration pain, and what to change before implementation, plus walk RW-01–RW-12 through the model.
