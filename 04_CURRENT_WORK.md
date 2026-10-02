@@ -14,10 +14,11 @@ Translate the final approved V1 into UX/design without adding product scope.
 3. Design the lean admin/operations panel: Dashboard, Users, Subscriptions, Support/Recovery, and Controls, with Owner/Admin/Support roles and no private document viewing.
 4. Design trailer-type behavior, equipment swaps/history, Quick Trailer Check, reefer fields, Critical Load Instructions, offline-first behavior, settlement reconciliation, expenses, export, PTI, wallet, and facility intelligence using already-approved rules.
 5. Apply the 2026-09-26 rulings: Onsite timer from arrival with "Appt [time]" (TM-D058); no in-motion restriction/driving mode and no input-requiring notifications (TM-D059); expenses for both tiers (TM-D060); phone-number change flow (TM-D062); new trial/pricing (TM-D072/TM-D073).
-6. Use **CabPilot** as the public product name and **cabpilotapp.com** as the approved domain; the repository may remain named TruckMate for continuity.
+6. Apply the V1 load-photo evidence rule (TM-D078): pickup/delivery stage; load/cargo, seal, temp, or other type; automatic timestamp + GPS when available; optional short note; attach evidence to the correct stop.
+7. Use **CabPilot** as the public product name and **cabpilotapp.com** as the approved domain; the repository may remain named TruckMate for continuity.
 
 ## Baseline state
-Owner-approved project truth now includes TM-D077. The final V1 feature additions remain Upcoming due/reminders and the lean admin/operations layer. TM-Q012 is resolved: public product name **CabPilot**, domain **cabpilotapp.com**. No material V1 product question is intentionally open.
+Owner-approved project truth now includes TM-D078. The final V1 feature additions remain Upcoming due/reminders and the lean admin/operations layer. TM-Q012 is resolved: public product name **CabPilot**, domain **cabpilotapp.com**. No material V1 product question is intentionally open.
 
 ## Scope rule
 **No more V1 feature additions.** New ideas go to V2 unless field evidence reveals a contradiction, security/privacy flaw, implementation blocker, or genuine gap in an already-approved requirement.
