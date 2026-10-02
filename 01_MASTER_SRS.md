@@ -42,6 +42,14 @@ Each load SHALL maintain one organized package containing source documents and s
 
 Multi-page documents SHALL remain associated with the same load. Original source files SHALL remain retrievable even after AI extraction.
 
+V1 SHALL support **load photo evidence** at both pickup and delivery stops. Each photo SHALL be attributable to the correct load and stop and SHALL store:
+- **Stage:** pickup or delivery.
+- **Type:** load/cargo, seal, temp, or other.
+- **Automatically captured metadata:** capture timestamp and device GPS location when location permission/location is available.
+- **Optional:** a short driver note.
+
+This SHALL use one photo/evidence model rather than separate cargo, seal, and temperature-photo modules. The design SHALL remain usable on multi-stop loads by preserving stop attribution. Offline capture SHOULD save locally and sync safely when connectivity returns, consistent with the V1 offline-first rules.
+
 ## 6. Scanner and AI Processing
 TruckMate SHOULD use an established/native scanning capability for capture, crop, page handling, and compression rather than building scanning technology from scratch.
 
