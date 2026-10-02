@@ -75,3 +75,4 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 
 | TM-F066 | Driving view / simplified in-motion screen | Future (V2) | Moved out of V1 by TM-D059. |
 | TM-F067 | Fleet-admin in-motion lock setting | Future (V2) | Moved out of V1 by TM-D059. |
+| TM-F068 | Load photo evidence | V1 Core | Per-stop photos at pickup or delivery; type = load/cargo, seal, temp, or other; automatic capture time + GPS when available; optional short note (TM-D078). |
