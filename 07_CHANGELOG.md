@@ -1,5 +1,12 @@
 # TruckMate — Changelog
 
+## 2026-10-02 — Owner decisions TM-D080–TM-D082 and data model v0.2
+- TM-D080: **Cancelled** operational status; cancelled loads stay in history and TONU pay can be matched. SRS §7 and §35 updated.
+- TM-D081: in-app account deletion with optional export first; facility reports kept anonymously. SRS §19 updated.
+- TM-D082: deleting a load sends it and all its evidence to the 30-day Trash; small records delete with Undo. SRS §19 updated.
+- `specs/data-model/DATA_MODEL.md` → v0.2: merged the GPT and Gemini reviews and TM-D079–TM-D082; all DM-Q questions resolved; one finding rejected with a reason. Diagrams verified to parse. Still DRAFT pending a confirmation review and owner approval.
+- Updated feature bank (TM-F031, TM-F038), AGENTS freeze line, approval status, current work, handoff and open questions.
+
 ## 2026-10-02 — Bill reminder → expense (TM-D079)
 - Owner approved: marking a bill reminder Done offers "Log as expense?" pre-filled from the reminder; never automatic. Resolves DM-Q03. Updated SRS §36, TM-F061, AGENTS freeze line, approval status, handoff, open questions and the data-model draft.
 

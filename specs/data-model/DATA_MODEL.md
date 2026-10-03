@@ -1,9 +1,9 @@
 # CabPilot (TruckMate) — V1 Data Model
 
-**Status:** DRAFT v0.1 — for multi-AI review. **Not approved.** Not yet project truth.
-**Drafted by:** Claude, 2026-10-01.
+**Status:** DRAFT v0.2 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
+**Drafted by:** Claude, 2026-10-01. **v0.2:** 2026-10-02, merges the GPT and Gemini reviews (`reviews/`) and owner decisions TM-D079–TM-D082. See §8 for what changed.
 **Expands:** Master SRS §25 ("conceptual, not a final database schema").
-**Baseline:** frozen V1 requirements through TM-D078. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
+**Baseline:** frozen V1 requirements through TM-D082. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
 
 ## How to read and edit this document
 
@@ -18,7 +18,7 @@
 
 1. **Collect once, reuse everywhere** (TM-D004). One fact lives in one place; screens, share messages, exports and reports read it from there.
 2. **Private by default** (TM-D007, TM-D053). Driver data is owned by one user; shared/reference data (facilities) never exposes who contributed it.
-3. **Offline-first and duplicate-safe** (TM-D024, TM-D025, TM-D047). Records created on the phone must sync once, exactly once, and preserve how each value was obtained.
+3. **Offline-first and duplicate-safe** (TM-D024, TM-D025, TM-D047). Records created on the phone must be safe to re-send (idempotent) and preserve how each value was obtained.
 4. **Corrections never erase the original** (TM-D019, TM-D029, TM-D030).
 5. **Extension without speculation** — team/shared loads (TM-D022), more trailer types (TM-D040) and more tiers (§39) must be addable later without rewrites, but are not built now.
 
@@ -31,7 +31,7 @@ Every user-data record carries:
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | UUID | **Generated on the device** at creation, not by the server. Makes offline creation and retry idempotent: re-sending the same record cannot create a second one (TM-D025). |
+| `id` | UUID | **Generated on the device** at creation, not by the server. The server **must treat this ID as the idempotency key**: a create that arrives again with an existing ID is merged/ignored, never stored as a second record. That makes offline creation and retries safe (effectively-once, TM-D025). |
 | `ownerUserId` | ref User | The user who owns the record. Authorization checks this (§19). |
 | `createdAt` / `updatedAt` | instant (UTC) | Server-assigned on sync. |
 | `clientCreatedAt` | instant | Device clock at creation. Kept separately because device clocks can be wrong (TM-D047). |
@@ -51,8 +51,8 @@ Every user-data record carries:
 - Priority on sync (TM-D047): a deliberate `MANUAL` value outranks `AI_EXTRACTED`/`SYSTEM_CAPTURED`/`ROUTE_ESTIMATED`. Two conflicting `MANUAL` values are **not** resolved by device timestamp; both are kept in a `SyncConflict` (§4.H).
 
 ### R4 — Time
-- Moments that happened (check-in, photo capture, inspection) are stored as **UTC instants**, plus the IANA time zone where they happened, so history displays in local facility time.
-- **Appointments are local wall-clock times at the facility** (`localDateTime` + facility `timeZone`), not instants. A driver crossing time zones must still see "Appt 8:00 AM" as the facility means it.
+- Moments that happened are stored as a **UTC instant plus `eventTimeZone`** (the IANA time zone where it happened), so history always displays in the local time it happened. **Every event record carries `eventTimeZone`:** CheckEvent, LoadPhoto, Inspection, ReeferReading, LoadStatusChange.
+- **Appointments are local wall-clock times at the facility**, not instants. Each stop stores its own `timeZoneSnapshot`, so the appointment stays correct even when no Facility record is linked. A driver crossing time zones must still see "Appt 8:00 AM" as the facility means it.
 - Calendar-only values (document expiry, reminder due date, settlement period) are plain `date`.
 
 ### R5 — Location
@@ -61,12 +61,15 @@ Every user-data record carries:
 
 ### R6 — Money and units
 - Money is stored as integer **minor units (cents)** plus a currency code (`USD` default). Never floating point.
+- **Exception — unit prices.** Fuel is priced in tenths of a cent ($3.899). The paid total and the quantity are the source of truth; a printed unit price, when kept, is stored in **mills** (thousandths of a dollar).
 - Distance in miles (decimal). Temperature as value + unit (`F`/`C`); the user's display unit is a setting.
 
 ### R7 — Deletion
 - **Documents and files** (load documents, essentials, photos, receipts): user delete sets `trashedAt`; restorable for 30 days; then the file is **permanently deleted** and the record becomes a tombstone that keeps only "a document of category X was deleted on date Y" (TM-D031, §19).
-- **Other records**: deletion behavior is not specified by the SRS for loads, expenses, reminders, etc. See open question **DM-Q01**.
-- **Account deletion** is not specified — see **DM-Q02**.
+- **Loads** (TM-D082): delete sets `trashedAt` on the load; the load and everything under it (stops, check events, documents, photos, references, instructions, equipment history, readings, pay lines, mileage) are hidden together and restorable as a whole for 30 days, then permanently deleted.
+- **Small records** such as expenses and reminders (TM-D082): deleted immediately, with Undo in the app. The server keeps a short-lived **tombstone** (ID + `deletedAt`) so other devices learn about the deletion when they sync. Attached files still follow the Trash rule above.
+- **Settlements** carry scanned documents, so they follow the same Trash rule as loads.
+- **Account deletion** (TM-D081): sets `User.status = DELETION_PENDING`, revokes every Device, then a server job permanently deletes all records and files owned by the user. FacilityReport rows are kept with `reporterUserId` cleared. Export is offered before, never required. Billing records live with the billing provider, not in driver data.
 
 ### R8 — Hidden is not deleted (TM-D075, §39)
 - Tier access is decided **when data is read**, from the user's current entitlements. No flag is written onto data at downgrade.
@@ -97,6 +100,7 @@ erDiagram
     LoadStop |o--o{ LoadReference : "stop-specific"
     Load ||--o{ CriticalInstruction : has
     LoadStop ||--o{ CheckEvent : records
+    LoadStop |o--o{ LoadStop : "disposition of"
     Load ||--o{ LoadStatusChange : "status history"
     Load ||--o{ EquipmentAssignment : "equipment history"
     Load |o--o| ReeferProfile : "reefer settings"
@@ -118,11 +122,14 @@ erDiagram
     Vehicle |o--o{ EquipmentAssignment : "assigned as truck"
     Trailer |o--o{ EquipmentAssignment : "assigned as trailer"
     EquipmentAssignment |o--o| Inspection : "Quick Trailer Check"
+    Trailer |o--o{ ReeferReading : "reading of"
     Vehicle |o--o{ Inspection : "PTI of"
     Trailer |o--o{ Inspection : "PTI of"
     Inspection ||--o{ Defect : finds
     Inspection ||--o{ StoredFile : photos
     Defect |o--o| Reminder : "follow-up"
+    Vehicle |o--o{ Reminder : "maintenance for"
+    Trailer |o--o{ Reminder : "maintenance for"
 ```
 
 ### 3.3 Money, miles and reminders
@@ -139,7 +146,9 @@ erDiagram
     User ||--o{ Settlement : receives
     Settlement ||--|{ SettlementLine : lines
     SettlementLine }o--o| Load : "matched to"
-    LoadDocument |o--o| Settlement : "scanned from"
+    SettlementLine }o--o| LoadPayLine : "matched to line"
+    Settlement ||--o{ StoredFile : "source scans"
+    Settlement ||--o{ ExtractionJob : "AI processing"
     User ||--o{ Reminder : has
     EssentialDocument |o--o{ Reminder : "expiry reminder"
     Reminder |o--o{ Expense : "logged when paid"
@@ -161,7 +170,8 @@ erDiagram
     User ||--o{ ExportJob : requests
     User ||--o{ FieldRevision : "correction history"
     Facility ||--o{ FacilityReport : "driver reports"
-    User ||--o{ FacilityReport : "submits (private)"
+    Facility |o--o{ Facility : "merged into"
+    User |o--o{ FacilityReport : "submits (private, cleared on deletion)"
     User ||--o{ AccountActivity : "support metadata"
     StaffUser ||--o{ SupportCase : handles
     User ||--o{ SupportCase : "subject of"
@@ -187,7 +197,8 @@ The driver account. Authentication itself is Firebase Authentication; this recor
 | `email` | text | — | Optional backup channel. | §37 |
 | `emailVerified` | bool | Y | Only a verified email can confirm a phone change. | TM-D062 |
 | `displayName` | text | — | | |
-| `status` | enum | Y | `ACTIVE`, `SUSPENDED`, `RECOVERY_HOLD`. | §38 |
+| `status` | enum | Y | `ACTIVE`, `SUSPENDED`, `RECOVERY_HOLD`, `DELETION_PENDING`. | §38, TM-D081 |
+| `deletionRequestedAt` | instant | — | Start of account deletion. | TM-D081 |
 | `paidHow` | enum | Y | Setup answer: `COMPANY_DRIVER`, `OO`. Drives tier-adaptive UI; not an access control. | TM-D069, TM-D005 |
 | `currentLoadId` | ref Load | — | The one Current Load. Changes only when the driver taps Start on another load. | TM-D018, TM-D067, R2 |
 | `homeTimeZone` | IANA tz | Y | Default for reports and reminder times. | R4 |
@@ -267,6 +278,7 @@ A shipper/receiver location. **Shared reference data**, not owned by one user �
 | `timeZone` | IANA tz | Y | Required to interpret appointment times. | R4 |
 | `source` | enum | Y | `PUBLIC_DATA`, `DRIVER_CREATED`. | §16 |
 | `publicInfo` | object | — | Public-source parking/hours data with `sourceLabel` and `retrievedAt`. | §16, TM-D034 |
+| `mergedIntoFacilityId` | ref Facility | — | Set when this record is found to be a duplicate. Reads follow the link; historical stops are **never rewritten** (they keep their snapshots). | §16, DM-Q07 |
 
 A driver's own notes about a facility do not belong here; they stay on the driver's private records.
 
@@ -276,7 +288,7 @@ Opt-in report submitted in the check-out flow.
 | Field | Type | Req | Notes | Source |
 |---|---|---|---|---|
 | `facilityId` | ref Facility | Y | | §16 |
-| `reporterUserId` | ref User | Y | **Never exposed** to other users or in public views. | §16, TM-D007 |
+| `reporterUserId` | ref User | — | **Never exposed** to other users or in public views. Cleared when the reporter deletes their account; the report itself is kept. | §16, TM-D007, TM-D081 |
 | `reportedAt` | instant | Y | Shown as "reported N days ago". | §16 |
 | `overnightParking` / `restroom` / `earlyLoading` / `vendingFood` | enum | — | `YES`, `NO`, `LIMITED`, `UNKNOWN`. | §16 |
 | `note` | text | — | Short. | §16 |
@@ -307,7 +319,9 @@ Drivers hook many trailers they do not own, so a trailer record is lightweight a
 |---|---|---|---|---|
 | `carrierProfileId` | ref CarrierProfile | — | | §3 |
 | `loadNumber` | text | — | Carrier/broker load number. Searchable. | §4, §18 |
-| `operationalStatus` | enum | Y | `PLANNED`, `AT_PICKUP`, `IN_TRANSIT`, `AT_DELIVERY`, `DELIVERED`, `DELIVERED_WITH_EXCEPTION`, `REJECTED_AWAITING_INSTRUCTIONS`. (`PLANNED` is the internal name for the SRS "Upcoming" operational status.) | §35, §7, TM-D033 |
+| `operationalStatus` | enum | Y | `PLANNED`, `AT_PICKUP`, `IN_TRANSIT`, `AT_DELIVERY`, `DELIVERED`, `DELIVERED_WITH_EXCEPTION`, `REJECTED_AWAITING_INSTRUCTIONS`, `CANCELLED`. (`PLANNED` is the internal name for the SRS "Upcoming" operational status.) | §35, §7, TM-D033, TM-D080 |
+| `cancelledAt` / `cancellationReason` | instant / text | — | Optional, when `CANCELLED`. The load stays in history and remains matchable for TONU pay. | TM-D080 |
+| `trashedAt` | instant | — | Load and all its children are in Trash (R7). | TM-D082 |
 | `settlementStatus` | enum | Y | `NOT_EXPECTED`, `AWAITING_SETTLEMENT`, `SETTLED`, `REVIEW_NEEDED`. Set by settlement matching; user can override. | §35, TM-D028 |
 | `paperworkStatus` | derived | D | `COMPLETE` / `INCOMPLETE` + list of missing items, computed from LoadDocument per stop (rate con once per load; pickup BOL per pickup stop; POD per delivery stop). | §35, TM-D048 |
 | `activeStopId` | ref LoadStop | — | The stop the Current Load Card follows. Changing it does **not** complete other stops. | §3, TM-D045 |
@@ -322,9 +336,11 @@ Drivers hook many trailers they do not own, so a trailer record is lightweight a
 | `sequence` | int | Y | Listed order; editable in Edit Load. Does not force service order. | TM-D045 |
 | `kind` | enum (R9) | Y | `PICKUP`, `DELIVERY`, `DISPOSITION`. | §7, TM-D017 |
 | `dispositionType` | enum | — | When `DISPOSITION`: `RETURN_TO_SHIPPER`, `ALTERNATE_RECEIVER`, `DONATION`, `OTHER`. | TM-D033 |
+| `originatingStopId` | ref LoadStop | — | When `DISPOSITION`: the delivery stop where the freight was rejected. | §7, TM-D033 |
 | `facilityId` | ref Facility | — | | §3 |
 | `nameSnapshot` / `addressSnapshot` | text / Address | Y | Copy as written on the load paperwork, so later facility edits never rewrite history. | §3 |
-| `appointment` | object | — | `{type: FIXED / WINDOW / FCFS, startLocal, endLocal}` as local times in the facility time zone. | §3, R4 |
+| `timeZoneSnapshot` | IANA tz | Y | Time zone of the stop, captured with the address. Appointments are read in this zone, with or without a Facility link. | R4, §3 |
+| `appointment` | object | — | `{type: FIXED / WINDOW / FCFS, startLocal, endLocal}` as local times in `timeZoneSnapshot`. | §3, R4 |
 | `contacts` | list of Contact | — | | §3 |
 | `status` | enum | Y | `PENDING`, `ARRIVED`, `DEPARTED`, `COMPLETED`. Set by check events and stop actions, never by selecting another stop. | TM-D045 |
 | `onsiteThresholdMinutes` | int | — | Load-specific threshold; falls back to user default. | §8 |
@@ -362,7 +378,7 @@ The raw evidence. Dwell is computed from these; events are never overwritten.
 | `stopId` | ref LoadStop | Y | Load is reachable through the stop. | §8 |
 | `kind` | enum | Y | `CHECK_IN`, `CHECK_OUT`. | §8 |
 | `occurredAt` | instant | Y | Current operational time. | §8 |
-| `timeZone` | IANA tz | Y | | R4 |
+| `eventTimeZone` | IANA tz | Y | | R4 |
 | `timeSource` | enum | Y | `SYSTEM_CAPTURED`, `MANUAL_ENTERED`, `MANUAL_EDITED`. Edits keep the original in FieldRevision. | TM-D019 |
 | `location` / `locationStatus` | GeoPoint / enum | — | | R5, TM-D025 |
 | `capturedOffline` | bool | Y | | TM-D025 |
@@ -378,7 +394,7 @@ History of every status change, so an automatic change can be understood and und
 | `fromValue` / `toValue` | text | Y | | |
 | `trigger` | enum | Y | `DOCUMENT_AUTO`, `USER`, `SETTLEMENT_MATCH`, `SYSTEM`. | TM-D032 |
 | `triggerDocumentId` | ref LoadDocument | — | Which scan caused an automatic change. | TM-D032 |
-| `occurredAt` | instant | Y | | |
+| `occurredAt` / `eventTimeZone` | instant / IANA tz | Y | | R4 |
 | `revertsChangeId` | ref LoadStatusChange | — | Set when this change undoes an automatic one. | §7 |
 
 #### EquipmentAssignment
@@ -406,7 +422,8 @@ Split because the set point and mode come from the load paperwork (one value per
 | ReeferProfile | `valueSource` | enum (R3) | Y | | §4 |
 | ReeferReading | `loadId` | ref Load | Y | | |
 | ReeferReading | `stopId` | ref LoadStop | — | | |
-| ReeferReading | `recordedAt` | instant | Y | | |
+| ReeferReading | `recordedAt` / `eventTimeZone` | instant / IANA tz | Y | | R4 |
+| ReeferReading | `trailerId` | ref Trailer | — | Which reefer trailer, since trailers can be swapped mid-load. | TM-D041 |
 | ReeferReading | `fuelLevelPercent` | int | — | | TM-D043 |
 | ReeferReading | `unitStatus` | enum | — | `RUNNING`, `OFF`, `ALARM`, `UNKNOWN`. | TM-D043 |
 | ReeferReading | `alarmCode` / `alarmNote` | text | — | | TM-D043 |
@@ -438,13 +455,13 @@ One file model for every upload: load documents, wallet documents, photos, recei
 | `loadId` | ref Load | Y | Attribution confirmed by the user when ambiguous. | §4, TM-D018 |
 | `stopId` | ref LoadStop | — | Needed for per-stop paperwork (pickup BOL, POD on multi-stop loads). | §5, §35 |
 | `category` | enum | Y | `RATE_CONFIRMATION`, `PICKUP_BOL`, `DELIVERY_POD`, `OTHER`. | §5, TM-D009 |
-| `otherSubtype` | enum (R9) | — | `LUMPER`, `SCALE_TICKET`, `WASHOUT`, `ACCESSORIAL`, `DAMAGE`, `SETTLEMENT`, `OTHER`. | §5 |
+| `otherSubtype` | enum (R9) | — | `LUMPER`, `SCALE_TICKET`, `WASHOUT`, `ACCESSORIAL`, `DAMAGE`, `CANCELLATION`, `OTHER`. (Settlement statements are **not** load documents; see Settlement.) | §5 |
 | `fileIds` | list of ref StoredFile | Y | Ordered pages; multi-page stays together. | §5 |
 | `categorySource` | enum (R3) | Y | AI classification or manual choice. | §6 |
 | `classificationConfidence` | decimal | — | | §4 |
 | `processingStatus` | enum | Y | `NOT_REQUESTED`, `QUEUED`, `EXTRACTED`, `NEEDS_REVIEW`, `FAILED`. | §4, §6, §22 |
 | `capturedOffline` | bool | Y | Offline scans save immediately; stage changes apply when online. | TM-D063 |
-| `trashedAt` | instant | — | R7. | TM-D031 |
+| `trashedAt` | instant | — | R7. | TM-D031, TM-D082 |
 
 #### LoadPhoto
 One evidence model for all load photos (TM-D078). Not separate cargo/seal/temperature modules.
@@ -453,20 +470,21 @@ One evidence model for all load photos (TM-D078). Not separate cargo/seal/temper
 |---|---|---|---|---|
 | `loadId` | ref Load | Y | | TM-D078 |
 | `stopId` | ref LoadStop | Y | Always attributed to a stop. | TM-D078 |
-| `stage` | enum | Y | `PICKUP`, `DELIVERY`. Defaults from the stop kind. | TM-D078 |
+| `stage` | enum | Y | `PICKUP`, `DELIVERY`. Defaults from the stop kind; disposition stops use `DELIVERY`. | TM-D078, DM-Q06 |
 | `type` | enum | Y | `LOAD_CARGO`, `SEAL`, `TEMP`, `OTHER`. | TM-D078 |
-| `capturedAt` | instant | Y | Automatic. | TM-D078 |
+| `capturedAt` / `eventTimeZone` | instant / IANA tz | Y | Automatic. | TM-D078, R4 |
 | `location` / `locationStatus` | GeoPoint / enum | — | Automatic when available. | TM-D078, R5 |
 | `note` | text (short) | — | Optional. | TM-D078 |
 | `fileId` | ref StoredFile | Y | | |
 | `capturedOffline` | bool | Y | | §5, §20 |
+| `trashedAt` | instant | — | R7. | TM-D031 |
 
 #### ExtractionJob
 One AI processing attempt. Needed for retry, failure visibility and cost control.
 
 | Field | Type | Req | Notes | Source |
 |---|---|---|---|---|
-| `documentRef` | ref LoadDocument / EssentialDocument | Y | | §6 |
+| `documentRef` | ref LoadDocument / EssentialDocument / Settlement | Y | | §6, TM-D070 |
 | `status` | enum | Y | `QUEUED`, `RUNNING`, `SUCCEEDED`, `FAILED`. | §22 |
 | `attempt` | int | Y | | §6 |
 | `model` | text | Y | Gemini model version used. | TM-D011 |
@@ -507,14 +525,15 @@ The correction history required by §30, shared by every entity.
 ### 4.E Inspections
 
 #### Inspection
-One model for PTI and trailer checks, distinguished by `kind`. The SRS lists `Inspection` and `TrailerInspection` separately; this draft merges them because they share every field. See **DM-Q04**.
+One model for PTI and trailer checks, distinguished by `kind`. The SRS lists `Inspection` and `TrailerInspection` separately; they are merged because they share every field (DM-Q04, agreed by both reviewers).
 
 | Field | Type | Req | Notes | Source |
 |---|---|---|---|---|
 | `kind` | enum | Y | `PTI_QUICK`, `PTI_DETAILED`, `TRAILER_QUICK_CHECK`, `TRAILER_DETAILED`. | §15, §33 |
 | `vehicleId` / `trailerId` | ref | — | What was inspected. | §15 |
 | `loadId` | ref Load | — | Set for trailer checks done during a load. | §33 |
-| `performedAt` | instant | Y | | TM-D027 |
+| `performedAt` / `eventTimeZone` | instant / IANA tz | Y | | TM-D027, R4 |
+| `checklistVersion` | text | Y | Which version of the app's checklist produced `results`, so old inspections stay readable after the checklist changes. | §15, §33 |
 | `results` | list | — | `{itemCode, result: OK / ISSUE / NA, note}`. Checklist items are versioned app content, not user data. | §15 |
 | `notes` | text | — | | §15 |
 | `photoFileIds` | list of ref StoredFile | — | Pre-existing damage etc. | §15, §33 |
@@ -539,12 +558,13 @@ The single model behind the **Reminders** area (§36, TM-D050, TM-D057): expirat
 | `title` | text | Y | e.g. "Truck payment". | §36 |
 | `kind` | enum (R9) | Y | `DOCUMENT_EXPIRATION`, `BILL`, `MAINTENANCE`, `DEFECT_FOLLOW_UP`, `OTHER`. | §36 |
 | `essentialDocumentId` / `defectId` | ref | — | Source record when generated from one. | §14, §15 |
+| `vehicleId` / `trailerId` | ref | — | The unit a maintenance reminder is for. | §36 |
 | `nextDueOn` | date | Y | | §36 |
 | `recurrence` | object | — | `{unit: WEEK / MONTH / YEAR, interval: n}`; absent = one-time. Biweekly = WEEK×2. | §36 |
 | `notifyOffsetsDays` | list of int | Y | Days before due. Recurring default `[7, 0]` (start of the final week + due day); document expiry default `[60, 45, 30, 15, 7, 3, 2, 1, 0]`. User can change. | §14, §36 |
-| `status` | enum | Y | `ACTIVE`, `DONE`, `ARCHIVED`. Recurring items advance `nextDueOn` when marked done. | TM-D066 |
+| `status` | enum | Y | `ACTIVE`, `DONE`, `ARCHIVED`. Marking a **recurring** reminder done sets `lastCompletedOn`, advances `nextDueOn` and **stays `ACTIVE`**. `DONE` is used only for one-time reminders. | TM-D066 |
 | `lastCompletedOn` | date | — | | TM-D066 |
-| `expenseTemplate` | object | — | `{amount, category}` for recurring costs. See **DM-Q03**. | §29 |
+| `expenseTemplate` | object | — | `{amount, category}` for bills. On Done the app offers "Log as expense?" pre-filled from it; never automatic. | §29, TM-D079 |
 
 Scheduled phone notifications are **derived** from these fields on the device. Dismissing one notification does not change the Reminder, so later notifications still fire (§14).
 
@@ -568,7 +588,7 @@ What the driver expects to be paid for a load. Settlement lines are matched agai
 | Field | Type | Req | Notes | Source |
 |---|---|---|---|---|
 | `loadId` | ref Load | Y | | §12 |
-| `type` | enum (R9) | Y | `LINEHAUL`, `FUEL_SURCHARGE`, `DETENTION`, `LAYOVER`, `LUMPER_REIMBURSEMENT`, `DISPOSITION_PAY`, `OTHER`. | §12, TM-D028 |
+| `type` | enum (R9) | Y | `LINEHAUL`, `FUEL_SURCHARGE`, `DETENTION`, `LAYOVER`, `LUMPER_REIMBURSEMENT`, `DISPOSITION_PAY`, `TONU`, `OTHER`. | §12, TM-D028, TM-D080 |
 | `amount` | Money | Y | | R6 |
 | `valueSource` | enum (R3) | Y | e.g. extracted from the rate con. | §12 |
 
@@ -589,7 +609,7 @@ One expense system for both tiers (TM-D039, TM-D060). Fuel is an expense with op
 | `description` / `notes` | text | — | What was fixed or purchased. | §29 |
 | `lineItems` | list | — | `{description, amount}`. | §29 |
 | `receiptFileIds` | list of ref StoredFile | — | Encouraged, not required. | §29 |
-| `fuel` | object | — | When category is fuel: `{gallons, pricePerGallonMinor, defGallons}`. | §12, SRS §25 FuelRecord |
+| `fuel` | object | — | When category is fuel: `{gallons, defGallons, printedPricePerGallonMills}`. `amount` + `gallons` are the source of truth; the printed unit price is optional (R6). | §12, SRS §25 FuelRecord |
 | `fromReminderId` | ref Reminder | — | When logged from a recurring bill. | §29 |
 
 #### Settlement and SettlementLine
@@ -597,13 +617,16 @@ One expense system for both tiers (TM-D039, TM-D060). Fuel is an expense with op
 |---|---|---|---|---|---|
 | Settlement | `carrierProfileId` | ref | — | | §12 |
 | Settlement | `periodStart` / `periodEnd` / `payDate` | date | — | | §12 |
-| Settlement | `sourceDocumentId` | ref LoadDocument | — | Entered through Scan/Import. | TM-D070 |
+| Settlement | `sourceFileIds` | list of ref StoredFile | — | The scanned statement, owned by the settlement itself (a settlement covers many loads). Entered through Scan/Import. | TM-D070 |
+| Settlement | `processingStatus` | enum | Y | Same values as LoadDocument. | §6 |
+| Settlement | `trashedAt` | instant | — | R7. | TM-D082 |
 | Settlement | `grossAmount` / `deductionsAmount` / `netAmount` | Money | — | As printed. | §12 |
 | SettlementLine | `settlementId` | ref | Y | | TM-D028 |
 | SettlementLine | `lineType` | enum (R9) | Y | `LOAD_PAY`, `ACCESSORIAL`, `DEDUCTION`, `ADVANCE`, `FUEL`, `OTHER`. | §12 |
 | SettlementLine | `printedReference` / `printedDescription` | text | — | As printed, used for matching. | TM-D028 |
 | SettlementLine | `amount` | Money | Y | | |
-| SettlementLine | `matchedLoadId` | ref Load | — | Any load, any week. | TM-D028 |
+| SettlementLine | `matchedLoadId` | ref Load | — | Any load, any week, including cancelled loads. | TM-D028, TM-D080 |
+| SettlementLine | `matchedLoadPayLineId` | ref LoadPayLine | — | The specific expected line, for true line-by-line matching. | TM-D028 |
 | SettlementLine | `matchStatus` | enum | Y | `UNMATCHED`, `MATCHED`, `AMOUNT_DIFFERS`, `POSSIBLE_DUPLICATE`, `IGNORED`. | §12 |
 | SettlementLine | `differenceAmount` | Money | D | Against the load's LoadPayLines. | §12 |
 | SettlementLine | `matchSource` | enum | Y | `SUGGESTED`, `USER_CONFIRMED`. Suggestions never assert carrier error. | §12 |
@@ -626,7 +649,7 @@ Created only when two deliberate manual edits disagree (TM-D047).
 | `scope` | enum | Y | `ALL`, `DATE_RANGE`, `ONE_LOAD`, `SELECTED_LOADS`. | §19, TM-D038 |
 | `parameters` | object | — | Dates or load IDs. | |
 | `status` | enum | Y | `QUEUED`, `RUNNING`, `READY`, `FAILED`, `EXPIRED`. | |
-| `outputFileId` | ref StoredFile | — | Excel workbook + documents bundle. Expires after a short period. | TM-D038 |
+| `outputFileId` | ref StoredFile | — | Excel workbook + documents bundle. Expires after a short period. **Downloadable only by the owning driver**; staff can see that an export exists and its status, never its file. | TM-D038, TM-D053 |
 
 ### 4.I Operations and admin
 Staff accounts are **separate from driver accounts**, so a staff login can never reach driver-app data paths (§38, TM-D053).
@@ -664,7 +687,7 @@ Every staff action that reads or changes a driver account.
 | `staffUserId` | ref StaffUser | Y | | §19, §38 |
 | `action` | text | Y | e.g. `EXTEND_TRIAL`, `VIEW_USER`, `CHANGE_ENTITLEMENT`. | §38 |
 | `targetUserId` | ref User | — | | |
-| `before` / `after` | json | — | | |
+| `before` / `after` | object | — | **Restricted to an allow-list of administrative metadata** (account status, tier, subscription/trial state, entitlement toggles, case status). Must never contain document contents, extracted text, financial details or precise location. | TM-D053, §38 |
 | `occurredAt` | instant | Y | | |
 
 #### AppControl
@@ -701,7 +724,7 @@ Every entity named in SRS §25 and where it went:
 | Defect | Defect |
 | MileageRecord | MileageRecord |
 | Expense / FuelRecord | Expense (fuel details inside) |
-| RecurringExpense | Reminder with `expenseTemplate` (DM-Q03) |
+| RecurringExpense | Reminder with `expenseTemplate` (TM-D079) |
 | Settlement/SettlementLine | Settlement / SettlementLine |
 | Subscription/Entitlement | Subscription / Tier / TierEntitlement |
 
@@ -709,17 +732,17 @@ Added because later approved requirements need them: LoadPhoto (TM-D078), Critic
 
 ## 6. Open questions for review
 
-These need a decision from the owner or reviewers. They are **not** silently decided by the model.
+All seven are now resolved by owner decision or applied after both reviewers agreed.
 
 | ID | Question | Why it matters | Draft position |
 |---|---|---|---|
-| DM-Q01 | What happens when a driver deletes a **load**, expense, reminder or settlement? The SRS only defines Trash for documents. | Deleting a load cascades to its documents, photos and evidence. | Same 30-day Trash as documents for loads (with all children); simple delete with undo for small records. Needs owner confirmation. |
-| DM-Q02 | What happens on **account deletion**? Not specified. | App stores require in-app account deletion; this affects every entity. | Account delete → all user data enters a deletion process (with export offered first); facility reports become anonymous. Needs owner confirmation; likely a store-compliance requirement, not a new feature. |
+| DM-Q01 | What happens when a driver deletes a **load**, expense, reminder or settlement? The SRS only defines Trash for documents. | Deleting a load cascades to its documents, photos and evidence. | **RESOLVED by TM-D082** (R7). |
+| DM-Q02 | What happens on **account deletion**? Not specified. | App stores require in-app account deletion; this affects every entity. | **RESOLVED by TM-D081** (R7). |
 | DM-Q03 | Should marking a recurring bill **Done** offer to log it as an Expense? | §29 requires recurring costs in expense reports; §36 puts recurring bills in Reminders. Without a link the driver records the same bill twice. **RESOLVED by TM-D079 (2026-10-02):** on Done, offer "Log as expense?" pre-filled from `expenseTemplate`; never automatic. |
-| DM-Q04 | Merge PTI and trailer checks into one Inspection entity? | SRS §25 lists two names. | Merge (same fields, simpler code, one history). Data-structure choice only. |
-| DM-Q05 | How is a **cancelled load** (or truck-order-not-used) recorded? | Real loads get cancelled; the operational status list has no value for it. | Do not add a status now; flag for field validation. A cancelled load can currently be deleted or kept in history with a note. |
-| DM-Q06 | What `stage` does a photo on a **disposition** stop get? | TM-D078 allows only pickup/delivery. | `DELIVERY` (freight is being handed off). |
-| DM-Q07 | Is a Facility record created automatically from every new address, or only when the driver confirms? | Duplicate facilities split facility reports. | Match to an existing facility when confident; otherwise create a driver-created facility; allow merging later (server-side). |
+| DM-Q04 | Merge PTI and trailer checks into one Inspection entity? | SRS §25 lists two names. | **APPLIED:** merged; both reviewers agreed. |
+| DM-Q05 | How is a **cancelled load** (or truck-order-not-used) recorded? | Real loads get cancelled; the operational status list has no value for it. | **RESOLVED by TM-D080:** `CANCELLED` status; `TONU` pay line. |
+| DM-Q06 | What `stage` does a photo on a **disposition** stop get? | TM-D078 allows only pickup/delivery. | **APPLIED:** `DELIVERY`; both reviewers agreed. |
+| DM-Q07 | Is a Facility record created automatically from every new address, or only when the driver confirms? | Duplicate facilities split facility reports. | **APPLIED:** match when confident, else create a driver-created facility; duplicates merged via `mergedIntoFacilityId` without rewriting stops. Both reviewers agreed. |
 
 ## 7. Deliberately deferred
 
@@ -731,3 +754,33 @@ Decided at implementation, not here:
 - Checklist item catalog content for PTI and trailer checks.
 - Backup/restore and retention schedule details (§22).
 - Team/shared loads (`LoadMember`) — architecture allows it (R2); not built in V1 (TM-F047).
+
+## 8. v0.2 change log — review reconciliation (2026-10-02)
+
+Sources: `reviews/gpt.md`, `reviews/gemini.md`, owner decisions TM-D079–TM-D082.
+
+**Accepted (raised by both reviewers):**
+- Settlement scans moved off LoadDocument to `Settlement.sourceFileIds`; ExtractionJob can target a Settlement.
+- `LoadStop.timeZoneSnapshot`; `eventTimeZone` on every event record (R4).
+- Recurring reminders stay `ACTIVE` when marked done.
+- Fuel: total + gallons are authoritative; unit price in mills (R6).
+- `Inspection.checklistVersion`.
+- AdminAuditEvent limited to an allow-list of admin metadata.
+- Idempotency wording and server contract (R1).
+- Facility merge lineage; FacilityReport reporter cleared on account deletion.
+- Reminder → Expense link kept, now approved by TM-D079.
+
+**Accepted (Gemini only):**
+- `SettlementLine.matchedLoadPayLineId`.
+- `LoadStop.originatingStopId` for disposition stops.
+- `Reminder.vehicleId` / `trailerId`.
+- `LoadPhoto.trashedAt`.
+- ExportJob output downloadable only by the owning driver.
+- `ReeferReading.trailerId` (rated optional; adopted because it is one field and avoids time-matching against equipment history).
+
+**Rejected:**
+- `MILEAGE_PAY` pay-line type (Gemini #7). Settlement reconciliation is O/O-only (TM-F031). A company driver's weekly estimate is already derived from PayProfile + MileageRecord (§11), so storing it as an expected pay line would add company-driver settlement matching, which is not V1 scope.
+
+**Owner decisions applied:** TM-D079 (bill → "Log as expense?"), TM-D080 (`CANCELLED` + `TONU`), TM-D081 (account deletion), TM-D082 (load Trash; small records delete with Undo).
+
+**Process note:** Gemini's review was written after GPT's review was in the repository, and its first findings closely follow GPT's. The overlapping findings are therefore treated as one confirmed opinion, not two independent ones.

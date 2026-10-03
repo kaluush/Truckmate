@@ -62,6 +62,8 @@ Pickup papers/BOL MAY automatically advance a load to **In Transit** when docume
 
 Partial rejection SHALL be recorded as **Delivered with Exception**, including rejected quantity/reason and optional notes/photos/documents; remaining rejected freight stays associated with the same load. Full rejection SHALL keep the same load open as rejected/awaiting instructions. Return to shipper, alternate receiver, donation/food-bank, or other disposition SHALL be modeled as an additional stop on the same load, not a new load. Additional compensation for disposition/return MAY be unknown, none, or a recorded amount and SHALL be reconcilable later.
 
+A load MAY be marked **Cancelled** with optional cancellation time and reason. A cancelled load SHALL remain in Load History with its documents and evidence, and cancellation pay (e.g. TONU) SHALL be recordable and matchable on a later settlement (TM-D080).
+
 ## 8. Check-In, Check-Out, and Detention Evidence
 A Check In action SHALL record timestamp, load/facility context, and location when permission is available. Check Out SHALL record departure and calculate dwell duration. Check events SHALL preserve whether a timestamp was system-captured or manually entered/edited. Manual correction SHALL remain possible.
 
@@ -123,6 +125,10 @@ V1 SHALL provide base-tier Load History and search so all users can retrieve pas
 Authentication SHALL protect user data. Authorization SHALL prevent cross-user access. Sensitive documents SHALL be protected in transit and at rest using appropriate platform/cloud controls. Secrets SHALL never be embedded in client code or committed to the repository.
 
 Deleted documents SHALL enter a user-restorable Trash state for 30 days and then be permanently deleted. A linked load/history record MAY retain that a document was deleted but SHALL NOT retain the deleted file after permanent deletion.
+
+Deleting a load SHALL move the load and all its stops, documents, photos and evidence to the same 30-day Trash, restorable as a whole. Small records such as expenses and reminders SHALL be deleted immediately with an Undo option (TM-D082).
+
+A user SHALL be able to delete their account in the app. The app SHALL offer an export first without requiring it. Deletion SHALL sign out all devices and permanently delete the user's private records and files; facility reports SHALL be kept with the user's identity removed. The app SHALL explain how to cancel an app-store subscription (TM-D081).
 
 Export SHALL support all data, a selected date range, one load, or selected loads. The primary financial export SHALL be an Excel workbook containing summaries, loads/income, expenses, and settlements, bundled with original documents organized by load and referenced from the workbook.
 
@@ -230,7 +236,7 @@ V1 SHALL provide a flexible **Critical Load Instructions** area for high-value s
 
 ## 35. Parallel Workflow Statuses
 TruckMate SHALL model at least three independent status dimensions where applicable:
-1. **Operational status** — e.g. Upcoming, At Pickup, In Transit, At Delivery, Delivered, Delivered with Exception.
+1. **Operational status** — e.g. Upcoming, At Pickup, In Transit, At Delivery, Delivered, Delivered with Exception, Cancelled (TM-D080).
 2. **Paperwork status** — e.g. incomplete/complete with missing-document indicators.
 3. **Settlement status** — e.g. not yet expected, Awaiting Settlement, matched/settled, or review needed.
 

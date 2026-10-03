@@ -34,14 +34,14 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F028 | O/O load revenue extraction | V1 Core (O/O) | Rate/pay where available. |
 | TM-F029 | Expenses/fuel | V1 Core (both tiers) | Load/business expense records; available to Company Driver and O/O (TM-D060). |
 | TM-F030 | O/O weekly/monthly/yearly analytics | V1 Core (O/O) | Loads, gross, miles, RPM, fuel, expenses, net estimate. |
-| TM-F031 | Settlement reconciliation support | V1 Core (O/O) | Line-by-line load matching across settlement weeks; awaiting-settlement status and mismatch/accessorial review. Intake via Scan/Import (TM-D070); never auto-flags missing detention from the Onsite timer (TM-D058). |
+| TM-F031 | Settlement reconciliation support | V1 Core (O/O) | Line-by-line load matching across settlement weeks; awaiting-settlement status and mismatch/accessorial review. Intake via Scan/Import (TM-D070); never auto-flags missing detention from the Onsite timer (TM-D058). Cancelled loads stay matchable for TONU pay (TM-D080). |
 | TM-F032 | Excel + document export | V1 Core (O/O) | All data/date range/selected loads; Excel financial index plus original document bundle. |
 | TM-F033 | Driver-sourced facility intelligence | V1 Core | Opt-in post-stop structured reports; timestamp/source; supplement conflicting public info without exposing driver history. |
 | TM-F034 | Gmail automatic rate-con detection/import | Future | Requires permissions/verification design. |
 | TM-F035 | Subscription billing | Future before public monetization | Add after field validation. |
 | TM-F036 | Full-feature trial | Monetization target | 14 days no payment method (day-10 notice only); add-payment step at day 14 unlocks 2 more weeks (28 days total, no charge during trial; charge screens show the calendar date of first charge); then Company Driver from $14.99/mo or O/O from $29.99/mo (TM-D072/TM-D073/TM-D076/TM-D077). |
 | TM-F037 | Offline/poor-network operation | V1 Core | Everything technically feasible stays usable offline; safe queued sync; manual user corrections outrank AI/inference; material manual conflicts preserve recovery/provenance. |
-| TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. |
+| TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. Deleted loads go to Trash with all evidence; small records delete with Undo (TM-D082). In-app account deletion with optional export first (TM-D081). |
 | TM-F039 | Large roadside service marketplace | Rejected/Out of Scope | Feature bloat for V1. |
 | TM-F040 | ELD replacement | Rejected/Out of Scope | Explicit boundary. |
 | TM-F041 | Multi-stop loads | V1 Core | Multiple pickups/deliveries; driver may select an out-of-order Active Stop without fake completion; drag-and-drop is not a required primary flow. |

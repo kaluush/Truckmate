@@ -55,4 +55,4 @@ No new open V1 product question was created.
 
 
 ## Data model draft — 2026-10-01 (OPEN)
-- TM-Q029 — Data-structure questions DM-Q01–DM-Q07 in `specs/data-model/DATA_MODEL.md` §6: load/record deletion, account deletion, recurring bill → expense link, PTI/trailer-check merge, cancelled loads, disposition-stop photo stage, facility de-duplication. Each has a draft position; owner decision needed before the model is approved. DM-Q03 resolved by TM-D079 (2026-10-02).
+- TM-Q029 — Data-structure questions DM-Q01–DM-Q07 in `specs/data-model/DATA_MODEL.md` §6: load/record deletion, account deletion, recurring bill → expense link, PTI/trailer-check merge, cancelled loads, disposition-stop photo stage, facility de-duplication. Each has a draft position; owner decision needed before the model is approved. DM-Q03 resolved by TM-D079; DM-Q01, DM-Q02 and DM-Q05 resolved by TM-D082, TM-D081 and TM-D080 (2026-10-02). DM-Q04, DM-Q06 and DM-Q07 applied as drafted in data model v0.2 after both reviewers agreed.
