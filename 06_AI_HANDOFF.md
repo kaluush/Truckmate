@@ -27,7 +27,7 @@ All 15 Claude Stage 1 design issues are resolved; see `design/independent/claude
 ## Data model — DRAFT v0.2, 2026-10-02 (NOT APPROVED)
 - `specs/data-model/DATA_MODEL.md` expands SRS §25 into cross-cutting rules, four Mermaid relationship diagrams and a data dictionary. The dictionary is the source of truth; diagrams are derived from it and must change in the same commit. All four diagrams were checked to parse with Mermaid 11.
 - v0.2 merges both reviews (`specs/data-model/reviews/gpt.md`, `gemini.md`) and owner decisions TM-D079–TM-D082. All DM-Q01–DM-Q07 are resolved. One finding was rejected with a reason (Gemini `MILEAGE_PAY`). See the model's §8 change log.
-- **Owner-set review order:** (1) **Gemini** — confirmation review of v0.2, saved as `specs/data-model/reviews/gemini-v0.2.md`; Claude then merges any accepted findings. (2) **GPT** — last and final review of the resulting version, saved as `specs/data-model/reviews/gpt-final.md`. (3) Owner approval. Only after owner approval is the model project truth. Reviewers edit only their own review file.
+- **Owner-set review order:** (1) **Gemini** — confirmation review of v0.2 DONE (`specs/data-model/reviews/gemini-v0.2.md`): no blockers; its one diagram fix applied as v0.2.1. (2) **GPT** — last and final review of the resulting version, saved as `specs/data-model/reviews/gpt-final.md`. (3) Owner approval. Only after owner approval is the model project truth. Reviewers edit only their own review file.
 
 ## Final additions now in project truth
 - **Upcoming due/reminders:** one unified flow for one-time expiration/due dates or recurring schedules; supports bills, expiring documents, maintenance and similar obligations; distinct from Upcoming/Pre-planned Loads.

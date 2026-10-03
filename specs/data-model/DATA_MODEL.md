@@ -1,6 +1,6 @@
 # CabPilot (TruckMate) — V1 Data Model
 
-**Status:** DRAFT v0.2 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
+**Status:** DRAFT v0.2.1 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
 **Drafted by:** Claude, 2026-10-01. **v0.2:** 2026-10-02, merges the GPT and Gemini reviews (`reviews/`) and owner decisions TM-D079–TM-D082. See §8 for what changed.
 **Expands:** Master SRS §25 ("conceptual, not a final database schema").
 **Baseline:** frozen V1 requirements through TM-D082. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
@@ -156,6 +156,7 @@ erDiagram
     CustomDocumentType |o--o{ EssentialDocument : "custom slot"
     EssentialDocument |o--o| EssentialDocument : "replaced by"
     EssentialDocument ||--|{ StoredFile : pages
+    EssentialDocument ||--o{ ExtractionJob : "AI processing"
 ```
 
 ### 3.4 Account, sync and operations
@@ -782,5 +783,7 @@ Sources: `reviews/gpt.md`, `reviews/gemini.md`, owner decisions TM-D079–TM-D08
 - `MILEAGE_PAY` pay-line type (Gemini #7). Settlement reconciliation is O/O-only (TM-F031). A company driver's weekly estimate is already derived from PayProfile + MileageRecord (§11), so storing it as an expected pay line would add company-driver settlement matching, which is not V1 scope.
 
 **Owner decisions applied:** TM-D079 (bill → "Log as expense?"), TM-D080 (`CANCELLED` + `TONU`), TM-D081 (account deletion), TM-D082 (load Trash; small records delete with Undo).
+
+**v0.2.1 (2026-10-02):** after Gemini's confirmation review (`reviews/gemini-v0.2.md`), added the missing `EssentialDocument → ExtractionJob` line to diagram 3.3 so the diagram matches the dictionary. No dictionary change.
 
 **Process note:** Gemini's review was written after GPT's review was in the repository, and its first findings closely follow GPT's. The overlapping findings are therefore treated as one confirmed opinion, not two independent ones.
