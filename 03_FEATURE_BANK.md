@@ -41,7 +41,7 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F035 | Subscription billing | Future before public monetization | Add after field validation. |
 | TM-F036 | Full-feature trial | Monetization target | 14 days no payment method (day-10 notice only); add-payment step at day 14 unlocks 2 more weeks (28 days total, no charge during trial; charge screens show the calendar date of first charge); then Company Driver from $14.99/mo or O/O from $29.99/mo (TM-D072/TM-D073/TM-D076/TM-D077). |
 | TM-F037 | Offline/poor-network operation | V1 Core | Everything technically feasible stays usable offline; safe queued sync; manual user corrections outrank AI/inference; material manual conflicts preserve recovery/provenance. |
-| TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. Deleted loads go to Trash with all evidence; small records delete with Undo (TM-D082). In-app account deletion with optional export first (TM-D081). |
+| TM-F038 | Data deletion/retention controls | V1 Core | 30-day Trash then permanent deletion; deleted-file history may retain event only. Deleted loads go to Trash with all evidence; small records delete with Undo (TM-D082). Deleted settlements go to Trash with lines and matches (TM-D083). In-app account deletion with optional export first (TM-D081). |
 | TM-F039 | Large roadside service marketplace | Rejected/Out of Scope | Feature bloat for V1. |
 | TM-F040 | ELD replacement | Rejected/Out of Scope | Explicit boundary. |
 | TM-F041 | Multi-stop loads | V1 Core | Multiple pickups/deliveries; driver may select an out-of-order Active Stop without fake completion; drag-and-drop is not a required primary flow. |

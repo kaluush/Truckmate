@@ -1,5 +1,10 @@
 # TruckMate — Changelog
 
+## 2026-10-02 — Data model v0.3 and TM-D083
+- GPT final review (`specs/data-model/reviews/gpt-final.md`): NOT READY with three Must-fix items, all accepted.
+- TM-D083 (owner-approved): deleting a settlement sends it with its lines, scans and load matches to the 30-day Trash. SRS §19, TM-F038 updated.
+- Data model v0.3: offline records valid before server receipt (F-01); settlement deletion now cites TM-D083 (F-02); Facility/FacilityReport exempt from `ownerUserId` so account deletion leaves reports anonymous (F-03).
+
 ## 2026-10-02 — Owner decisions TM-D080–TM-D082 and data model v0.2
 - TM-D080: **Cancelled** operational status; cancelled loads stay in history and TONU pay can be matched. SRS §7 and §35 updated.
 - TM-D081: in-app account deletion with optional export first; facility reports kept anonymously. SRS §19 updated.

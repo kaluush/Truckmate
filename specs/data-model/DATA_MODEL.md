@@ -1,9 +1,9 @@
 # CabPilot (TruckMate) — V1 Data Model
 
-**Status:** DRAFT v0.2.1 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
+**Status:** DRAFT v0.3 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
 **Drafted by:** Claude, 2026-10-01. **v0.2:** 2026-10-02, merges the GPT and Gemini reviews (`reviews/`) and owner decisions TM-D079–TM-D082. See §8 for what changed.
 **Expands:** Master SRS §25 ("conceptual, not a final database schema").
-**Baseline:** frozen V1 requirements through TM-D082. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
+**Baseline:** frozen V1 requirements through TM-D083. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
 
 ## How to read and edit this document
 
@@ -33,10 +33,12 @@ Every user-data record carries:
 |---|---|---|
 | `id` | UUID | **Generated on the device** at creation, not by the server. The server **must treat this ID as the idempotency key**: a create that arrives again with an existing ID is merged/ignored, never stored as a second record. That makes offline creation and retries safe (effectively-once, TM-D025). |
 | `ownerUserId` | ref User | The user who owns the record. Authorization checks this (§19). |
-| `createdAt` / `updatedAt` | instant (UTC) | Server-assigned on sync. |
+| `createdAt` / `updatedAt` | instant (UTC) | Server-assigned when the server accepts the record. **Empty while the record exists only on the device** (e.g. created offline); never fabricated by the client. |
 | `clientCreatedAt` | instant | Device clock at creation. Kept separately because device clocks can be wrong (TM-D047). |
 | `createdOnDeviceId` | ref Device | Which phone created it. Supports sync debugging and conflict recovery. |
-| `version` | int | Incremented by the server on each accepted change; used to detect concurrent edits. |
+| `version` | int | Incremented by the server on each accepted change; used to detect concurrent edits. Empty until first accepted. |
+
+**Exception — shared community data.** `Facility` and `FacilityReport` are shared/reference records, not user-owned data. They do **not** carry `ownerUserId` (or `createdOnDeviceId`). A FacilityReport's only link to a person is `reporterUserId`, which is cleared on account deletion, leaving the report fully anonymous (TM-D081).
 
 ### R2 — Ownership now, sharing later (TM-D022)
 - V1: every user-data record has exactly one `ownerUserId`; authorization is "owner only".
@@ -68,7 +70,7 @@ Every user-data record carries:
 - **Documents and files** (load documents, essentials, photos, receipts): user delete sets `trashedAt`; restorable for 30 days; then the file is **permanently deleted** and the record becomes a tombstone that keeps only "a document of category X was deleted on date Y" (TM-D031, §19).
 - **Loads** (TM-D082): delete sets `trashedAt` on the load; the load and everything under it (stops, check events, documents, photos, references, instructions, equipment history, readings, pay lines, mileage) are hidden together and restorable as a whole for 30 days, then permanently deleted.
 - **Small records** such as expenses and reminders (TM-D082): deleted immediately, with Undo in the app. The server keeps a short-lived **tombstone** (ID + `deletedAt`) so other devices learn about the deletion when they sync. Attached files still follow the Trash rule above.
-- **Settlements** carry scanned documents, so they follow the same Trash rule as loads.
+- **Settlements** (TM-D083): delete sets `trashedAt`; the settlement, its lines, scanned pages and load matches are hidden together and restorable as a whole for 30 days, then permanently deleted. While trashed, its matches do not count toward load settlement status.
 - **Account deletion** (TM-D081): sets `User.status = DELETION_PENDING`, revokes every Device, then a server job permanently deletes all records and files owned by the user. FacilityReport rows are kept with `reporterUserId` cleared. Export is offered before, never required. Billing records live with the billing provider, not in driver data.
 
 ### R8 — Hidden is not deleted (TM-D075, §39)
@@ -383,7 +385,7 @@ The raw evidence. Dwell is computed from these; events are never overwritten.
 | `timeSource` | enum | Y | `SYSTEM_CAPTURED`, `MANUAL_ENTERED`, `MANUAL_EDITED`. Edits keep the original in FieldRevision. | TM-D019 |
 | `location` / `locationStatus` | GeoPoint / enum | — | | R5, TM-D025 |
 | `capturedOffline` | bool | Y | | TM-D025 |
-| `serverReceivedAt` | instant | Y | Lets support spot device-clock problems without trusting device time alone. | TM-D047 |
+| `serverReceivedAt` | instant | — | Set by the server when the event syncs; **empty while the event exists only on the device** (offline check-in is valid without it). Lets support spot device-clock problems without trusting device time alone. | TM-D025, TM-D047 |
 
 #### LoadStatusChange
 History of every status change, so an automatic change can be understood and undone (RW-05).
@@ -620,7 +622,7 @@ One expense system for both tiers (TM-D039, TM-D060). Fuel is an expense with op
 | Settlement | `periodStart` / `periodEnd` / `payDate` | date | — | | §12 |
 | Settlement | `sourceFileIds` | list of ref StoredFile | — | The scanned statement, owned by the settlement itself (a settlement covers many loads). Entered through Scan/Import. | TM-D070 |
 | Settlement | `processingStatus` | enum | Y | Same values as LoadDocument. | §6 |
-| Settlement | `trashedAt` | instant | — | R7. | TM-D082 |
+| Settlement | `trashedAt` | instant | — | R7. | TM-D083 |
 | Settlement | `grossAmount` / `deductionsAmount` / `netAmount` | Money | — | As printed. | §12 |
 | SettlementLine | `settlementId` | ref | Y | | TM-D028 |
 | SettlementLine | `lineType` | enum (R9) | Y | `LOAD_PAY`, `ACCESSORIAL`, `DEDUCTION`, `ADVANCE`, `FUEL`, `OTHER`. | §12 |
@@ -737,7 +739,7 @@ All seven are now resolved by owner decision or applied after both reviewers agr
 
 | ID | Question | Why it matters | Draft position |
 |---|---|---|---|
-| DM-Q01 | What happens when a driver deletes a **load**, expense, reminder or settlement? The SRS only defines Trash for documents. | Deleting a load cascades to its documents, photos and evidence. | **RESOLVED by TM-D082** (R7). |
+| DM-Q01 | What happens when a driver deletes a **load**, expense, reminder or settlement? The SRS only defines Trash for documents. | Deleting a load cascades to its documents, photos and evidence. | **RESOLVED by TM-D082** (loads, small records) and **TM-D083** (settlements) (R7). |
 | DM-Q02 | What happens on **account deletion**? Not specified. | App stores require in-app account deletion; this affects every entity. | **RESOLVED by TM-D081** (R7). |
 | DM-Q03 | Should marking a recurring bill **Done** offer to log it as an Expense? | §29 requires recurring costs in expense reports; §36 puts recurring bills in Reminders. Without a link the driver records the same bill twice. **RESOLVED by TM-D079 (2026-10-02):** on Done, offer "Log as expense?" pre-filled from `expenseTemplate`; never automatic. |
 | DM-Q04 | Merge PTI and trailer checks into one Inspection entity? | SRS §25 lists two names. | **APPLIED:** merged; both reviewers agreed. |
@@ -785,5 +787,10 @@ Sources: `reviews/gpt.md`, `reviews/gemini.md`, owner decisions TM-D079–TM-D08
 **Owner decisions applied:** TM-D079 (bill → "Log as expense?"), TM-D080 (`CANCELLED` + `TONU`), TM-D081 (account deletion), TM-D082 (load Trash; small records delete with Undo).
 
 **v0.2.1 (2026-10-02):** after Gemini's confirmation review (`reviews/gemini-v0.2.md`), added the missing `EssentialDocument → ExtractionJob` line to diagram 3.3 so the diagram matches the dictionary. No dictionary change.
+
+**v0.3 (2026-10-02):** fixes the three Must-fix items from GPT's final review (`reviews/gpt-final.md`):
+- F-01: `CheckEvent.serverReceivedAt` and the R1 server-assigned fields (`createdAt`, `updatedAt`, `version`) are empty until the server accepts the record, so offline records are valid.
+- F-02: settlement deletion was asserted without approval; now owner-approved as TM-D083 (30-day Trash) and cited.
+- F-03: R1 now states that Facility and FacilityReport are shared community data with no `ownerUserId`; `reporterUserId` is the only personal link and is cleared on account deletion.
 
 **Process note:** Gemini's review was written after GPT's review was in the repository, and its first findings closely follow GPT's. The overlapping findings are therefore treated as one confirmed opinion, not two independent ones.

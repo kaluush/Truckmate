@@ -126,7 +126,7 @@ Authentication SHALL protect user data. Authorization SHALL prevent cross-user a
 
 Deleted documents SHALL enter a user-restorable Trash state for 30 days and then be permanently deleted. A linked load/history record MAY retain that a document was deleted but SHALL NOT retain the deleted file after permanent deletion.
 
-Deleting a load SHALL move the load and all its stops, documents, photos and evidence to the same 30-day Trash, restorable as a whole. Small records such as expenses and reminders SHALL be deleted immediately with an Undo option (TM-D082).
+Deleting a load SHALL move the load and all its stops, documents, photos and evidence to the same 30-day Trash, restorable as a whole. Small records such as expenses and reminders SHALL be deleted immediately with an Undo option (TM-D082). Deleting a settlement SHALL move it, with its lines, scanned pages and load matches, to the same 30-day Trash, restorable as a whole (TM-D083).
 
 A user SHALL be able to delete their account in the app. The app SHALL offer an export first without requiring it. Deletion SHALL sign out all devices and permanently delete the user's private records and files; facility reports SHALL be kept with the user's identity removed. The app SHALL explain how to cancel an app-store subscription (TM-D081).
 
