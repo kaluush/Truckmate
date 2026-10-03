@@ -1,5 +1,8 @@
 # TruckMate — Changelog
 
+## 2026-10-02 — Bill reminder → expense (TM-D079)
+- Owner approved: marking a bill reminder Done offers "Log as expense?" pre-filled from the reminder; never automatic. Resolves DM-Q03. Updated SRS §36, TM-F061, AGENTS freeze line, approval status, handoff, open questions and the data-model draft.
+
 ## 2026-10-02 — Gemini V1 data model review complete
 - Completed Gemini independent data model review in `specs/data-model/reviews/gemini.md` following `REVIEW_TEMPLATE.md`.
 - Identified 15 findings, including settlement document decoupling, appointment/event time-zone preservation on `LoadStop`, `CANCELLED` operational status for TONU tracking, line-level settlement reconciliation linking, recurring reminder lifecycle correction, and admin audit privacy boundaries.

@@ -244,6 +244,8 @@ A single **Add Upcoming** flow SHALL support either a one-time due/expiration da
 
 The user SHALL set the applicable due date or recurring draft/due date. The UI SHOULD show a clear countdown and surface approaching items. Recurring items SHOULD remind within the final week and on the due day unless the user changes the reminder behavior. Existing document-expiration rules may continue using their more detailed cadence.
 
+When the driver marks a bill reminder Done, the app SHALL offer once to log it as an expense, pre-filled from the reminder and editable before saving. It SHALL NOT create the expense automatically (TM-D079).
+
 The design SHALL avoid separate features for expirations, bills, and maintenance when the same Upcoming item model can represent them cleanly.
 
 ## 37. Authentication and Account Recovery

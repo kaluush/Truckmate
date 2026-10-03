@@ -1,7 +1,7 @@
 # TruckMate — AI Handoff
 
 ## Current state
-TruckMate's final V1 requirements baseline is owner-approved through **TM-D078**. The previous baseline was extended by the owner's final additions and the public-brand decision. TM-Q012 is resolved: the public product name is **CabPilot** and the approved domain is **cabpilotapp.com**.
+TruckMate's final V1 requirements baseline is owner-approved through **TM-D079**. The previous baseline was extended by the owner's final additions and the public-brand decision. TM-Q012 is resolved: the public product name is **CabPilot** and the approved domain is **cabpilotapp.com**.
 
 ## Owner rulings — 2026-09-26 (TM-D057–TM-D074)
 All 15 Claude Stage 1 design issues are resolved; see `design/independent/claude/OWNER_RULINGS_2026-09-26.md`. Key points for the next design round:
@@ -12,6 +12,9 @@ All 15 Claude Stage 1 design issues are resolved; see `design/independent/claude
 - Pricing and trial replaced (TM-D072/TM-D073/TM-D076/TM-D077): 14 days no card (day-10 notice only), add-payment step at day 14 unlocks 2 more weeks (28 days total), no charge during the trial; charge screens show the calendar date of the first charge.
 - Downgrade O/O → Company Driver takes effect at next billing date; O/O data kept hidden, never deleted (TM-D075).
 - SRS §8, §12, §17, §24, §37 and §39 now match these decisions.
+
+## Owner ruling — 2026-10-02 (TM-D079)
+- Marking a bill reminder Done offers "Log as expense?" pre-filled from the reminder; never created automatically. Resolves data-model DM-Q03.
 
 ## Owner ruling — 2026-10-01 (TM-D078)
 - V1 load-photo evidence is fixed: stage = pickup or delivery; type = load/cargo, seal, temp, or other; capture time and GPS are automatic when available; short note optional; evidence attaches to the correct load stop. This is treated as a field-validated repair to the existing load-document/evidence workflow, not a new standalone module.

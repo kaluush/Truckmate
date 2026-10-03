@@ -67,7 +67,7 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F059 | Reefer operational fields | V1 Core | Set point, operating mode, reefer fuel level, unit/alarm status, optional actual temperature. |
 | TM-F060 | Critical Load Instructions | V1 Core | Flexible high-value instructions such as seal, driver assist, pallet exchange, special handling; surface when relevant. |
 
-| TM-F061 | Unified Upcoming due/reminder area | V1 Core | UI label **Reminders** (TM-D057). One-time date or recurring schedule for expirations, bills, maintenance and similar obligations; distinct from Next Loads. Mark done; recurring items advance (TM-D066). |
+| TM-F061 | Unified Upcoming due/reminder area | V1 Core | UI label **Reminders** (TM-D057). One-time date or recurring schedule for expirations, bills, maintenance and similar obligations; distinct from Next Loads. Mark done; recurring items advance (TM-D066). Bill reminders offer "Log as expense?" pre-filled on Done; never automatic (TM-D079). |
 | TM-F062 | Lean admin/operations panel | V1 Core (Ops) | Dashboard, Users, Subscriptions, Support/Recovery, Controls only. |
 | TM-F063 | Phone OTP + optional email authentication | V1 Core | No password; no automatic self-service recovery when both channels are lost. Phone-number change: OTP to new number + old number or verified email, else support/recovery (TM-D062). |
 | TM-F064 | Simple admin roles + privacy boundary | V1 Core (Ops) | Owner/Admin/Support; metadata-only support context; no private driver document viewing. |

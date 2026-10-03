@@ -67,7 +67,7 @@ Do not mark your own new work approved merely because you created it. The next A
 
 
 ## Final V1 freeze rule
-The owner-approved V1 baseline is frozen through TM-D078. TM-D057–TM-D077 are owner-approved rulings (2026-09-26) that resolve design-review issues and set pricing/trial; TM-D078 is the owner-approved 2026-10-01 field-validated repair defining load-photo evidence. These decisions are part of the frozen baseline. The unified Upcoming due/reminder module and lean admin/operations panel are the final V1 feature additions. Do not add another V1 feature during design or coding. Put new ideas in V2/future scope unless they are necessary to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
+The owner-approved V1 baseline is frozen through TM-D079. TM-D057–TM-D077 are owner-approved rulings (2026-09-26) that resolve design-review issues and set pricing/trial; TM-D078 is the owner-approved 2026-10-01 field-validated repair defining load-photo evidence; TM-D079 is the owner-approved 2026-10-02 bill-reminder → expense repair. These decisions are part of the frozen baseline. The unified Upcoming due/reminder module and lean admin/operations panel are the final V1 feature additions. Do not add another V1 feature during design or coding. Put new ideas in V2/future scope unless they are necessary to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
 
 
 ## Multi-AI design protocol
