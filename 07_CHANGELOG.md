@@ -1,5 +1,9 @@
 # TruckMate — Changelog
 
+## 2026-10-02 — TM-D084 AI architecture and data model v0.3.1
+- TM-D084 (owner-approved): app never calls AI providers directly; one CabPilot API with three internal AI job classes — Document Processing (V1, Gemini), Reporting/Analysis and Assistant/Q&A (later; voice via Assistant). Guardrails: AI never produces authoritative figures; AI reads only the requesting user's data, enforced by API authorization; providers must not retain or train on user data. SRS §21, AGENTS architecture line, TM-F048 updated; TM-F069/TM-F070 added as Future.
+- Data model v0.3.1: cancelled loads paperwork `NOT_APPLICABLE`; `currentLoadId` cleared on cancel/trash; provisional offline stop time zone; per-job-class AI usage counter.
+
 ## 2026-10-02 — Data model v0.3 and TM-D083
 - GPT final review (`specs/data-model/reviews/gpt-final.md`): NOT READY with three Must-fix items, all accepted.
 - TM-D083 (owner-approved): deleting a settlement sends it with its lines, scans and load matches to the 30-day Trash. SRS §19, TM-F038 updated.

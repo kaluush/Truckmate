@@ -51,7 +51,7 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F045 | Load History + search | V1 Core | Base-tier retrieval across past loads/documents. |
 | TM-F046 | In-motion interaction guardrails | V1 Core UX principle | Design principle only (TM-D059): core workflows should not require interaction while moving; no lock/driving mode; notifications never require input to dismiss or continue. |
 | TM-F047 | Team-driver/shared-load access | Architecture Later | Schema should permit later sharing without building it now. |
-| TM-F048 | AI usage/cost-abuse controls | Architecture Later / production requirement | Server-side quotas/rate controls for extraction calls. |
+| TM-F048 | AI usage/cost-abuse controls | Architecture Later / production requirement | Server-side quotas/rate controls for extraction calls, tracked per AI job class (TM-D084). |
 
 | TM-F049 | Offline check-in/out | V1 Core | Local timestamp + location when available; provenance/pending-sync state; idempotent sync. |
 | TM-F050 | Custom wallet documents | V1 Core | User-defined document types with expiration/reminders when applicable. |
@@ -76,3 +76,5 @@ Status vocabulary: **V1 Core**, **V1 Candidate**, **Architecture Later**, **Futu
 | TM-F066 | Driving view / simplified in-motion screen | Future (V2) | Moved out of V1 by TM-D059. |
 | TM-F067 | Fleet-admin in-motion lock setting | Future (V2) | Moved out of V1 by TM-D059. |
 | TM-F068 | Load photo evidence | V1 Core | Per-stop photos at pickup or delivery; type = load/cargo, seal, temp, or other; automatic capture time + GPS when available; optional short note (TM-D078). |
+| TM-F069 | AI Assistant / Q&A over the driver's own data (voice later via the same path) | Future | Architecture allowed by TM-D084; not V1. Reads only the asking driver's data; never authoritative for numbers. |
+| TM-F070 | AI reporting / analysis explanations | Future | Architecture allowed by TM-D084; not V1. May explain CabPilot-calculated figures; never produces them. |

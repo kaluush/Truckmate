@@ -46,7 +46,7 @@ Build for extension, not speculation.
 Prefer: **Mobile Client → TruckMate-owned API/business boundary → data/services/integrations**.
 Keep business rules, authorization, validation, sensitive data access, and integration orchestration out of presentation code. Controlled direct client integrations are acceptable when intentional and secure.
 
-Current direction: mobile app, Firebase Authentication, project-owned backend/API, Firestore or equivalent structured data, Cloud Storage for documents, Gemini for document extraction/classification, push notifications, device location/maps, scanner component, subscription billing later, Gmail integration later.
+Current direction: mobile app, Firebase Authentication, project-owned backend/API, Firestore or equivalent structured data, Cloud Storage for documents, AI providers only behind the project-owned API in three job classes (Document Processing in V1 with Gemini; Reporting and Assistant later — TM-D084), push notifications, device location/maps, scanner component, subscription billing later, Gmail integration later.
 
 Do not commit secrets.
 
@@ -67,7 +67,7 @@ Do not mark your own new work approved merely because you created it. The next A
 
 
 ## Final V1 freeze rule
-The owner-approved V1 baseline is frozen through TM-D083. TM-D057–TM-D077 are owner-approved rulings (2026-09-26) that resolve design-review issues and set pricing/trial; TM-D078 is the owner-approved 2026-10-01 field-validated repair defining load-photo evidence; TM-D079 is the owner-approved 2026-10-02 bill-reminder → expense repair; TM-D080–TM-D083 are owner-approved 2026-10-02 rulings on cancelled loads, account deletion and record/settlement deletion. These decisions are part of the frozen baseline. The unified Upcoming due/reminder module and lean admin/operations panel are the final V1 feature additions. Do not add another V1 feature during design or coding. Put new ideas in V2/future scope unless they are necessary to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
+The owner-approved V1 baseline is frozen through TM-D084. TM-D057–TM-D077 are owner-approved rulings (2026-09-26) that resolve design-review issues and set pricing/trial; TM-D078 is the owner-approved 2026-10-01 field-validated repair defining load-photo evidence; TM-D079 is the owner-approved 2026-10-02 bill-reminder → expense repair; TM-D080–TM-D083 are owner-approved 2026-10-02 rulings on cancelled loads, account deletion and record/settlement deletion; TM-D084 is the owner-approved 2026-10-02 AI architecture clarification (no new V1 feature). These decisions are part of the frozen baseline. The unified Upcoming due/reminder module and lean admin/operations panel are the final V1 feature additions. Do not add another V1 feature during design or coding. Put new ideas in V2/future scope unless they are necessary to repair a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement.
 
 
 ## Multi-AI design protocol

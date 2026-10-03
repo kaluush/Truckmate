@@ -144,7 +144,7 @@ Current direction:
 - TruckMate-owned API/business boundary.
 - Firestore or equivalent structured data store.
 - Cloud Storage for source documents.
-- Gemini API for document classification/extraction.
+- AI providers/models behind the CabPilot-owned API; Gemini is the current document-processing provider (TM-D011, TM-D084).
 - Push notifications.
 - Device location/maps/routing.
 - Existing/native scanner capability.
@@ -152,6 +152,8 @@ Current direction:
 - Gmail integration later.
 
 Core business rules, authorization, sensitive operations, and integration orchestration SHOULD remain behind the project-owned boundary rather than being tightly coupled to the mobile UI. The data model SHOULD allow future team-driver/shared-load access without requiring that feature in V1.
+
+The mobile app SHALL NOT call AI providers directly. All AI work SHALL go through the CabPilot-owned API, separated internally into three job classes, each with its own provider/model configuration and usage limits: **Document Processing** (classification, extraction and validation of load, wallet, receipt and settlement documents — the only V1 job class), **Reporting / Analysis** and **Assistant / Q&A** (both architecture-must-allow-later, not V1; voice, if added, SHALL use the Assistant path). AI SHALL NOT produce authoritative money, mileage or settlement figures; those come from CabPilot's own calculations, and AI may only explain them. AI jobs SHALL read only the requesting user's data, enforced by API authorization rather than prompt instructions, and providers SHALL be used only under terms that do not retain user data or train on it (TM-D084).
 
 ## 22. Reliability, Recovery, and Observability
 The system SHALL plan for failed uploads, partial scans, AI extraction failures, duplicate submissions, interrupted network operations, notification failures, and dependency outages. Critical operations SHOULD be idempotent where appropriate. Logging/error monitoring SHALL avoid exposing sensitive document content unnecessarily. Backup/restore and rollback expectations SHALL be defined before production. AI/document-processing endpoints SHALL have server-side usage/cost-abuse controls before production.

@@ -1,9 +1,9 @@
 # CabPilot (TruckMate) — V1 Data Model
 
-**Status:** DRAFT v0.3 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
+**Status:** DRAFT v0.3.1 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
 **Drafted by:** Claude, 2026-10-01. **v0.2:** 2026-10-02, merges the GPT and Gemini reviews (`reviews/`) and owner decisions TM-D079–TM-D082. See §8 for what changed.
 **Expands:** Master SRS §25 ("conceptual, not a final database schema").
-**Baseline:** frozen V1 requirements through TM-D083. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
+**Baseline:** frozen V1 requirements through TM-D084. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
 
 ## How to read and edit this document
 
@@ -203,7 +203,7 @@ The driver account. Authentication itself is Firebase Authentication; this recor
 | `status` | enum | Y | `ACTIVE`, `SUSPENDED`, `RECOVERY_HOLD`, `DELETION_PENDING`. | §38, TM-D081 |
 | `deletionRequestedAt` | instant | — | Start of account deletion. | TM-D081 |
 | `paidHow` | enum | Y | Setup answer: `COMPANY_DRIVER`, `OO`. Drives tier-adaptive UI; not an access control. | TM-D069, TM-D005 |
-| `currentLoadId` | ref Load | — | The one Current Load. Changes only when the driver taps Start on another load. | TM-D018, TM-D067, R2 |
+| `currentLoadId` | ref Load | — | The one Current Load. Changes only when the driver taps Start on another load, **or is cleared when that load is cancelled or moved to Trash** (never left pointing at a missing load). | TM-D018, TM-D067, TM-D080, TM-D082, R2 |
 | `homeTimeZone` | IANA tz | Y | Default for reports and reminder times. | R4 |
 | `settings.notifications` | object | Y | Five switches: `expirations`, `reminders`, `onsiteThreshold`, `openDefects`, `facilityPrompts`. | §17, TM-D068 |
 | `settings.onsiteThresholdMinutes` | int | Y | Default 120. | §8, TM-D046 |
@@ -326,7 +326,7 @@ Drivers hook many trailers they do not own, so a trailer record is lightweight a
 | `cancelledAt` / `cancellationReason` | instant / text | — | Optional, when `CANCELLED`. The load stays in history and remains matchable for TONU pay. | TM-D080 |
 | `trashedAt` | instant | — | Load and all its children are in Trash (R7). | TM-D082 |
 | `settlementStatus` | enum | Y | `NOT_EXPECTED`, `AWAITING_SETTLEMENT`, `SETTLED`, `REVIEW_NEEDED`. Set by settlement matching; user can override. | §35, TM-D028 |
-| `paperworkStatus` | derived | D | `COMPLETE` / `INCOMPLETE` + list of missing items, computed from LoadDocument per stop (rate con once per load; pickup BOL per pickup stop; POD per delivery stop). | §35, TM-D048 |
+| `paperworkStatus` | derived | D | `COMPLETE` / `INCOMPLETE` / `NOT_APPLICABLE` + list of missing items, computed from LoadDocument per stop (rate con once per load; pickup BOL per pickup stop; POD per delivery stop). A `CANCELLED` load is `NOT_APPLICABLE`, so it never shows missing BOL/POD. | §35, TM-D048, TM-D080 |
 | `activeStopId` | ref LoadStop | — | The stop the Current Load Card follows. Changing it does **not** complete other stops. | §3, TM-D045 |
 | `startedAt` | instant | — | When the driver tapped Start. | TM-D067 |
 | `trailerType` | derived | D | From the current trailer EquipmentAssignment. | §32 |
@@ -343,6 +343,7 @@ Drivers hook many trailers they do not own, so a trailer record is lightweight a
 | `facilityId` | ref Facility | — | | §3 |
 | `nameSnapshot` / `addressSnapshot` | text / Address | Y | Copy as written on the load paperwork, so later facility edits never rewrite history. | §3 |
 | `timeZoneSnapshot` | IANA tz | Y | Time zone of the stop, captured with the address. Appointments are read in this zone, with or without a Facility link. | R4, §3 |
+| `timeZoneSource` | enum | Y | `RESOLVED` (looked up from the address) or `PROVISIONAL_DEVICE` (stop entered offline: the phone's current time zone is used temporarily and replaced by the resolved zone once online). | R4, TM-D024 |
 | `appointment` | object | — | `{type: FIXED / WINDOW / FCFS, startLocal, endLocal}` as local times in `timeZoneSnapshot`. | §3, R4 |
 | `contacts` | list of Contact | — | | §3 |
 | `status` | enum | Y | `PENDING`, `ARRIVED`, `DEPARTED`, `COMPLETED`. Set by check events and stop actions, never by selecting another stop. | TM-D045 |
@@ -483,7 +484,7 @@ One evidence model for all load photos (TM-D078). Not separate cargo/seal/temper
 | `trashedAt` | instant | — | R7. | TM-D031 |
 
 #### ExtractionJob
-One AI processing attempt. Needed for retry, failure visibility and cost control.
+One AI processing attempt in the **Document Processing** job class (TM-D084). Needed for retry, failure visibility and cost control. Later job classes do not reuse this entity.
 
 | Field | Type | Req | Notes | Source |
 |---|---|---|---|---|
@@ -701,6 +702,7 @@ Single configuration record: `maintenanceMessage`, `minimumSupportedAppVersion`.
 |---|---|---|---|---|
 | `userId` | ref User | Y | | TM-D023 |
 | `period` | text | Y | e.g. `2026-10`. | TM-D023 |
+| `jobClass` | enum | Y | `DOCUMENT_PROCESSING` (V1); `REPORTING`, `ASSISTANT` reserved for later. One counter row per user, period and job class. | TM-D084 |
 | `aiCalls` / `aiCostUnits` | int | Y | Server-side quota check before each AI call. | TM-D023 |
 
 ---
@@ -792,5 +794,11 @@ Sources: `reviews/gpt.md`, `reviews/gemini.md`, owner decisions TM-D079–TM-D08
 - F-01: `CheckEvent.serverReceivedAt` and the R1 server-assigned fields (`createdAt`, `updatedAt`, `version`) are empty until the server accepts the record, so offline records are valid.
 - F-02: settlement deletion was asserted without approval; now owner-approved as TM-D083 (30-day Trash) and cited.
 - F-03: R1 now states that Facility and FacilityReport are shared community data with no `ownerUserId`; `reporterUserId` is the only personal link and is cleared on account deletion.
+
+**v0.3.1 (2026-10-02):** owner-requested pre-approval fixes from Claude's final read-through, plus TM-D084:
+- Cancelled loads: `paperworkStatus = NOT_APPLICABLE` (never "missing BOL/POD").
+- `User.currentLoadId` is cleared when that load is cancelled or trashed.
+- `LoadStop.timeZoneSource`: offline-entered stops use the phone's time zone provisionally until resolved online (same offline principle as F-01).
+- TM-D084: `UsageCounter.jobClass` so AI limits apply per job class; ExtractionJob documented as the Document Processing job.
 
 **Process note:** Gemini's review was written after GPT's review was in the repository, and its first findings closely follow GPT's. The overlapping findings are therefore treated as one confirmed opinion, not two independent ones.
