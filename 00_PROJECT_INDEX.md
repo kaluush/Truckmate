@@ -16,7 +16,7 @@
 - `07_CHANGELOG.md` — meaningful project-level history.
 
 ## Specifications
-- `specs/data-model/DATA_MODEL.md` — V1 data model (DRAFT, under review; not yet approved truth).
+- `specs/data-model/DATA_MODEL.md` — V1 data model, **APPROVED v1.0** (2026-10-02); authoritative logical model for design and coding.
 
 ## AI entry files
 - `CLAUDE.md` — Claude entry point; delegates to AGENTS.

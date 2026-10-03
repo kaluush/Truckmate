@@ -21,6 +21,7 @@ The owner approved the final V1 additions through **TM-D055** on 2026-09-23. The
 - TM-D080 cancelled loads, TM-D081 account deletion, TM-D082 record deletion: OWNER-APPROVED on 2026-10-02 (resolve DM-Q05, DM-Q02, DM-Q01).
 - TM-D083 settlement deletion → 30-day Trash: OWNER-APPROVED on 2026-10-02 (raised by GPT final review F-02).
 - TM-D084 AI architecture (one owned API, three AI job classes, only Document Processing in V1; guardrails on numbers, data access and provider terms): OWNER-APPROVED on 2026-10-02.
+- **V1 data model `specs/data-model/DATA_MODEL.md` v1.0: OWNER-APPROVED on 2026-10-02** after GPT and Gemini reviews, Gemini confirmation, GPT final review and GPT confirmation (READY). Changes require owner approval.
 
 ## Design/coding gate
 Proceed to UX/design using Master Decisions and Master SRS as product truth. **Do not add new V1 features.** New ideas go to V2 unless a contradiction, security/privacy flaw, implementation blocker, or field-validated gap in an already-approved requirement requires repair. Coding should follow designed/approved flows rather than inventing behavior.

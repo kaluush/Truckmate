@@ -175,7 +175,7 @@ A user MAY switch from Company Driver to O/O at any time. A user MAY switch from
 ## 25. Data Model — Initial Conceptual Entities
 At minimum the architecture should anticipate: User, DriverProfile, Vehicle, Trailer, EquipmentAssignment, TrailerInspection, CarrierProfile, Load, LoadStop, LoadReference, LoadDocument, ExtractedField/Provenance, CheckEvent, DwellRecord, SharedStatusTemplate, EssentialDocument, ExpirationReminder, Inspection, Defect, MileageRecord, Expense, RecurringExpense, FuelRecord, Settlement/SettlementLine, and Subscription/Entitlement when monetization is added.
 
-This is conceptual, not a final database schema.
+This is conceptual, not a final database schema. The owner-approved logical data model that expands this section is `specs/data-model/DATA_MODEL.md` (v1.0, 2026-10-02); it is authoritative for entities, fields and relationships. Physical database layout remains an implementation decision.
 
 ## 26. Success Criteria and Field Validation
 Before monetization, TruckMate SHOULD be tested in real trucking workflows. Validation should determine whether drivers can retrieve check-in information quickly, maintain load paperwork without photo-gallery searching, capture dwell evidence with minimal effort, manage expirations reliably, and understand mileage/financial summaries without reconstruction.

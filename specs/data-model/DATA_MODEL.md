@@ -1,6 +1,6 @@
 # CabPilot (TruckMate) — V1 Data Model
 
-**Status:** DRAFT v0.3.1 — review findings merged; awaiting owner approval. **Not approved.** Not yet project truth.
+**Status:** **APPROVED v1.0** — owner-approved 2026-10-02. This is project truth for V1 design and coding. (v1.0 = the reviewed v0.3.1 content.) Any change to an entity, field, relationship or cross-cutting rule requires owner approval and must update the dictionary and diagrams in the same commit.
 **Drafted by:** Claude, 2026-10-01. **v0.2:** 2026-10-02, merges the GPT and Gemini reviews (`reviews/`) and owner decisions TM-D079–TM-D082. See §8 for what changed.
 **Expands:** Master SRS §25 ("conceptual, not a final database schema").
 **Baseline:** frozen V1 requirements through TM-D084. This document adds **no product behavior**. Every entity and field must trace to an SRS section or decision. Anything that would need a new product decision is listed in §6 (Open questions) instead of being modeled silently.
@@ -800,5 +800,7 @@ Sources: `reviews/gpt.md`, `reviews/gemini.md`, owner decisions TM-D079–TM-D08
 - `User.currentLoadId` is cleared when that load is cancelled or trashed.
 - `LoadStop.timeZoneSource`: offline-entered stops use the phone's time zone provisionally until resolved online (same offline principle as F-01).
 - TM-D084: `UsageCounter.jobClass` so AI limits apply per job class; ExtractionJob documented as the Document Processing job.
+
+**v1.0 (2026-10-02):** owner approved v0.3.1 as the official V1 data model. Review trail: `reviews/gpt.md`, `reviews/gemini.md`, `reviews/gemini-v0.2.md`, `reviews/gpt-final.md`, `reviews/gpt-final-confirm.md` (READY).
 
 **Process note:** Gemini's review was written after GPT's review was in the repository, and its first findings closely follow GPT's. The overlapping findings are therefore treated as one confirmed opinion, not two independent ones.
